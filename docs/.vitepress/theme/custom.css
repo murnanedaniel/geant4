@@ -1,0 +1,10 @@
+/* Custom styling for Mermaid diagrams */
+.vp-doc .mermaid {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+.vp-doc .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
