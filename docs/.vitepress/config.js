@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'Geant4',
   description: 'A toolkit for the simulation of the passage of particles through matter',
   base: '/geant4/',
+  ignoreDeadLinks: true,
 
   themeConfig: {
     nav: [
