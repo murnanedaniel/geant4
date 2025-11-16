@@ -6,26 +6,6 @@ export default defineConfig({
   base: '/geant4/',
   ignoreDeadLinks: true,
 
-  markdown: {
-    config: (md) => {
-      // Mermaid diagrams are supported natively in VitePress 1.6+
-      // No additional configuration needed - just use ```mermaid blocks
-    }
-  },
-
-  mermaid: {
-    // Mermaid configuration
-    theme: 'default',
-    themeVariables: {
-      primaryColor: '#4ecdc4',
-      primaryTextColor: '#fff',
-      primaryBorderColor: '#45b7d1',
-      lineColor: '#96ceb4',
-      secondaryColor: '#ff6b6b',
-      tertiaryColor: '#f7fff7'
-    }
-  },
-
   themeConfig: {
     search: {
       provider: 'local',
