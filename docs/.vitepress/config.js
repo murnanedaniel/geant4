@@ -6,12 +6,57 @@ export default defineConfig({
   base: '/geant4/',
   ignoreDeadLinks: true,
 
+  markdown: {
+    config: (md) => {
+      // Mermaid diagrams are supported natively in VitePress 1.6+
+      // No additional configuration needed - just use ```mermaid blocks
+    }
+  },
+
+  mermaid: {
+    // Mermaid configuration
+    theme: 'default',
+    themeVariables: {
+      primaryColor: '#4ecdc4',
+      primaryTextColor: '#fff',
+      primaryBorderColor: '#45b7d1',
+      lineColor: '#96ceb4',
+      secondaryColor: '#ff6b6b',
+      tertiaryColor: '#f7fff7'
+    }
+  },
+
   themeConfig: {
+    search: {
+      provider: 'local',
+      options: {
+        detailedView: true,
+        miniSearch: {
+          searchOptions: {
+            fuzzy: 0.2,
+            prefix: true,
+            boost: {
+              title: 4,
+              text: 2,
+              heading: 3
+            }
+          }
+        }
+      }
+    },
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'Architecture', link: '/architecture' },
-      { text: 'Modules', link: '/modules/materials/' },
+      {
+        text: 'Modules',
+        items: [
+          { text: 'Materials', link: '/modules/materials/' },
+          { text: 'Run', link: '/modules/run/' }
+        ]
+      },
+      { text: 'Visualization', link: '/visualization' },
       { text: 'Reference', link: '/reference/' }
     ],
 
@@ -27,7 +72,8 @@ export default defineConfig({
       {
         text: 'Modules',
         items: [
-          { text: 'Materials', link: '/modules/materials/' }
+          { text: 'Materials', link: '/modules/materials/' },
+          { text: 'Run', link: '/modules/run/' }
         ]
       },
       {
@@ -49,6 +95,28 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'G4IonisParamElm', link: '/modules/materials/api/g4ionisparamelm' }
+            ]
+          }
+        ]
+      },
+      {
+        text: 'Run Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/run/' },
+          {
+            text: 'Run Managers',
+            collapsed: true,
+            items: [
+              { text: 'G4RunManager', link: '/modules/run/api/g4runmanager' },
+              { text: 'G4MTRunManager', link: '/modules/run/api/g4mtrunmanager' }
+            ]
+          },
+          {
+            text: 'Run Data',
+            collapsed: true,
+            items: [
+              { text: 'G4Run', link: '/modules/run/api/g4run' }
             ]
           }
         ]

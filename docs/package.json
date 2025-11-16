@@ -2,7 +2,7 @@
   "name": "docs",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
+  "description": "Geant4 Documentation Site",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev",
@@ -14,5 +14,9 @@
   "license": "ISC",
   "devDependencies": {
     "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "mermaid": "^10.9.0",
+    "vitepress-plugin-mermaid": "^2.0.16"
   }
 }
