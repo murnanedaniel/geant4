@@ -10,6 +10,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'Architecture', link: '/architecture' },
+      { text: 'Modules', link: '/modules/materials/' },
       { text: 'Reference', link: '/reference/' }
     ],
 
@@ -20,6 +21,35 @@ export default defineConfig({
           { text: 'What is Geant4?', link: '/' },
           { text: 'Getting Started', link: '/getting-started' },
           { text: 'Architecture', link: '/architecture' }
+        ]
+      },
+      {
+        text: 'Modules',
+        items: [
+          { text: 'Materials', link: '/modules/materials/' }
+        ]
+      },
+      {
+        text: 'Materials Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/materials/' },
+          {
+            text: 'Core Classes',
+            collapsed: true,
+            items: [
+              { text: 'G4Isotope', link: '/modules/materials/api/g4isotope' },
+              { text: 'G4Element', link: '/modules/materials/api/g4element' },
+              { text: 'G4Material', link: '/modules/materials/api/g4material' }
+            ]
+          },
+          {
+            text: 'Ionisation Parameters',
+            collapsed: true,
+            items: [
+              { text: 'G4IonisParamElm', link: '/modules/materials/api/g4ionisparamelm' }
+            ]
+          }
         ]
       },
       {
