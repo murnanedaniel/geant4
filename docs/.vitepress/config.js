@@ -38,6 +38,7 @@ export default defineConfig({
         ]
       },
       { text: 'Visualization', link: '/visualization' },
+      { text: 'Progress', link: '/documentation-progress' },
       { text: 'Reference', link: '/reference/' }
     ],
 
