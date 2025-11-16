@@ -33,6 +33,7 @@ export default defineConfig({
         text: 'Modules',
         items: [
           { text: 'Materials', link: '/modules/materials/' },
+          { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' }
         ]
       },
@@ -53,6 +54,7 @@ export default defineConfig({
         text: 'Modules',
         items: [
           { text: 'Materials', link: '/modules/materials/' },
+          { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' }
         ]
       },
@@ -75,6 +77,29 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'G4IonisParamElm', link: '/modules/materials/api/g4ionisparamelm' }
+            ]
+          }
+        ]
+      },
+      {
+        text: 'Event Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/event/' },
+          {
+            text: 'Event Container',
+            collapsed: true,
+            items: [
+              { text: 'G4Event', link: '/modules/event/api/g4event' },
+              { text: 'G4PrimaryVertex', link: '/modules/event/api/g4primaryvertex' },
+              { text: 'G4PrimaryParticle', link: '/modules/event/api/g4primaryparticle' }
+            ]
+          },
+          {
+            text: 'Event Management',
+            collapsed: true,
+            items: [
+              { text: 'G4EventManager', link: '/modules/event/api/g4eventmanager' }
             ]
           }
         ]
