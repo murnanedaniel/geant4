@@ -32,6 +32,7 @@ export default defineConfig({
       {
         text: 'Modules',
         items: [
+          { text: 'Global', link: '/modules/global/' },
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' },
@@ -56,11 +57,57 @@ export default defineConfig({
       {
         text: 'Modules',
         items: [
+          { text: 'Global', link: '/modules/global/' },
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' },
           { text: 'Track', link: '/modules/track/' },
           { text: 'Tracking', link: '/modules/tracking/' }
+        ]
+      },
+      {
+        text: 'Global Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/global/' },
+          {
+            text: 'System of Units',
+            collapsed: true,
+            items: [
+              { text: 'G4UnitsTable', link: '/modules/global/api/g4unitstable' }
+            ]
+          },
+          {
+            text: 'State Management',
+            collapsed: true,
+            items: [
+              { text: 'G4StateManager', link: '/modules/global/api/g4statemanager' },
+              { text: 'G4ApplicationState', link: '/modules/global/api/g4applicationstate' }
+            ]
+          },
+          {
+            text: 'Exception Handling',
+            collapsed: true,
+            items: [
+              { text: 'G4Exception', link: '/modules/global/api/g4exception' },
+              { text: 'G4ExceptionSeverity', link: '/modules/global/api/g4exceptionseverity' }
+            ]
+          },
+          {
+            text: 'Memory Management',
+            collapsed: true,
+            items: [
+              { text: 'G4Allocator', link: '/modules/global/api/g4allocator' }
+            ]
+          },
+          {
+            text: 'I/O and Utilities',
+            collapsed: true,
+            items: [
+              { text: 'G4ios', link: '/modules/global/api/g4ios' },
+              { text: 'G4Timer', link: '/modules/global/api/g4timer' }
+            ]
+          }
         ]
       },
       {
