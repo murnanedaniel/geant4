@@ -83,6 +83,7 @@ graph TB
     style analysis fill:#f0e1ff
 
     click materials "/geant4/modules/materials/" "Materials Module Documentation"
+    click event "/geant4/modules/event/" "Event Module Documentation"
     click run "/geant4/modules/run/" "Run Module Documentation"
 ```
 
@@ -224,6 +225,69 @@ classDiagram
     click G4RunManager "/geant4/modules/run/api/g4runmanager" "G4RunManager API Documentation"
     click G4MTRunManager "/geant4/modules/run/api/g4mtrunmanager" "G4MTRunManager API Documentation"
     click G4Run "/geant4/modules/run/api/g4run" "G4Run API Documentation"
+```
+
+## Event Module Class Hierarchy
+
+```mermaid
+classDiagram
+    class G4Event {
+        -G4int eventID
+        -G4PrimaryVertex* thePrimaryVertex
+        -G4HCofThisEvent* HC
+        -G4DCofThisEvent* DC
+        -G4TrajectoryContainer* trajectoryContainer
+        +GetEventID() G4int
+        +AddPrimaryVertex(G4PrimaryVertex*)
+        +GetPrimaryVertex(G4int) G4PrimaryVertex*
+        +GetHCofThisEvent() G4HCofThisEvent*
+        +KeepTheEvent(G4bool)
+    }
+
+    class G4PrimaryVertex {
+        -G4double X0, Y0, Z0, T0
+        -G4PrimaryParticle* theParticle
+        -G4PrimaryVertex* nextVertex
+        -G4double Weight0
+        +GetPosition() G4ThreeVector
+        +GetT0() G4double
+        +SetPrimary(G4PrimaryParticle*)
+        +GetPrimary(G4int) G4PrimaryParticle*
+        +GetNumberOfParticle() G4int
+    }
+
+    class G4PrimaryParticle {
+        -G4int PDGcode
+        -G4ParticleDefinition* G4code
+        -G4ThreeVector direction
+        -G4double kinE
+        -G4PrimaryParticle* nextParticle
+        -G4PrimaryParticle* daughterParticle
+        +GetPDGcode() G4int
+        +GetMomentum() G4ThreeVector
+        +GetKineticEnergy() G4double
+        +SetDaughter(G4PrimaryParticle*)
+    }
+
+    class G4EventManager {
+        <<singleton>>
+        -G4Event* currentEvent
+        -G4StackManager* trackContainer
+        -G4TrackingManager* trackManager
+        +ProcessOneEvent(G4Event*)
+        +GetEventManager() static
+        +AbortCurrentEvent()
+        +SetUserAction()
+    }
+
+    G4Event --> G4PrimaryVertex : contains
+    G4PrimaryVertex --> G4PrimaryParticle : contains
+    G4EventManager --> G4Event : processes
+
+    click G4Event "/geant4/modules/event/api/g4event" "G4Event API Documentation"
+    click G4PrimaryVertex "/geant4/modules/event/api/g4primaryvertex" "G4PrimaryVertex API Documentation"
+    click G4PrimaryParticle "/geant4/modules/event/api/g4primaryparticle" "G4PrimaryParticle API Documentation"
+    click G4EventManager "/geant4/modules/event/api/g4eventmanager" "G4EventManager API Documentation"
 ```
 
 ## Event Processing Sequence
@@ -380,6 +444,7 @@ flowchart LR
 
 ::: info Quick Navigation
 - [Materials Module →](/modules/materials/) - Isotopes, elements, and material definitions
+- [Event Module →](/modules/event/) - Event generation and primary particle management
 - [Run Module →](/modules/run/) - Simulation control and event loop management
 - [Architecture Overview →](/architecture) - High-level system architecture
 :::
@@ -389,12 +454,12 @@ flowchart LR
 | Module | Classes | Dependencies | Documentation Status |
 |--------|---------|--------------|---------------------|
 | **materials** | 44 | global | ✅ 4/44 classes documented |
+| **event** | 36 | global, particles | ✅ 4/36 classes documented |
 | **run** | 15+ | global, event, tracking | ✅ 3/15 classes documented |
 | global | 60+ | - | ⏳ Pending |
 | geometry | 150+ | global, materials | ⏳ Pending |
 | particles | 200+ | global | ⏳ Pending |
 | processes | 250+ | particles, geometry | ⏳ Pending |
-| event | 30+ | global, particles | ⏳ Pending |
 | tracking | 40+ | event, geometry | ⏳ Pending |
 
 ## Legend
