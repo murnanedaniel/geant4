@@ -34,7 +34,8 @@ export default defineConfig({
         items: [
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
-          { text: 'Run', link: '/modules/run/' }
+          { text: 'Run', link: '/modules/run/' },
+          { text: 'Particles', link: '/modules/particles/' }
         ]
       },
       { text: 'Visualization', link: '/visualization' },
@@ -56,7 +57,8 @@ export default defineConfig({
         items: [
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
-          { text: 'Run', link: '/modules/run/' }
+          { text: 'Run', link: '/modules/run/' },
+          { text: 'Particles', link: '/modules/particles/' }
         ]
       },
       {
@@ -123,6 +125,42 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'G4Run', link: '/modules/run/api/g4run' }
+            ]
+          }
+        ]
+      },
+      {
+        text: 'Particles Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/particles/' },
+          {
+            text: 'Core Management',
+            collapsed: true,
+            items: [
+              { text: 'G4ParticleDefinition', link: '/modules/particles/api/g4particledefinition' },
+              { text: 'G4ParticleTable', link: '/modules/particles/api/g4particletable' },
+              { text: 'G4DynamicParticle', link: '/modules/particles/api/g4dynamicparticle' },
+              { text: 'G4IonTable', link: '/modules/particles/api/g4iontable' }
+            ]
+          },
+          {
+            text: 'Decay Management',
+            collapsed: true,
+            items: [
+              { text: 'G4DecayTable', link: '/modules/particles/api/g4decaytable' },
+              { text: 'G4VDecayChannel', link: '/modules/particles/api/g4vdecaychannel' }
+            ]
+          },
+          {
+            text: 'Particle Categories',
+            collapsed: true,
+            items: [
+              { text: 'Leptons', link: '/modules/particles/leptons' },
+              { text: 'Bosons', link: '/modules/particles/bosons' },
+              { text: 'Hadrons', link: '/modules/particles/hadrons' },
+              { text: 'Ions', link: '/modules/particles/ions' },
+              { text: 'Short-Lived', link: '/modules/particles/shortlived' }
             ]
           }
         ]

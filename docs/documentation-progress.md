@@ -21,7 +21,7 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 | [**tracking**](#tracking-module) | 40+ | 0 | 0% | ⏳ Planned | High |
 | **global** | 60+ | 0 | 0% | ⏳ Planned | High |
 | **geometry** | 150+ | 0 | 0% | ⏳ Planned | Medium |
-| **particles** | 200+ | 0 | 0% | ⏳ Planned | High |
+| [**particles**](#particles-module) | 252 | 13 | 5% | ✅ Current | High |
 | **processes** | 250+ | 0 | 0% | ⏳ Planned | Medium |
 | **digits_hits** | 30+ | 0 | 0% | ⏳ Planned | Medium |
 | **analysis** | 20+ | 0 | 0% | ⏳ Planned | Low |
@@ -170,6 +170,71 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 
 ---
 
+### Particles Module
+
+**Location:** `source/particles/`
+**Documentation:** [Module Overview](/modules/particles/) | [Visualization Diagram](/visualization#particles-module-class-hierarchy)
+**Progress:** 13/252 classes (5%)
+
+#### Documented Classes
+
+| Class | API Docs | Lines | Status |
+|-------|----------|-------|--------|
+| **G4ParticleDefinition** | [📖 API](/modules/particles/api/g4particledefinition) | 2,400 | ✅ Complete |
+| **G4ParticleTable** | [📖 API](/modules/particles/api/g4particletable) | 1,900 | ✅ Complete |
+| **G4DynamicParticle** | [📖 API](/modules/particles/api/g4dynamicparticle) | 2,500 | ✅ Complete |
+| **G4IonTable** | [📖 API](/modules/particles/api/g4iontable) | 1,350 | ✅ Complete |
+| **G4DecayTable** | [📖 API](/modules/particles/api/g4decaytable) | 900 | ✅ Complete |
+| **G4VDecayChannel** | [📖 API](/modules/particles/api/g4vdecaychannel) | 1,400 | ✅ Complete |
+| **Leptons** | [📖 Categories](/modules/particles/leptons) | 1,200 | ✅ Complete |
+| **Bosons** | [📖 Categories](/modules/particles/bosons) | 1,300 | ✅ Complete |
+| **Hadrons** | [📖 Categories](/modules/particles/hadrons) | 1,800 | ✅ Complete |
+| **Ions** | [📖 Categories](/modules/particles/ions) | 1,500 | ✅ Complete |
+| **Short-Lived** | [📖 Categories](/modules/particles/shortlived) | 1,400 | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (239 classes)</summary>
+
+**Management Classes:**
+- G4NuclideTable
+- G4IsotopeProperty
+- G4PDGCodeChecker
+- G4ParticlePropertyTable
+- G4ParticlePropertyData
+- G4ElectronOccupancy
+- G4DecayProducts
+- G4PrimaryParticle
+- G4PrimaryVertex
+- And 10+ more management classes
+
+**Decay Channel Types:**
+- G4PhaseSpaceDecayChannel
+- G4DalitzDecayChannel
+- G4MuonDecayChannel
+- G4MuonDecayChannelWithSpin
+- G4MuonRadiativeDecayChannelWithSpin
+- G4TauLeptonicDecayChannel
+- G4KL3DecayChannel
+- G4NeutronBetaDecayChannel
+- G4PionRadiativeDecayChannel
+- And 5+ more specialized channels
+
+**Individual Particle Classes:**
+Note: Individual particle classes (200+ particles) are documented in category pages:
+- 12 Leptons (documented in Leptons category)
+- 10 Bosons (documented in Bosons category)
+- 47 Baryons (documented in Hadrons category)
+- 29 Mesons (documented in Hadrons category)
+- 23 Ions (documented in Ions category)
+- 14+ Short-lived (documented in Short-lived category)
+- 11 Adjoint particles
+
+</details>
+
+---
+
 ### Track Module
 
 **Location:** `source/track/`
@@ -250,16 +315,18 @@ Each documented module includes:
 
 | Metric | Count |
 |--------|-------|
-| **Modules Documented** | 3 / 23+ |
-| **Classes Documented** | 11 / 400+ |
-| **Total Documentation Lines** | ~20,000 |
-| **API Reference Pages** | 11 |
-| **Module Overview Pages** | 3 |
+| **Modules Documented** | 4 / 23+ |
+| **Classes Documented** | 24 / 400+ |
+| **Total Documentation Lines** | ~35,000 |
+| **API Reference Pages** | 17 |
+| **Module Overview Pages** | 4 |
+| **Category Pages** | 5 |
 | **Interactive Diagrams** | 8 |
 | **Generated HTML Pages** | 25 |
 
 ### Recent Additions
 
+- **2025-11-17**: Particles Module - 6 API classes + 5 category pages, ~15,000 lines
 - **2025-11-16**: Event Module - 4 classes, 8,500 lines
 - **2025-11-16**: Run Module - 3 classes, 7,300 lines
 - **2025-11-16**: Materials Module - 4 classes, 5,950 lines
@@ -326,6 +393,6 @@ Templates and style guides available:
 ---
 
 ::: info Last Updated
-**Date:** 2025-11-16
+**Date:** 2025-11-17
 **Next Update:** After Track module documentation
 :::
