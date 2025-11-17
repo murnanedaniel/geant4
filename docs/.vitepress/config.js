@@ -133,6 +133,31 @@ export default defineConfig({
             items: [
               { text: 'G4EventManager', link: '/modules/event/api/g4eventmanager' }
             ]
+          },
+          {
+            text: 'Primary Generation',
+            collapsed: true,
+            items: [
+              { text: 'G4VPrimaryGenerator', link: '/modules/event/api/g4vprimarygenerator' },
+              { text: 'G4ParticleGun', link: '/modules/event/api/g4particlegun' },
+              { text: 'G4GeneralParticleSource', link: '/modules/event/api/g4generalparticlesource' },
+              { text: 'G4SingleParticleSource', link: '/modules/event/api/g4singleparticlesource' },
+              { text: 'G4HEPEvtInterface', link: '/modules/event/api/g4hepevtinterface' }
+            ]
+          },
+          {
+            text: 'Stacking',
+            collapsed: true,
+            items: [
+              { text: 'G4StackManager', link: '/modules/event/api/g4stackmanager' },
+              { text: 'G4TrackStack', link: '/modules/event/api/g4trackstack' },
+              { text: 'G4SmartTrackStack', link: '/modules/event/api/g4smarttrackstack' },
+              { text: 'G4StackedTrack', link: '/modules/event/api/g4stackedtrack' },
+              { text: 'G4UserStackingAction', link: '/modules/event/api/g4userstackingaction' },
+              { text: 'G4ClassificationOfNewTrack', link: '/modules/event/api/g4classificationofnewtrack' },
+              { text: 'G4SubEvent', link: '/modules/event/api/g4subevent' },
+              { text: 'G4SubEventTrackStack', link: '/modules/event/api/g4subeventtrackstack' }
+            ]
           }
         ]
       },
@@ -154,6 +179,13 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'G4Run', link: '/modules/run/api/g4run' }
+            ]
+          },
+          {
+            text: 'User Actions',
+            collapsed: true,
+            items: [
+              { text: 'G4VUserPrimaryGeneratorAction', link: '/modules/run/api/g4vuserprimarygeneratoraction' }
             ]
           }
         ]
