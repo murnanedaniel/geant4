@@ -158,6 +158,13 @@ export default defineConfig({
               { text: 'G4SubEvent', link: '/modules/event/api/g4subevent' },
               { text: 'G4SubEventTrackStack', link: '/modules/event/api/g4subeventtrackstack' }
             ]
+          },
+          {
+            text: 'User Actions',
+            collapsed: true,
+            items: [
+              { text: 'G4UserEventAction', link: '/modules/event/api/g4usereventaction' }
+            ]
           }
         ]
       },
@@ -171,7 +178,10 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'G4RunManager', link: '/modules/run/api/g4runmanager' },
-              { text: 'G4MTRunManager', link: '/modules/run/api/g4mtrunmanager' }
+              { text: 'G4MTRunManager', link: '/modules/run/api/g4mtrunmanager' },
+              { text: 'G4TaskRunManager', link: '/modules/run/api/g4taskrunmanager' },
+              { text: 'G4WorkerRunManager', link: '/modules/run/api/g4workerrunmanager' },
+              { text: 'G4WorkerTaskRunManager', link: '/modules/run/api/g4workertaskrunmanager' }
             ]
           },
           {
@@ -185,6 +195,10 @@ export default defineConfig({
             text: 'User Actions',
             collapsed: true,
             items: [
+              { text: 'G4UserRunAction', link: '/modules/run/api/g4userrunaction' },
+              { text: 'G4VUserActionInitialization', link: '/modules/run/api/g4vuseractioninitialization' },
+              { text: 'G4VUserDetectorConstruction', link: '/modules/run/api/g4vuserdetectorconstruction' },
+              { text: 'G4VUserPhysicsList', link: '/modules/run/api/g4vuserphysicslist' },
               { text: 'G4VUserPrimaryGeneratorAction', link: '/modules/run/api/g4vuserprimarygeneratoraction' }
             ]
           }
@@ -215,6 +229,20 @@ export default defineConfig({
               { text: 'G4ParticleChangeForLoss', link: '/modules/track/api/g4particlechangeforloss' },
               { text: 'G4ParticleChangeForMSC', link: '/modules/track/api/g4particlechangeformsc' },
               { text: 'G4ParticleChangeForTransport', link: '/modules/track/api/g4particlechangefortransport' }
+            ]
+          }
+        ]
+      },
+      {
+        text: 'Tracking Module',
+        collapsed: true,
+        items: [
+          {
+            text: 'User Actions',
+            collapsed: true,
+            items: [
+              { text: 'G4UserSteppingAction', link: '/modules/tracking/api/g4usersteppingaction' },
+              { text: 'G4UserTrackingAction', link: '/modules/tracking/api/g4usertrackingaction' }
             ]
           }
         ]
