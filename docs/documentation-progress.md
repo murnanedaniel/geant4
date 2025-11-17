@@ -19,7 +19,7 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 | [**run**](#run-module) | 15+ | 3 | 20% | ✅ Current | High |
 | [**track**](#track-module) | 23 | 0 | 0% | 🔄 Next | High |
 | [**tracking**](#tracking-module) | 40+ | 0 | 0% | ⏳ Planned | High |
-| **global** | 60+ | 0 | 0% | ⏳ Planned | High |
+| [**global**](#global-module) | 109 | 97 | 89% | ✅ Current | High |
 | **geometry** | 150+ | 0 | 0% | ⏳ Planned | Medium |
 | **particles** | 200+ | 0 | 0% | ⏳ Planned | High |
 | **processes** | 250+ | 0 | 0% | ⏳ Planned | Medium |
@@ -213,6 +213,206 @@ Planned for future documentation sprint.
 
 ---
 
+### Global Module
+
+**Location:** `source/global/`
+**Documentation:** [Module Overview](/modules/global/)
+**Progress:** 97/109 classes (89%)
+
+#### Documented Classes
+
+**HEPGeometry (8/8 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **geomdefs.hh** | [📖 API](/modules/global/api/geomdefs) | ✅ Complete |
+| **G4Transform3D** | [📖 API](/modules/global/api/g4transform3d) | ✅ Complete |
+| **G4Point3D** | [📖 API](/modules/global/api/g4point3d) | ✅ Complete |
+| **G4Vector3D** | [📖 API](/modules/global/api/g4vector3d) | ✅ Complete |
+| **G4Normal3D** | [📖 API](/modules/global/api/g4normal3d) | ✅ Complete |
+| **G4Plane3D** | [📖 API](/modules/global/api/g4plane3d) | ✅ Complete |
+| **G4LorentzVector** | [📖 API](/modules/global/api/g4lorentzvector) | ✅ Complete |
+| **G4LorentzRotation** | [📖 API](/modules/global/api/g4lorentzrotation) | ✅ Complete |
+
+**HEPNumerics (18/18 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Integrator** | [📖 API](/modules/global/api/g4integrator) | ✅ Complete |
+| **G4VGaussianQuadrature** | [📖 API](/modules/global/api/g4vgaussianquadrature) | ✅ Complete |
+| **G4GaussLegendreQ** | [📖 API](/modules/global/api/g4gausslegendreq) | ✅ Complete |
+| **G4GaussHermiteQ** | [📖 API](/modules/global/api/g4gausshermiteq) | ✅ Complete |
+| **G4GaussLaguerreQ** | [📖 API](/modules/global/api/g4gausslaguerreq) | ✅ Complete |
+| **G4GaussChebyshevQ** | [📖 API](/modules/global/api/g4gausschebyshevq) | ✅ Complete |
+| **G4GaussJacobiQ** | [📖 API](/modules/global/api/g4gaussjacobiq) | ✅ Complete |
+| **G4SimpleIntegration** | [📖 API](/modules/global/api/g4simpleintegration) | ✅ Complete |
+| **G4VSIntegration** | [📖 API](/modules/global/api/g4vsintegration) | ✅ Complete |
+| **G4PolynomialSolver** | [📖 API](/modules/global/api/g4polynomialsolver) | ✅ Complete |
+| **G4AnalyticalPolSolver** | [📖 API](/modules/global/api/g4analyticalpolsolver) | ✅ Complete |
+| **G4JTPolynomialSolver** | [📖 API](/modules/global/api/g4jtpolynomialsolver) | ✅ Complete |
+| **G4DataInterpolation** | [📖 API](/modules/global/api/g4datainterpolation) | ✅ Complete |
+| **G4ChebyshevApproximation** | [📖 API](/modules/global/api/g4chebyshevapproximation) | ✅ Complete |
+| **G4SimplexDownhill** | [📖 API](/modules/global/api/g4simplexdownhill) | ✅ Complete |
+| **G4StatDouble** | [📖 API](/modules/global/api/g4statdouble) | ✅ Complete |
+| **G4StatAnalysis** | [📖 API](/modules/global/api/g4statanalysis) | ✅ Complete |
+| **G4ConvergenceTester** | [📖 API](/modules/global/api/g4convergencetester) | ✅ Complete |
+
+**HEPRandom (6/6 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **Randomize.hh** | [📖 API](/modules/global/api/randomize) | ✅ Complete |
+| **G4RandomTools** | [📖 API](/modules/global/api/g4randomtools) | ✅ Complete |
+| **G4RandomDirection** | [📖 API](/modules/global/api/g4randomdirection) | ✅ Complete |
+| **G4Poisson** | [📖 API](/modules/global/api/g4poisson) | ✅ Complete |
+| **G4QuickRand** | [📖 API](/modules/global/api/g4quickrand) | ✅ Complete |
+| **G4UniformRandPool** | [📖 API](/modules/global/api/g4uniformrandpool) | ✅ Complete |
+
+**Management - Types and Constants (5/5 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Types.hh** | [📖 API](/modules/global/api/g4types) | ✅ Complete |
+| **G4SystemOfUnits.hh** | [📖 API](/modules/global/api/g4systemofunits) | ✅ Complete |
+| **G4PhysicalConstants.hh** | [📖 API](/modules/global/api/g4physicalconstants) | ✅ Complete |
+| **globals.hh** | [📖 API](/modules/global/api/globals) | ✅ Complete |
+| **G4Version.hh** | [📖 API](/modules/global/api/g4version) | ✅ Complete |
+
+**Management - Vectors and Matrices (3/3 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4ThreeVector** | [📖 API](/modules/global/api/g4threevector) | ✅ Complete |
+| **G4TwoVector** | [📖 API](/modules/global/api/g4twovector) | ✅ Complete |
+| **G4RotationMatrix** | [📖 API](/modules/global/api/g4rotationmatrix) | ✅ Complete |
+
+**Management - Physics Data (11/11 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4PhysicsVector** | [📖 API](/modules/global/api/g4physicsvector) | ✅ Complete |
+| **G4PhysicsLinearVector** | [📖 API](/modules/global/api/g4physicslinearvector) | ✅ Complete |
+| **G4PhysicsLogVector** | [📖 API](/modules/global/api/g4physicslogvector) | ✅ Complete |
+| **G4PhysicsFreeVector** | [📖 API](/modules/global/api/g4physicsfreevector) | ✅ Complete |
+| **G4PhysicsOrderedFreeVector** | [📖 API](/modules/global/api/g4physicsorderedfreevector) | ✅ Complete |
+| **G4Physics2DVector** | [📖 API](/modules/global/api/g4physics2dvector) | ✅ Complete |
+| **G4PhysicsTable** | [📖 API](/modules/global/api/g4physicstable) | ✅ Complete |
+| **G4OrderedTable** | [📖 API](/modules/global/api/g4orderedtable) | ✅ Complete |
+| **G4PhysicsVectorType** | [📖 API](/modules/global/api/g4physicsvectortype) | ✅ Complete |
+| **G4PhysicsModelCatalog** | [📖 API](/modules/global/api/g4physicsmodelcatalog) | ✅ Complete |
+| **G4DataVector** | [📖 API](/modules/global/api/g4datavector) | ✅ Complete |
+
+**Management - Exception Handling (1 comprehensive doc) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Exception** | [📖 API](/modules/global/api/g4exception) | ✅ Complete |
+
+**Management - Math Utilities (4/4 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Pow** | [📖 API](/modules/global/api/g4pow) | ✅ Complete |
+| **G4Log** | [📖 API](/modules/global/api/g4log) | ✅ Complete |
+| **G4Exp** | [📖 API](/modules/global/api/g4exp) | ✅ Complete |
+| **G4IEEE754** | [📖 API](/modules/global/api/g4ieee754) | ✅ Complete |
+
+**Management - Timing (2/2 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Timer** | [📖 API](/modules/global/api/g4timer) | ✅ Complete |
+| **G4SliceTimer** | [📖 API](/modules/global/api/g4slicetimer) | ✅ Complete |
+
+**Management - State Management (4 docs) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **State Management Overview** | [📖 API](/modules/global/api/state-management) | ✅ Complete |
+| **G4StateManager** | [📖 API](/modules/global/api/g4statemanager) | ✅ Complete |
+| **G4VStateDependent** | [📖 API](/modules/global/api/g4vstatedependent) | ✅ Complete |
+| **G4ApplicationState** | [📖 API](/modules/global/api/g4applicationstate) | ✅ Complete |
+
+**Management - Threading (14/14 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Threading** | [📖 API](/modules/global/api/G4Threading) | ✅ Complete |
+| **G4ThreadPool** | [📖 API](/modules/global/api/G4ThreadPool) | ✅ Complete |
+| **G4Task** | [📖 API](/modules/global/api/G4Task) | ✅ Complete |
+| **G4VTask** | [📖 API](/modules/global/api/G4VTask) | ✅ Complete |
+| **G4TaskManager** | [📖 API](/modules/global/api/G4TaskManager) | ✅ Complete |
+| **G4TaskGroup** | [📖 API](/modules/global/api/G4TaskGroup) | ✅ Complete |
+| **G4TBBTaskGroup** | [📖 API](/modules/global/api/G4TBBTaskGroup) | ✅ Complete |
+| **G4UserTaskQueue** | [📖 API](/modules/global/api/G4UserTaskQueue) | ✅ Complete |
+| **G4VUserTaskQueue** | [📖 API](/modules/global/api/G4VUserTaskQueue) | ✅ Complete |
+| **G4AutoLock** | [📖 API](/modules/global/api/G4AutoLock) | ✅ Complete |
+| **G4MTBarrier** | [📖 API](/modules/global/api/G4MTBarrier) | ✅ Complete |
+| **G4ThreadLocalSingleton** | [📖 API](/modules/global/api/G4ThreadLocalSingleton) | ✅ Complete |
+| **G4ThreadData** | [📖 API](/modules/global/api/G4ThreadData) | ✅ Complete |
+| **G4TWorkspacePool** | [📖 API](/modules/global/api/G4TWorkspacePool) | ✅ Complete |
+
+**Management - Memory (6/6 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Allocator** | [📖 API](/modules/global/api/G4Allocator) | ✅ Complete |
+| **G4AllocatorPool** | [📖 API](/modules/global/api/G4AllocatorPool) | ✅ Complete |
+| **G4AllocatorList** | [📖 API](/modules/global/api/G4AllocatorList) | ✅ Complete |
+| **G4ReferenceCountedHandle** | [📖 API](/modules/global/api/G4ReferenceCountedHandle) | ✅ Complete |
+| **G4Cache** | [📖 API](/modules/global/api/G4Cache) | ✅ Complete |
+| **G4AutoDelete** | [📖 API](/modules/global/api/G4AutoDelete) | ✅ Complete |
+
+**Management - I/O and Output (10/10 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4coutDestination** | [📖 API](/modules/global/api/G4coutDestination) | ✅ Complete |
+| **G4FilecoutDestination** | [📖 API](/modules/global/api/G4FilecoutDestination) | ✅ Complete |
+| **G4MTcoutDestination** | [📖 API](/modules/global/api/G4MTcoutDestination) | ✅ Complete |
+| **G4MasterForwardcoutDestination** | [📖 API](/modules/global/api/G4MasterForwardcoutDestination) | ✅ Complete |
+| **G4BuffercoutDestination** | [📖 API](/modules/global/api/G4BuffercoutDestination) | ✅ Complete |
+| **G4MulticoutDestination** | [📖 API](/modules/global/api/G4MulticoutDestination) | ✅ Complete |
+| **G4LockcoutDestination** | [📖 API](/modules/global/api/G4LockcoutDestination) | ✅ Complete |
+| **G4coutFormatters** | [📖 API](/modules/global/api/G4coutFormatters) | ✅ Complete |
+| **G4ios** | [📖 API](/modules/global/api/G4ios) | ✅ Complete |
+| **G4String** | [📖 API](/modules/global/api/G4String) | ✅ Complete |
+
+**Management - Utilities (5/5 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4UnitsTable** | [📖 API](/modules/global/api/G4UnitsTable) | ✅ Complete |
+| **G4Tokenizer** | [📖 API](/modules/global/api/G4Tokenizer) | ✅ Complete |
+| **G4UserLimits** | [📖 API](/modules/global/api/G4UserLimits) | ✅ Complete |
+| **G4GeometryTolerance** | [📖 API](/modules/global/api/G4GeometryTolerance) | ✅ Complete |
+| **G4Evaluator** | [📖 API](/modules/global/api/G4Evaluator) | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (12 remaining classes)</summary>
+
+**Platform-Specific Headers:**
+- windefs.hh - Windows platform definitions
+- tls.hh - Thread-local storage support
+- templates.hh - Template utilities
+
+**Advanced Features (Lower Priority):**
+- G4VNotifier - Observer pattern notifications
+- G4Backtrace - Stack trace debugging
+- G4FPEDetection - Floating-point exception detection
+- G4EnvironmentUtils - Environment variable utilities
+- G4Filesystem - Filesystem operations
+- G4ErrorPropagatorData - Error propagation data
+- G4FindDataDir - Data directory utilities
+- G4FastVector - Fast dynamic vector
+- G4CacheDetails - Cache implementation details
+
+</details>
+
+---
+
 ## Documentation Standards
 
 Each documented module includes:
@@ -250,16 +450,17 @@ Each documented module includes:
 
 | Metric | Count |
 |--------|-------|
-| **Modules Documented** | 3 / 23+ |
-| **Classes Documented** | 11 / 400+ |
-| **Total Documentation Lines** | ~20,000 |
-| **API Reference Pages** | 11 |
-| **Module Overview Pages** | 3 |
-| **Interactive Diagrams** | 8 |
-| **Generated HTML Pages** | 25 |
+| **Modules Documented** | 4 / 23+ |
+| **Classes Documented** | 108 / 500+ |
+| **Total Documentation Lines** | ~80,000+ |
+| **API Reference Pages** | 108 |
+| **Module Overview Pages** | 4 |
+| **Interactive Diagrams** | 14 |
+| **Generated HTML Pages** | 120+ |
 
 ### Recent Additions
 
+- **2025-11-17**: Global Module - 97 classes, 60,000+ lines (MAJOR)
 - **2025-11-16**: Event Module - 4 classes, 8,500 lines
 - **2025-11-16**: Run Module - 3 classes, 7,300 lines
 - **2025-11-16**: Materials Module - 4 classes, 5,950 lines
@@ -273,10 +474,10 @@ These modules are fundamental to Geant4 and should be documented first:
 1. ✅ **Materials** - Material definitions (4/44 done)
 2. ✅ **Event** - Event generation (4/36 done)
 3. ✅ **Run** - Simulation control (3/15 done)
-4. 🔄 **Track** - Track container (next)
-5. ⏳ **Tracking** - Track processing
-6. ⏳ **Particles** - Particle definitions
-7. ⏳ **Global** - Utilities and types
+4. ✅ **Global** - Utilities and types (97/109 done - 89%)
+5. 🔄 **Track** - Track container (next)
+6. ⏳ **Tracking** - Track processing
+7. ⏳ **Particles** - Particle definitions
 
 ### Medium Priority (Core Physics)
 
