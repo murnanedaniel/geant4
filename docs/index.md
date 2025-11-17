@@ -14,23 +14,17 @@ hero:
       link: https://github.com/Geant4/geant4
 
 features:
-  - icon: ∫
-    title: High Energy Physics
+  - title: High Energy Physics
     details: Comprehensive simulation capabilities for high energy, nuclear and accelerator physics experiments
-  - icon: γ
-    title: Medical Applications
+  - title: Medical Applications
     details: Advanced tools for medical physics simulations including radiotherapy and medical imaging
-  - icon: ⊕
-    title: Space Science
+  - title: Space Science
     details: Simulation support for space radiation effects and particle interactions in space environments
-  - icon: ℏ
-    title: Accurate Physics
+  - title: Accurate Physics
     details: Extensive physics models covering electromagnetic, hadronic, and optical processes
-  - icon: ⊗
-    title: Flexible Architecture
+  - title: Flexible Architecture
     details: Modular design allowing customization and extension for specific use cases
-  - icon: ∇
-    title: Geometry & Visualization
+  - title: Geometry & Visualization
     details: Powerful geometry modeling and multiple visualization options for detector design
 ---
 

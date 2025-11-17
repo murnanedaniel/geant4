@@ -3,51 +3,17 @@
 
 /* ============================================
    PHYSICS-THEMED COLOR PALETTE
-   Inspired by detector physics, Cherenkov radiation,
-   and scientific instrumentation
+   Light mode default, dark mode override
    ============================================ */
 
 :root {
-  /* Primary - Deep space/night sky */
-  --vp-c-brand-1: #4a90e2;
-  --vp-c-brand-2: #3a7bc8;
-  --vp-c-brand-3: #2e3856;
-  --vp-c-brand-soft: rgba(74, 144, 226, 0.14);
+  /* Primary brand colors */
+  --vp-c-brand-1: #3a7bc8;
+  --vp-c-brand-2: #2e6ab3;
+  --vp-c-brand-3: #4a90e2;
+  --vp-c-brand-soft: rgba(58, 123, 200, 0.14);
 
-  /* Accent - Cherenkov blue & detector green */
-  --physics-cherenkov-blue: #7cb9ff;
-  --physics-detector-green: #00d4aa;
-  --physics-scintillator-cyan: #00ffcc;
-  --physics-deep-navy: #1a1f3a;
-  --physics-warm-gray: #e8e6e3;
-
-  /* Background - Dark mode first */
-  --vp-c-bg: #0a0e1a;
-  --vp-c-bg-soft: #141827;
-  --vp-c-bg-mute: #1a1f3a;
-  --vp-c-bg-alt: #2e3856;
-
-  /* Text colors - High contrast for readability */
-  --vp-c-text-1: #f5f5f5;
-  --vp-c-text-2: #d4d4d8;
-  --vp-c-text-3: #a1a1aa;
-
-  /* Borders - Subtle technical lines */
-  --vp-c-border: rgba(74, 144, 226, 0.2);
-  --vp-c-divider: rgba(74, 144, 226, 0.12);
-  --vp-c-gutter: rgba(74, 144, 226, 0.08);
-
-  /* Code blocks - Technical aesthetic */
-  --vp-code-bg: #0f1419;
-  --vp-code-block-bg: rgba(15, 20, 25, 0.8);
-
-  /* Typography */
-  --vp-font-family-base: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-}
-
-/* Light mode - Clean technical paper aesthetic */
-.light {
+  /* Light mode - Clean technical paper aesthetic */
   --vp-c-bg: #ffffff;
   --vp-c-bg-soft: #f8f9fa;
   --vp-c-bg-mute: #f1f3f5;
@@ -62,38 +28,65 @@
 
   --vp-code-bg: #f5f5f5;
   --vp-code-block-bg: rgba(245, 245, 245, 0.8);
+
+  /* Typography */
+  --vp-font-family-base: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Dark mode - Physics research aesthetic */
+.dark {
+  --vp-c-brand-1: #4a90e2;
+  --vp-c-brand-2: #3a7bc8;
+  --vp-c-brand-3: #2e3856;
+
+  --vp-c-bg: #0a0e1a;
+  --vp-c-bg-soft: #141827;
+  --vp-c-bg-mute: #1a1f3a;
+  --vp-c-bg-alt: #2e3856;
+
+  --vp-c-text-1: #f5f5f5;
+  --vp-c-text-2: #d4d4d8;
+  --vp-c-text-3: #a1a1aa;
+
+  --vp-c-border: rgba(74, 144, 226, 0.2);
+  --vp-c-divider: rgba(74, 144, 226, 0.12);
+
+  --vp-code-bg: #0f1419;
+  --vp-code-block-bg: rgba(15, 20, 25, 0.8);
 }
 
 /* ============================================
    PHYSICS-THEMED VISUAL ELEMENTS
    ============================================ */
 
-/* Subtle particle track background pattern */
+/* Particle interaction visualization background */
 .VPHome {
-  background-image:
-    linear-gradient(rgba(74, 144, 226, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(74, 144, 226, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: 0 0, 0 0;
   position: relative;
 }
 
-/* Add subtle glow to hero section */
-.VPHero {
-  position: relative;
-  overflow: hidden;
-}
-
-.VPHero::before {
+.VPHome::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: 50%;
-  width: 150%;
-  height: 200%;
-  background: radial-gradient(ellipse at center, rgba(74, 144, 226, 0.08) 0%, transparent 50%);
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Cg fill='none' stroke='%23000000' stroke-width='0.5' opacity='0.15'%3E%3Cpath d='M100,300 Q200,250 300,300 T500,300'/%3E%3Cpath d='M100,300 L150,200'/%3E%3Cpath d='M100,300 L150,400'/%3E%3Ccircle cx='300' cy='300' r='3'/%3E%3Cpath d='M300,300 L350,250'/%3E%3Cpath d='M300,300 L350,350'/%3E%3Cpath d='M300,300 L380,300'/%3E%3Cpath d='M500,300 L550,280'/%3E%3Cpath d='M500,300 L550,320'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 800px 600px;
   pointer-events: none;
+  z-index: 0;
+}
+
+.dark .VPHome::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.1'%3E%3Cpath d='M100,300 Q200,250 300,300 T500,300'/%3E%3Cpath d='M100,300 L150,200'/%3E%3Cpath d='M100,300 L150,400'/%3E%3Ccircle cx='300' cy='300' r='3'/%3E%3Cpath d='M300,300 L350,250'/%3E%3Cpath d='M300,300 L350,350'/%3E%3Cpath d='M300,300 L380,300'/%3E%3Cpath d='M500,300 L550,280'/%3E%3Cpath d='M500,300 L550,320'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.VPHero {
+  position: relative;
+  z-index: 1;
 }
 
 /* Technical document feel for content areas */
@@ -143,17 +136,17 @@
   font-weight: 500;
 }
 
-/* Detector-display inspired links */
+/* Links with subtle underline */
 .vp-doc a {
-  color: var(--physics-cherenkov-blue);
+  color: var(--vp-c-brand-1);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s, color 0.2s;
 }
 
 .vp-doc a:hover {
-  color: var(--physics-detector-green);
-  border-bottom-color: var(--physics-detector-green);
+  color: var(--vp-c-brand-2);
+  border-bottom-color: var(--vp-c-brand-2);
 }
 
 /* Custom styling for Mermaid diagrams */
@@ -173,10 +166,6 @@
 
 /* Hero section refinements */
 .VPHero .name {
-  background: linear-gradient(120deg, var(--vp-c-brand-1), var(--physics-detector-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   font-weight: 700;
 }
 
@@ -188,10 +177,10 @@
   letter-spacing: -0.01em;
 }
 
-/* Button styling - Less "product-y" */
+/* Button styling - Clean and minimal */
 .VPButton.brand {
-  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
-  border: 1px solid var(--physics-cherenkov-blue);
+  background: var(--vp-c-brand-1);
+  border: 1px solid var(--vp-c-brand-1);
   font-family: var(--vp-font-family-base);
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -199,8 +188,8 @@
 }
 
 .VPButton.brand:hover {
-  background: linear-gradient(135deg, var(--physics-cherenkov-blue), var(--physics-detector-green));
-  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.25);
+  background: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
   transform: translateY(-2px);
 }
 
@@ -220,24 +209,38 @@
 
 .VPFeature:hover {
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-4px);
 }
 
-.VPFeature .icon {
-  font-size: 2em;
-  filter: grayscale(0.3);
+.dark .VPFeature:hover {
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
 }
 
-/* Navigation - Clean technical interface */
+/* Navigation with particle visualization */
 .VPNav {
   backdrop-filter: blur(8px);
-  background: rgba(10, 14, 26, 0.85);
   border-bottom: 1px solid var(--vp-c-border);
+  position: relative;
 }
 
-.light .VPNav {
-  background: rgba(255, 255, 255, 0.85);
+.VPNav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='60' viewBox='0 0 1200 60'%3E%3Cg fill='none' stroke='%23000000' stroke-width='0.3' opacity='0.08'%3E%3Cpath d='M50,30 L100,30'/%3E%3Ccircle cx='100' cy='30' r='2'/%3E%3Cpath d='M100,30 L150,20'/%3E%3Cpath d='M100,30 L150,40'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 200px 60px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dark .VPNav::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='60' viewBox='0 0 1200 60'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.08'%3E%3Cpath d='M50,30 L100,30'/%3E%3Ccircle cx='100' cy='30' r='2'/%3E%3Cpath d='M100,30 L150,20'/%3E%3Cpath d='M100,30 L150,40'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Sidebar - Technical manual aesthetic */
@@ -262,7 +265,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--physics-cherenkov-blue);
+  background: var(--vp-c-brand-2);
 }
 
 /* Citation styling - Academic paper format */
@@ -277,7 +280,7 @@
 /* Inline code - Technical highlight */
 .vp-doc code {
   background: var(--vp-code-bg);
-  color: var(--physics-detector-green);
+  color: var(--vp-c-brand-1);
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-family: var(--vp-font-family-mono);
