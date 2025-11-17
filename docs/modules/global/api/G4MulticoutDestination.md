@@ -5,7 +5,7 @@
 `G4MulticoutDestination` is a container class that allows routing output to multiple destinations simultaneously. It extends both `G4coutDestination` and `std::vector<G4coutDestinationUPtr>`, enabling users to chain multiple output handlers in a single job (e.g., console + file + GUI).
 
 **Category:** Global/Management - I/O System
-**Base Classes:** G4coutDestination, std::vector<G4coutDestinationUPtr>
+**Base Classes:** `G4coutDestination`, `std::vector<G4coutDestinationUPtr>`
 **Author:** A. Dotti (SLAC) - April 2017
 
 ## Source Locations

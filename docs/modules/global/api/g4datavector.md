@@ -2,14 +2,14 @@
 
 ## Overview
 
-G4DataVector is a **generic container for double-precision floating-point data**, extending `std::vector<G4double>` with additional utility methods and file I/O capabilities. It provides compatibility methods from legacy Rogue-Wave collections while leveraging STL performance.
+G4DataVector is a **generic container for double-precision floating-point data**, extending `std::vector&lt;G4double&gt;` with additional utility methods and file I/O capabilities. It provides compatibility methods from legacy Rogue-Wave collections while leveraging STL performance.
 
 **Source Files:**
 - Header: `source/global/management/include/G4DataVector.hh` (lines 1-100)
 - Inline: `source/global/management/include/G4DataVector.icc`
 - Implementation: `source/global/management/src/G4DataVector.cc`
 
-**Inherits from:** `std::vector<G4double>`
+**Inherits from:** `std::vector&lt;G4double&gt;`
 
 ## Purpose
 
@@ -81,7 +81,7 @@ G4DataVector vec(50, 0.0);  // 50 elements, all initialized to 0.0
 
 ### STL Vector Interface
 
-All `std::vector<G4double>` methods are available:
+All `std::vector&lt;G4double&gt;` methods are available:
 
 ```cpp
 G4DataVector vec;
@@ -401,7 +401,7 @@ G4DataVector RemoveOutliers(const G4DataVector& input, G4double nSigma)
 
 ## Performance Considerations
 
-G4DataVector has identical performance to `std::vector<G4double>`:
+G4DataVector has identical performance to `std::vector&lt;G4double&gt;`:
 
 **Memory:**
 ```
@@ -494,7 +494,7 @@ Reserved type identifier for G4DataVector (used internally for file I/O type che
 
 - [G4OrderedTable](g4orderedtable.md) - Collection of G4DataVectors
 - [G4PhysicsVector](g4physicsvector.md) - Physics data with interpolation
-- std::vector<G4double> - Base class
+- `std::vector&lt;G4double&gt;` - Base class
 
 ## See Also
 

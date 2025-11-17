@@ -76,51 +76,6 @@ export default defineConfig({
         items: [
           { text: 'Overview', link: '/modules/global/' },
           {
-            text: 'System of Units',
-            collapsed: true,
-            items: [
-              { text: 'G4UnitsTable', link: '/modules/global/api/g4unitstable' }
-            ]
-          },
-          {
-            text: 'State Management',
-            collapsed: true,
-            items: [
-              { text: 'G4StateManager', link: '/modules/global/api/g4statemanager' },
-              { text: 'G4ApplicationState', link: '/modules/global/api/g4applicationstate' }
-            ]
-          },
-          {
-            text: 'Exception Handling',
-            collapsed: true,
-            items: [
-              { text: 'G4Exception', link: '/modules/global/api/g4exception' },
-              { text: 'G4ExceptionSeverity', link: '/modules/global/api/g4exceptionseverity' }
-            ]
-          },
-          {
-            text: 'Memory Management',
-            collapsed: true,
-            items: [
-              { text: 'G4Allocator', link: '/modules/global/api/g4allocator' }
-            ]
-          },
-          {
-            text: 'I/O and Utilities',
-            collapsed: true,
-            items: [
-              { text: 'G4ios', link: '/modules/global/api/g4ios' },
-              { text: 'G4Timer', link: '/modules/global/api/g4timer' }
-            ]
-          }
-        ]
-      },
-      {
-        text: 'Global Module',
-        collapsed: true,
-        items: [
-          { text: 'Overview', link: '/modules/global/' },
-          {
             text: 'Types & Constants',
             collapsed: true,
             items: [
@@ -177,7 +132,7 @@ export default defineConfig({
             text: 'Memory Management',
             collapsed: true,
             items: [
-              { text: 'G4Allocator', link: '/modules/global/api/G4Allocator' },
+              { text: 'G4Allocator', link: '/modules/global/api/g4allocator' },
               { text: 'G4Cache', link: '/modules/global/api/G4Cache' },
               { text: 'G4ReferenceCountedHandle', link: '/modules/global/api/G4ReferenceCountedHandle' }
             ]
@@ -188,12 +143,11 @@ export default defineConfig({
             items: [
               { text: 'G4Exception', link: '/modules/global/api/g4exception' },
               { text: 'G4Timer', link: '/modules/global/api/g4timer' },
-              { text: 'G4UnitsTable', link: '/modules/global/api/G4UnitsTable' },
+              { text: 'G4UnitsTable', link: '/modules/global/api/g4unitstable' },
               { text: 'G4Pow', link: '/modules/global/api/g4pow' },
               { text: 'G4StateManager', link: '/modules/global/api/g4statemanager' }
             ]
           }
->>>>>>> origin/master
         ]
       },
       {
