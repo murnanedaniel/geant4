@@ -1,10 +1,254 @@
+/* Import physics-themed fonts */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================
+   PHYSICS-THEMED COLOR PALETTE
+   Light mode default, dark mode override
+   ============================================ */
+
+:root {
+  /* Primary brand colors */
+  --vp-c-brand-1: #3a7bc8;
+  --vp-c-brand-2: #2e6ab3;
+  --vp-c-brand-3: #4a90e2;
+  --vp-c-brand-soft: rgba(58, 123, 200, 0.14);
+
+  /* Light mode - Clean technical paper aesthetic */
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f8f9fa;
+  --vp-c-bg-mute: #f1f3f5;
+  --vp-c-bg-alt: #e8e6e3;
+
+  --vp-c-text-1: #1a1a1a;
+  --vp-c-text-2: #3a3a3a;
+  --vp-c-text-3: #6a6a6a;
+
+  --vp-c-border: rgba(46, 56, 86, 0.15);
+  --vp-c-divider: rgba(46, 56, 86, 0.1);
+
+  --vp-code-bg: #f5f5f5;
+  --vp-code-block-bg: rgba(245, 245, 245, 0.8);
+
+  /* Typography */
+  --vp-font-family-base: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Dark mode - Physics research aesthetic */
+.dark {
+  --vp-c-brand-1: #4a90e2;
+  --vp-c-brand-2: #3a7bc8;
+  --vp-c-brand-3: #2e3856;
+
+  --vp-c-bg: #0a0e1a;
+  --vp-c-bg-soft: #141827;
+  --vp-c-bg-mute: #1a1f3a;
+  --vp-c-bg-alt: #2e3856;
+
+  --vp-c-text-1: #f5f5f5;
+  --vp-c-text-2: #d4d4d8;
+  --vp-c-text-3: #a1a1aa;
+
+  --vp-c-border: rgba(74, 144, 226, 0.2);
+  --vp-c-divider: rgba(74, 144, 226, 0.12);
+
+  --vp-code-bg: #0f1419;
+  --vp-code-block-bg: rgba(15, 20, 25, 0.8);
+}
+
+/* ============================================
+   PHYSICS-THEMED VISUAL ELEMENTS
+   ============================================ */
+
+/* Particle interaction visualization background */
+.VPHome {
+  position: relative;
+}
+
+.VPHero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Technical document feel for content areas */
+.vp-doc {
+  background: var(--vp-c-bg);
+}
+
+/* Equation-like styling for headings */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  font-family: var(--vp-font-family-base);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.vp-doc h2::before {
+  content: '§';
+  position: absolute;
+  left: -1.5em;
+  color: var(--vp-c-brand-1);
+  opacity: 0.3;
+  font-weight: 400;
+}
+
+/* Code blocks with physics aesthetic */
+.vp-doc div[class*='language-'] {
+  background: var(--vp-code-block-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Technical data table styling */
+.vp-doc table {
+  border-collapse: collapse;
+  border: 1px solid var(--vp-c-border);
+}
+
+.vp-doc table th {
+  background: var(--vp-c-bg-soft);
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* Links with subtle underline */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+  border-bottom-color: var(--vp-c-brand-2);
+}
+
 /* Custom styling for Mermaid diagrams */
 .vp-doc .mermaid {
   text-align: center;
   margin: 1.5em 0;
+  padding: 1.5em;
+  background: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-border);
 }
 
 .vp-doc .mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+/* Hero section refinements */
+.VPHero .name {
+  font-weight: 700;
+}
+
+.VPHero .tagline {
+  color: var(--vp-c-text-2);
+  font-family: var(--vp-font-family-base);
+  font-weight: 400;
+  font-size: 1.1em;
+  letter-spacing: -0.01em;
+}
+
+/* Button styling - Clean and minimal */
+.VPButton.brand {
+  background: var(--vp-c-brand-1);
+  border: 1px solid var(--vp-c-brand-1);
+  font-family: var(--vp-font-family-base);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.VPButton.brand:hover {
+  background: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+  transform: translateY(-2px);
+}
+
+.VPButton.alt {
+  border: 1px solid var(--vp-c-border);
+  background: var(--vp-c-bg-soft);
+  backdrop-filter: blur(8px);
+}
+
+/* Feature cards - Scientific aesthetic */
+.VPFeature {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+/* Navigation with particle visualization */
+.VPNav {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--vp-c-border);
+  position: relative;
+}
+
+.VPNavBar {
+  position: relative;
+}
+
+/* Sidebar - Technical manual aesthetic */
+.VPSidebar {
+  background: var(--vp-c-bg-soft);
+  border-right: 1px solid var(--vp-c-border);
+}
+
+/* Custom scrollbar - Minimal and technical */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vp-c-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-2);
+}
+
+/* Citation styling - Academic paper format */
+.vp-doc blockquote {
+  border-left: 3px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  padding: 1em 1.5em;
+  font-style: normal;
+  font-family: var(--vp-font-family-base);
+}
+
+/* Inline code - Technical highlight */
+.vp-doc code {
+  background: var(--vp-code-bg);
+  color: var(--vp-c-brand-1);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.9em;
 }
