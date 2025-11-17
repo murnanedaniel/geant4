@@ -34,7 +34,8 @@ export default defineConfig({
         items: [
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
-          { text: 'Run', link: '/modules/run/' }
+          { text: 'Run', link: '/modules/run/' },
+          { text: 'Track', link: '/modules/track/' }
         ]
       },
       { text: 'Visualization', link: '/visualization' },
@@ -56,7 +57,8 @@ export default defineConfig({
         items: [
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
-          { text: 'Run', link: '/modules/run/' }
+          { text: 'Run', link: '/modules/run/' },
+          { text: 'Track', link: '/modules/track/' }
         ]
       },
       {
@@ -123,6 +125,29 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'G4Run', link: '/modules/run/api/g4run' }
+            ]
+          }
+        ]
+      },
+      {
+        text: 'Track Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/track/' },
+          {
+            text: 'Core Classes',
+            collapsed: true,
+            items: [
+              { text: 'G4Track', link: '/modules/track/api/g4track' },
+              { text: 'G4Step', link: '/modules/track/api/g4step' },
+              { text: 'G4StepPoint', link: '/modules/track/api/g4steppoint' }
+            ]
+          },
+          {
+            text: 'Particle Changes',
+            collapsed: true,
+            items: [
+              { text: 'G4VParticleChange', link: '/modules/track/api/g4vparticlechange' }
             ]
           }
         ]
