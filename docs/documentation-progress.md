@@ -7,7 +7,19 @@ Comprehensive tracking of Geant4 module documentation status.
 This page tracks the progress of documenting all Geant4 modules, their classes, and APIs. The documentation effort focuses on creating comprehensive, example-rich guides for each module.
 
 ::: tip Navigation
-Use the [Module Statistics](#module-statistics) table below to see overall progress, or jump to specific module details for class-level tracking.
+- Use the [Module Statistics](#module-statistics) table below to see overall progress
+- View the [**Documentation Coverage Analysis**](/documentation-coverage-analysis) for comprehensive source code analysis
+- Jump to specific module details for class-level tracking
+:::
+
+::: info Comprehensive Analysis Available
+A **rigorous scientific analysis** of all 7,052 source files has been completed, revealing documentation coverage rates, code quality metrics, and comparative benchmarks. [**View Full Analysis →**](/documentation-coverage-analysis)
+
+**Key Findings:**
+- Only 1.3% of files are well-documented
+- 6.3% of classes and 5.8% of functions have documentation
+- 94.6% of code is poorly documented or undocumented
+- Detailed module breakdowns and recommendations available
 :::
 
 ## Module Statistics

@@ -45,7 +45,13 @@ export default defineConfig({
         ]
       },
       { text: 'Visualization', link: '/visualization' },
-      { text: 'Progress', link: '/documentation-progress' },
+      {
+        text: 'Documentation',
+        items: [
+          { text: 'Progress Tracking', link: '/documentation-progress' },
+          { text: 'Coverage Analysis', link: '/documentation-coverage-analysis' }
+        ]
+      },
       { text: 'Reference', link: '/reference/' }
     ],
 
@@ -395,6 +401,13 @@ export default defineConfig({
               { text: 'Short-Lived', link: '/modules/particles/shortlived' }
             ]
           }
+        ]
+      },
+      {
+        text: 'Documentation Status',
+        items: [
+          { text: 'Progress Tracking', link: '/documentation-progress' },
+          { text: 'Coverage Analysis', link: '/documentation-coverage-analysis' }
         ]
       },
       {

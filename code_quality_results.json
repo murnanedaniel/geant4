@@ -1,0 +1,124 @@
+{
+  "magic_numbers": {
+    "files_with_magic_numbers": 631,
+    "total_magic_numbers": 468663
+  },
+  "complexity": {
+    "very_complex": 771,
+    "complex": 853,
+    "moderate": 1512,
+    "simple": 3537
+  },
+  "age_indicators": {
+    "very_old": 2985,
+    "old": 1207,
+    "recent": 430,
+    "modern": 352
+  },
+  "code_smells": {
+    "todo_comments": 115,
+    "fixme_comments": 107,
+    "hack_comments": 2,
+    "deprecated": 87,
+    "long_functions": 575,
+    "deep_nesting": 127
+  },
+  "examples": {
+    "magic_numbers": [
+      {
+        "file": "source/g3tog4/include/G3EleTable.hh",
+        "count": 104,
+        "samples": [
+          "109",
+          "1.00794",
+          "4.0026",
+          "6.941",
+          "9.012182"
+        ]
+      },
+      {
+        "file": "source/intercoms/include/G4UIcommandStatus.hh",
+        "count": 5,
+        "samples": [
+          "200",
+          "300",
+          "400",
+          "500",
+          "600"
+        ]
+      },
+      {
+        "file": "source/intercoms/include/private/G4UItokenNum.hh",
+        "count": 14,
+        "samples": [
+          "257",
+          "258",
+          "259",
+          "260",
+          "261"
+        ]
+      },
+      {
+        "file": "source/interfaces/implementation/include/G4UIWin32.hh",
+        "count": 23,
+        "samples": [
+          "40001",
+          "40002",
+          "40003",
+          "40004",
+          "40005"
+        ]
+      },
+      {
+        "file": "source/event/include/G4ClassificationOfNewTrack.hh",
+        "count": 15,
+        "samples": [
+          "101",
+          "102",
+          "103",
+          "104",
+          "105"
+        ]
+      }
+    ],
+    "deprecated": [
+      {
+        "file": "source/analysis/accumulables/include/G4AccumulableManager.hh"
+      },
+      {
+        "file": "source/intercoms/include/G4UIparameter.hh"
+      },
+      {
+        "file": "source/processes/parameterisation/include/G4FastSimulationManagerProcess.hh"
+      },
+      {
+        "file": "source/processes/parameterisation/include/G4FastStep.hh"
+      },
+      {
+        "file": "source/processes/transportation/include/G4CoupledTransportation.hh"
+      }
+    ],
+    "deep_nesting": [
+      {
+        "file": "source/intercoms/include/private/G4UIparsing.hh",
+        "depth": 7
+      },
+      {
+        "file": "source/geometry/magneticfield/include/G4QSS2.hh",
+        "depth": 8
+      },
+      {
+        "file": "source/g3tog4/src/G3toG4BuildTree.cc",
+        "depth": 8
+      },
+      {
+        "file": "source/intercoms/src/G4UIcommandTree.cc",
+        "depth": 7
+      },
+      {
+        "file": "source/intercoms/src/G4UIcommand.cc",
+        "depth": 10
+      }
+    ]
+  }
+}
