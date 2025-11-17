@@ -40,7 +40,8 @@ export default defineConfig({
           { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' },
           { text: 'Track', link: '/modules/track/' },
-          { text: 'Tracking', link: '/modules/tracking/' }
+          { text: 'Tracking', link: '/modules/tracking/' },
+          { text: 'Particles', link: '/modules/particles/' }
         ]
       },
       { text: 'Visualization', link: '/visualization' },
@@ -65,52 +66,8 @@ export default defineConfig({
           { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' },
           { text: 'Track', link: '/modules/track/' },
-          { text: 'Tracking', link: '/modules/tracking/' }
-        ]
-      },
-      {
-        text: 'Global Module',
-        collapsed: true,
-        items: [
-          { text: 'Overview', link: '/modules/global/' },
-          {
-            text: 'System of Units',
-            collapsed: true,
-            items: [
-              { text: 'G4UnitsTable', link: '/modules/global/api/g4unitstable' }
-            ]
-          },
-          {
-            text: 'State Management',
-            collapsed: true,
-            items: [
-              { text: 'G4StateManager', link: '/modules/global/api/g4statemanager' },
-              { text: 'G4ApplicationState', link: '/modules/global/api/g4applicationstate' }
-            ]
-          },
-          {
-            text: 'Exception Handling',
-            collapsed: true,
-            items: [
-              { text: 'G4Exception', link: '/modules/global/api/g4exception' },
-              { text: 'G4ExceptionSeverity', link: '/modules/global/api/g4exceptionseverity' }
-            ]
-          },
-          {
-            text: 'Memory Management',
-            collapsed: true,
-            items: [
-              { text: 'G4Allocator', link: '/modules/global/api/g4allocator' }
-            ]
-          },
-          {
-            text: 'I/O and Utilities',
-            collapsed: true,
-            items: [
-              { text: 'G4ios', link: '/modules/global/api/g4ios' },
-              { text: 'G4Timer', link: '/modules/global/api/g4timer' }
-            ]
-          }
+          { text: 'Tracking', link: '/modules/tracking/' },
+          { text: 'Particles', link: '/modules/particles/' }
         ]
       },
       {
@@ -175,7 +132,7 @@ export default defineConfig({
             text: 'Memory Management',
             collapsed: true,
             items: [
-              { text: 'G4Allocator', link: '/modules/global/api/G4Allocator' },
+              { text: 'G4Allocator', link: '/modules/global/api/g4allocator' },
               { text: 'G4Cache', link: '/modules/global/api/G4Cache' },
               { text: 'G4ReferenceCountedHandle', link: '/modules/global/api/G4ReferenceCountedHandle' }
             ]
@@ -186,7 +143,7 @@ export default defineConfig({
             items: [
               { text: 'G4Exception', link: '/modules/global/api/g4exception' },
               { text: 'G4Timer', link: '/modules/global/api/g4timer' },
-              { text: 'G4UnitsTable', link: '/modules/global/api/G4UnitsTable' },
+              { text: 'G4UnitsTable', link: '/modules/global/api/g4unitstable' },
               { text: 'G4Pow', link: '/modules/global/api/g4pow' },
               { text: 'G4StateManager', link: '/modules/global/api/g4statemanager' }
             ]
@@ -400,6 +357,42 @@ export default defineConfig({
             items: [
               { text: 'G4UserSteppingAction', link: '/modules/tracking/api/g4usersteppingaction' },
               { text: 'G4UserTrackingAction', link: '/modules/tracking/api/g4usertrackingaction' }
+            ]
+          }
+        ]
+      },
+      {
+        text: 'Particles Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/particles/' },
+          {
+            text: 'Core Management',
+            collapsed: true,
+            items: [
+              { text: 'G4ParticleDefinition', link: '/modules/particles/api/g4particledefinition' },
+              { text: 'G4ParticleTable', link: '/modules/particles/api/g4particletable' },
+              { text: 'G4DynamicParticle', link: '/modules/particles/api/g4dynamicparticle' },
+              { text: 'G4IonTable', link: '/modules/particles/api/g4iontable' }
+            ]
+          },
+          {
+            text: 'Decay Management',
+            collapsed: true,
+            items: [
+              { text: 'G4DecayTable', link: '/modules/particles/api/g4decaytable' },
+              { text: 'G4VDecayChannel', link: '/modules/particles/api/g4vdecaychannel' }
+            ]
+          },
+          {
+            text: 'Particle Categories',
+            collapsed: true,
+            items: [
+              { text: 'Leptons', link: '/modules/particles/leptons' },
+              { text: 'Bosons', link: '/modules/particles/bosons' },
+              { text: 'Hadrons', link: '/modules/particles/hadrons' },
+              { text: 'Ions', link: '/modules/particles/ions' },
+              { text: 'Short-Lived', link: '/modules/particles/shortlived' }
             ]
           }
         ]

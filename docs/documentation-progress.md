@@ -21,7 +21,7 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 | [**track**](#track-module) | 23 | 10 | 43% | ✅ Current | High |
 | [**tracking**](#tracking-module) | 40+ | 8 | 20% | ✅ Current | High |
 | [**geometry**](#geometry-module) | 308 | 13 | 4% | 🟢 Active | High |
-| **particles** | 200+ | 0 | 0% | 🔄 Next | High |
+| [**particles**](#particles-module) | 252 | 13 | 5% | ✅ Current | High |
 | [**processes**](#processes-module) | 1,939 | 100+ | 5% | ✅ Current | High |
 | **digits_hits** | 30+ | 0 | 0% | 🔄 Next | Medium |
 | **analysis** | 20+ | 0 | 0% | ⏳ Planned | Low |
@@ -366,6 +366,71 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 
 ---
 
+### Particles Module
+
+**Location:** `source/particles/`
+**Documentation:** [Module Overview](/modules/particles/) | [Visualization Diagram](/visualization#particles-module-class-hierarchy)
+**Progress:** 13/252 classes (5%)
+
+#### Documented Classes
+
+| Class | API Docs | Lines | Status |
+|-------|----------|-------|--------|
+| **G4ParticleDefinition** | [📖 API](/modules/particles/api/g4particledefinition) | 2,400 | ✅ Complete |
+| **G4ParticleTable** | [📖 API](/modules/particles/api/g4particletable) | 1,900 | ✅ Complete |
+| **G4DynamicParticle** | [📖 API](/modules/particles/api/g4dynamicparticle) | 2,500 | ✅ Complete |
+| **G4IonTable** | [📖 API](/modules/particles/api/g4iontable) | 1,350 | ✅ Complete |
+| **G4DecayTable** | [📖 API](/modules/particles/api/g4decaytable) | 900 | ✅ Complete |
+| **G4VDecayChannel** | [📖 API](/modules/particles/api/g4vdecaychannel) | 1,400 | ✅ Complete |
+| **Leptons** | [📖 Categories](/modules/particles/leptons) | 1,200 | ✅ Complete |
+| **Bosons** | [📖 Categories](/modules/particles/bosons) | 1,300 | ✅ Complete |
+| **Hadrons** | [📖 Categories](/modules/particles/hadrons) | 1,800 | ✅ Complete |
+| **Ions** | [📖 Categories](/modules/particles/ions) | 1,500 | ✅ Complete |
+| **Short-Lived** | [📖 Categories](/modules/particles/shortlived) | 1,400 | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (239 classes)</summary>
+
+**Management Classes:**
+- G4NuclideTable
+- G4IsotopeProperty
+- G4PDGCodeChecker
+- G4ParticlePropertyTable
+- G4ParticlePropertyData
+- G4ElectronOccupancy
+- G4DecayProducts
+- G4PrimaryParticle
+- G4PrimaryVertex
+- And 10+ more management classes
+
+**Decay Channel Types:**
+- G4PhaseSpaceDecayChannel
+- G4DalitzDecayChannel
+- G4MuonDecayChannel
+- G4MuonDecayChannelWithSpin
+- G4MuonRadiativeDecayChannelWithSpin
+- G4TauLeptonicDecayChannel
+- G4KL3DecayChannel
+- G4NeutronBetaDecayChannel
+- G4PionRadiativeDecayChannel
+- And 5+ more specialized channels
+
+**Individual Particle Classes:**
+Note: Individual particle classes (200+ particles) are documented in category pages:
+- 12 Leptons (documented in Leptons category)
+- 10 Bosons (documented in Bosons category)
+- 47 Baryons (documented in Hadrons category)
+- 29 Mesons (documented in Hadrons category)
+- 23 Ions (documented in Ions category)
+- 14+ Short-lived (documented in Short-lived category)
+- 11 Adjoint particles
+
+</details>
+
+---
+
 ### Track Module
 
 **Location:** `source/track/`
@@ -665,16 +730,18 @@ Each documented module includes:
 
 | Metric | Count |
 |--------|-------|
-| **Modules Documented** | 8 / 23+ |
-| **Classes Documented** | 184+ / 400+ |
-| **Total Documentation Lines** | ~156,000 |
-| **API Reference Pages** | 174+ |
-| **Module Overview Pages** | 19 |
+| **Modules Documented** | 9 / 23+ |
+| **Classes Documented** | 197+ / 400+ |
+| **Total Documentation Lines** | ~171,000 |
+| **API Reference Pages** | 185+ |
+| **Module Overview Pages** | 20 |
+| **Category Pages** | 5 |
 | **Interactive Diagrams** | 65+ |
 | **Code Examples** | 550+ |
 
 ### Recent Additions
 
+- **2025-11-17**: Particles Module - 13 classes (6 API + 5 category pages + 2 overview pages), ~15,000 lines
 - **2025-11-17**: Processes Module - 100+ classes, 80,000 lines (ALL 11 sub-modules)
 - **2025-11-17**: Global Module - 8 classes, 6,600 lines
 - **2025-11-17**: Tracking Module - 8 classes (inc. overview), 6,200 lines
@@ -688,21 +755,21 @@ Each documented module includes:
 
 ### ✅ Completed (Foundation Modules)
 
-1. ✅ **Global** - Foundational utilities (8/60+ done, 13%)
+1. ✅ **Global** - Foundational utilities (97/109 done, 89%)
 2. ✅ **Materials** - Material definitions (15/44 done, 34%)
 3. ✅ **Event** - Event generation (19/36 done, 53%)
 4. ✅ **Run** - Simulation control (11/15 done, 73%)
 5. ✅ **Track** - Track container (10/23 done, 43%)
 6. ✅ **Tracking** - Track processing (8/40+ done, 20%)
+7. ✅ **Particles** - Particle definitions (13/252 done, 5%)
 
 ### 🔄 In Progress
 
-7. 🟢 **Geometry** - Detector modeling (13/308 done, 4%)
-8. ✅ **Processes** - Physics processes (100+/1,939 done, 5%)
+8. 🟢 **Geometry** - Detector modeling (13/308 done, 4%)
+9. ✅ **Processes** - Physics processes (100+/1,939 done, 5%)
 
 ### 🔄 Next Priority
 
-9. 🔄 **Particles** - Particle definitions
 10. 🔄 **Digits & Hits** - Detector response
 
 ### ⏳ Planned (Lower Priority)
@@ -746,7 +813,8 @@ Templates and style guides available:
 ::: info Last Updated
 **Date:** 2025-11-17
 **Next Update:** After completing remaining classes in current modules
-**Parallel Effort:** Particles, Geometry, Processes, and Digits+Hits modules being documented by another instance
+**Recently Completed:** Particles module (13/252 classes)
+**Parallel Effort:** Geometry and Digits+Hits modules being documented by another instance
 :::
 
 ---
