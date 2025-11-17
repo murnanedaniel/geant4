@@ -7,6 +7,9 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   themeConfig: {
+    // Dark mode first - physics research aesthetic
+    appearance: 'dark',
+
     search: {
       provider: 'local',
       options: {

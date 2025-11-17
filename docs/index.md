@@ -3,33 +3,33 @@ layout: home
 
 hero:
   name: "Geant4"
-  text: "Particle Simulation Toolkit"
-  tagline: A toolkit for the simulation of the passage of particles through matter
+  text: "Monte Carlo Particle Transport"
+  tagline: Simulating the passage of particles through matter using validated physics models
   actions:
     - theme: brand
-      text: Getting Started
+      text: Documentation
       link: /getting-started
     - theme: alt
-      text: View on GitHub
+      text: GitHub Repository
       link: https://github.com/Geant4/geant4
 
 features:
-  - icon: 🔬
+  - icon: ∫
     title: High Energy Physics
     details: Comprehensive simulation capabilities for high energy, nuclear and accelerator physics experiments
-  - icon: 🏥
+  - icon: γ
     title: Medical Applications
     details: Advanced tools for medical physics simulations including radiotherapy and medical imaging
-  - icon: 🚀
+  - icon: ⊕
     title: Space Science
     details: Simulation support for space radiation effects and particle interactions in space environments
-  - icon: 🎯
+  - icon: ℏ
     title: Accurate Physics
     details: Extensive physics models covering electromagnetic, hadronic, and optical processes
-  - icon: 🛠️
+  - icon: ⊗
     title: Flexible Architecture
     details: Modular design allowing customization and extension for specific use cases
-  - icon: 📊
+  - icon: ∇
     title: Geometry & Visualization
     details: Powerful geometry modeling and multiple visualization options for detector design
 ---
