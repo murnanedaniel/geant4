@@ -655,6 +655,6 @@ for (G4int i = 0; i < nDaughters; ++i) {
 
 ### Related Classes
 - `G4PhysicalVolumeStore` - Global registry of physical volumes
-- `G4PVManager` (G4GeomSplitter<G4PVData>) - Per-thread data manager
+- `G4PVManager` (G4GeomSplitter&lt;G4PVData&gt;) - Per-thread data manager
 - `G4VPVParameterisation` - Parameterization base class
 - `G4TouchableHistory` - Navigation history through volume hierarchy

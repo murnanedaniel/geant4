@@ -726,7 +726,7 @@ G4cout << "Housing mass only: " << housingMass/kg << " kg" << G4endl;
 - Enable voxelization for volumes with many daughters (automatic when `optimise=true`)
 - Use cached mass values (don't call `GetMass(true)` repeatedly)
 - Set field managers and regions after building complete hierarchy
-- Use `SetOptimisation(false)` for volumes with few (<3) daughters
+- Use `SetOptimisation(false)` for volumes with few (&lt;3) daughters
 
 **DON'T**:
 - Modify geometry during tracking (not thread-safe!)
@@ -798,7 +798,7 @@ void MySteppingAction::UserSteppingAction(const G4Step* step) {
 
 ### Related Classes
 - `G4LogicalVolumeStore` - Global registry of all logical volumes
-- `G4LVManager` (G4GeomSplitter<G4LVData>) - Per-thread data manager
+- `G4LVManager` (G4GeomSplitter&lt;G4LVData&gt;) - Per-thread data manager
 - `G4SmartVoxelHeader` - Voxelization structure
 - `G4FieldManager` - Electromagnetic field management
 - `G4VSensitiveDetector` - Hit collection interface
