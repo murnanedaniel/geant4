@@ -76,6 +76,35 @@ export default defineConfig({
             ]
           },
           {
+            text: 'NIST Database',
+            collapsed: true,
+            items: [
+              { text: 'G4NistManager', link: '/modules/materials/api/g4nistmanager' },
+              { text: 'G4NistElementBuilder', link: '/modules/materials/api/g4nistelementbuilder' },
+              { text: 'G4NistMaterialBuilder', link: '/modules/materials/api/g4nistmaterialbuilder' }
+            ]
+          },
+          {
+            text: 'Material Properties',
+            collapsed: true,
+            items: [
+              { text: 'G4MaterialPropertiesTable', link: '/modules/materials/api/g4materialpropertiestable' },
+              { text: 'G4MaterialPropertyVector', link: '/modules/materials/api/g4materialpropertyvector' },
+              { text: 'G4MaterialPropertiesIndex', link: '/modules/materials/api/g4materialpropertiesindex' }
+            ]
+          },
+          {
+            text: 'Tables and Data',
+            collapsed: true,
+            items: [
+              { text: 'G4MaterialTable', link: '/modules/materials/api/g4materialtable' },
+              { text: 'G4ElementTable', link: '/modules/materials/api/g4elementtable' },
+              { text: 'G4IsotopeTable', link: '/modules/materials/api/g4isotopetable' },
+              { text: 'G4ElementData', link: '/modules/materials/api/g4elementdata' },
+              { text: 'G4AtomicShells', link: '/modules/materials/api/g4atomicshells' }
+            ]
+          },
+          {
             text: 'Ionisation Parameters',
             collapsed: true,
             items: [
