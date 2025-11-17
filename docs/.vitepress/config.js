@@ -35,7 +35,8 @@ export default defineConfig({
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' },
-          { text: 'Track', link: '/modules/track/' }
+          { text: 'Track', link: '/modules/track/' },
+          { text: 'Tracking', link: '/modules/tracking/' }
         ]
       },
       { text: 'Visualization', link: '/visualization' },
@@ -58,7 +59,8 @@ export default defineConfig({
           { text: 'Materials', link: '/modules/materials/' },
           { text: 'Event', link: '/modules/event/' },
           { text: 'Run', link: '/modules/run/' },
-          { text: 'Track', link: '/modules/track/' }
+          { text: 'Track', link: '/modules/track/' },
+          { text: 'Tracking', link: '/modules/tracking/' }
         ]
       },
       {
@@ -237,6 +239,31 @@ export default defineConfig({
         text: 'Tracking Module',
         collapsed: true,
         items: [
+          { text: 'Overview', link: '/modules/tracking/' },
+          {
+            text: 'Tracking Management',
+            collapsed: true,
+            items: [
+              { text: 'G4TrackingManager', link: '/modules/tracking/api/g4trackingmanager' },
+              { text: 'G4SteppingManager', link: '/modules/tracking/api/g4steppingmanager' }
+            ]
+          },
+          {
+            text: 'Trajectories',
+            collapsed: true,
+            items: [
+              { text: 'G4VTrajectory', link: '/modules/tracking/api/g4vtrajectory' },
+              { text: 'G4Trajectory', link: '/modules/tracking/api/g4trajectory' },
+              { text: 'G4TrajectoryContainer', link: '/modules/tracking/api/g4trajectorycontainer' }
+            ]
+          },
+          {
+            text: 'Stepping Verbosity',
+            collapsed: true,
+            items: [
+              { text: 'G4VSteppingVerbose', link: '/modules/tracking/api/g4vsteppingverbose' }
+            ]
+          },
           {
             text: 'User Actions',
             collapsed: true,
