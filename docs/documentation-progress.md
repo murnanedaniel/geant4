@@ -20,7 +20,7 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 | [**track**](#track-module) | 23 | 0 | 0% | 🔄 Next | High |
 | [**tracking**](#tracking-module) | 40+ | 0 | 0% | ⏳ Planned | High |
 | **global** | 60+ | 0 | 0% | ⏳ Planned | High |
-| **geometry** | 150+ | 0 | 0% | ⏳ Planned | Medium |
+| [**geometry**](#geometry-module) | 308 | 8 | 3% | 🟢 Active | High |
 | **particles** | 200+ | 0 | 0% | ⏳ Planned | High |
 | **processes** | 250+ | 0 | 0% | ⏳ Planned | Medium |
 | **digits_hits** | 30+ | 0 | 0% | ⏳ Planned | Medium |
@@ -329,3 +329,100 @@ Templates and style guides available:
 **Date:** 2025-11-16
 **Next Update:** After Track module documentation
 :::
+
+---
+
+### Geometry Module
+
+**Location:** `source/geometry/`
+**Documentation:** [Module Overview](/modules/geometry/) | Visualization Diagrams (in progress)
+**Progress:** 8/308 classes (3%)
+
+#### Documented Classes
+
+| Class | API Docs | Lines | Status |
+|-------|----------|-------|--------|
+| **G4VSolid** | [📖 API](/modules/geometry/api/g4vsolid) | 1,012 | ✅ Complete |
+| **G4LogicalVolume** | [📖 API](/modules/geometry/api/g4logicalvolume) | 804 | ✅ Complete |
+| **G4VPhysicalVolume** | [📖 API](/modules/geometry/api/g4vphysicalvolume) | 660 | ✅ Complete |
+| **G4PVPlacement** | [📖 API](/modules/geometry/api/g4pvplacement) | 963 | ✅ Complete |
+| **G4Box** | [📖 API](/modules/geometry/api/g4box) | 1,267 | ✅ Complete |
+| **G4Tubs** | [📖 API](/modules/geometry/api/g4tubs) | 1,478 | ✅ Complete |
+| **G4Cons** | [📖 API](/modules/geometry/api/g4cons) | 1,088 | ✅ Complete |
+| **G4Sphere** | [📖 API](/modules/geometry/api/g4sphere) | 1,136 | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (300 classes)</summary>
+
+**Core Management (41 remaining):**
+- G4Region
+- G4GeometryManager
+- G4VPVParameterisation
+- G4AffineTransform
+- G4ScaleTransform
+- G4TouchableHistory, G4TouchableHandle, G4VTouchable
+- G4SmartVoxelHeader, G4SmartVoxelNode
+- G4NavigationHistory, G4NavigationLevel
+- G4GeomTools, G4VoxelLimits, G4BoundingEnvelope
+- And 28 more...
+
+**Navigation (31 classes):**
+- G4Navigator
+- G4TransportationManager
+- G4MultiNavigator
+- G4PropagatorInField
+- G4SafetyHelper
+- G4PathFinder
+- And 25 more...
+
+**CSG Solids (13 remaining):**
+- G4Orb, G4Torus, G4Trap, G4Trd, G4Para
+- G4CutTubs
+- And 7 more...
+
+**Boolean Solids (8 classes):**
+- G4UnionSolid
+- G4SubtractionSolid
+- G4IntersectionSolid
+- G4MultiUnion
+- G4DisplacedSolid, G4ScaledSolid
+- And 2 more...
+
+**Specific Solids (56 classes):**
+- G4Polycone, G4Polyhedra
+- G4TessellatedSolid
+- G4Tet, G4Ellipsoid, G4Paraboloid, G4Hype
+- G4ExtrudedSolid, G4GenericTrap
+- Twisted solids (8 classes)
+- And 40 more...
+
+**Magnetic Field (103 classes):**
+- G4MagneticField, G4ElectricField
+- G4UniformMagField
+- G4FieldManager
+- G4ChordFinder
+- Integration steppers (40+ classes)
+- And 60 more...
+
+**Volumes (4 remaining):**
+- G4PVReplica
+- G4PVParameterised
+- G4AssemblyVolume
+- And 1 more...
+
+**Divisions (11 classes):**
+- G4VDivisionParameterisation
+- G4PVDivision
+- Shape-specific divisions (9 classes)
+
+**Biasing (17 classes):**
+- G4GeometryCell
+- G4IStore
+- G4WeightWindowStore
+- And 14 more...
+
+</details>
+
+---
