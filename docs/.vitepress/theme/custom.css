@@ -65,25 +65,6 @@
   position: relative;
 }
 
-.VPHome::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Cg fill='none' stroke='%23000000' stroke-width='0.5' opacity='0.15'%3E%3Cpath d='M100,300 Q200,250 300,300 T500,300'/%3E%3Cpath d='M100,300 L150,200'/%3E%3Cpath d='M100,300 L150,400'/%3E%3Ccircle cx='300' cy='300' r='3'/%3E%3Cpath d='M300,300 L350,250'/%3E%3Cpath d='M300,300 L350,350'/%3E%3Cpath d='M300,300 L380,300'/%3E%3Cpath d='M500,300 L550,280'/%3E%3Cpath d='M500,300 L550,320'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 800px 600px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.dark .VPHome::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.1'%3E%3Cpath d='M100,300 Q200,250 300,300 T500,300'/%3E%3Cpath d='M100,300 L150,200'/%3E%3Cpath d='M100,300 L150,400'/%3E%3Ccircle cx='300' cy='300' r='3'/%3E%3Cpath d='M300,300 L350,250'/%3E%3Cpath d='M300,300 L350,350'/%3E%3Cpath d='M300,300 L380,300'/%3E%3Cpath d='M500,300 L550,280'/%3E%3Cpath d='M500,300 L550,320'/%3E%3C/g%3E%3C/svg%3E");
-}
-
 .VPHero {
   position: relative;
   z-index: 1;
@@ -224,23 +205,8 @@
   position: relative;
 }
 
-.VPNav::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='60' viewBox='0 0 1200 60'%3E%3Cg fill='none' stroke='%23000000' stroke-width='0.3' opacity='0.08'%3E%3Cpath d='M50,30 L100,30'/%3E%3Ccircle cx='100' cy='30' r='2'/%3E%3Cpath d='M100,30 L150,20'/%3E%3Cpath d='M100,30 L150,40'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: 200px 60px;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.dark .VPNav::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='60' viewBox='0 0 1200 60'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.08'%3E%3Cpath d='M50,30 L100,30'/%3E%3Ccircle cx='100' cy='30' r='2'/%3E%3Cpath d='M100,30 L150,20'/%3E%3Cpath d='M100,30 L150,40'/%3E%3C/g%3E%3C/svg%3E");
+.VPNavBar {
+  position: relative;
 }
 
 /* Sidebar - Technical manual aesthetic */
