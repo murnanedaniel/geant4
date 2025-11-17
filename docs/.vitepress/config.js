@@ -147,7 +147,13 @@ export default defineConfig({
             text: 'Particle Changes',
             collapsed: true,
             items: [
-              { text: 'G4VParticleChange', link: '/modules/track/api/g4vparticlechange' }
+              { text: 'G4VParticleChange', link: '/modules/track/api/g4vparticlechange' },
+              { text: 'G4ParticleChange', link: '/modules/track/api/g4particlechange' },
+              { text: 'G4ParticleChangeForDecay', link: '/modules/track/api/g4particlechangefordecay' },
+              { text: 'G4ParticleChangeForGamma', link: '/modules/track/api/g4particlechangeforgamma' },
+              { text: 'G4ParticleChangeForLoss', link: '/modules/track/api/g4particlechangeforloss' },
+              { text: 'G4ParticleChangeForMSC', link: '/modules/track/api/g4particlechangeformsc' },
+              { text: 'G4ParticleChangeForTransport', link: '/modules/track/api/g4particlechangefortransport' }
             ]
           }
         ]
