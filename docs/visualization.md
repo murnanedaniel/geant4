@@ -85,6 +85,7 @@ graph TB
     click materials "/geant4/modules/materials/" "Materials Module Documentation"
     click event "/geant4/modules/event/" "Event Module Documentation"
     click run "/geant4/modules/run/" "Run Module Documentation"
+    click particles "/geant4/modules/particles/" "Particles Module Documentation"
 ```
 
 ## Core Module Relationships
@@ -336,6 +337,113 @@ sequenceDiagram
     deactivate RM
 ```
 
+## Particles Module Class Hierarchy
+
+```mermaid
+classDiagram
+    class G4ParticleDefinition {
+        -G4String theParticleName
+        -G4double thePDGMass
+        -G4double thePDGCharge
+        -G4int thePDGEncoding
+        -G4DecayTable* theDecayTable
+        -G4ProcessManager* theProcessManager
+        +GetParticleName() G4String
+        +GetPDGMass() G4double
+        +GetPDGCharge() G4double
+        +GetPDGEncoding() G4int
+        +GetDecayTable() G4DecayTable*
+        +GetProcessManager() G4ProcessManager*
+    }
+
+    class G4ParticleTable {
+        <<singleton>>
+        -static G4ParticleTable* fgParticleTable
+        -G4PTblDictionary* fDictionary
+        -G4IonTable* fIonTable
+        +GetParticleTable() static
+        +FindParticle(G4String) G4ParticleDefinition*
+        +FindParticle(G4int) G4ParticleDefinition*
+        +GetIonTable() G4IonTable*
+        +Insert(G4ParticleDefinition*)
+    }
+
+    class G4DynamicParticle {
+        -const G4ParticleDefinition* theParticleDefinition
+        -G4ThreeVector theMomentumDirection
+        -G4double theKineticEnergy
+        -G4ThreeVector thePolarization
+        -G4double theProperTime
+        +GetParticleDefinition() G4ParticleDefinition*
+        +GetMomentum() G4ThreeVector
+        +GetKineticEnergy() G4double
+        +SetKineticEnergy(G4double)
+        +GetBeta() G4double
+    }
+
+    class G4IonTable {
+        -G4ParticleTable* particleTable
+        -G4NuclideTable* pNuclideTable
+        +GetIon(G4int Z, G4int A) G4ParticleDefinition*
+        +GetIon(G4int encoding) G4ParticleDefinition*
+        +GetMuonicAtom(G4int Z, G4int A) G4ParticleDefinition*
+        +GetIonName(G4int Z, G4int A) G4String
+        +GetLifeTime(G4int Z, G4int A) G4double
+    }
+
+    class G4DecayTable {
+        -std::vector~G4VDecayChannel*~ channels
+        +Insert(G4VDecayChannel*)
+        +SelectADecayChannel() G4VDecayChannel*
+        +GetDecayChannel(G4int) G4VDecayChannel*
+        +entries() G4int
+    }
+
+    class G4VDecayChannel {
+        <<abstract>>
+        -G4String* daughters_name
+        -G4double rbranch
+        -G4int numberOfDaughters
+        +GetBR() G4double
+        +GetNumberOfDaughters() G4int
+        +DecayIt(G4double) G4DecayProducts*
+    }
+
+    class G4Electron {
+        <<singleton>>
+        +Definition() static G4ParticleDefinition*
+        +Electron() static G4Electron*
+    }
+
+    class G4Proton {
+        <<singleton>>
+        +Definition() static G4ParticleDefinition*
+        +Proton() static G4Proton*
+    }
+
+    class G4Gamma {
+        <<singleton>>
+        +Definition() static G4ParticleDefinition*
+        +Gamma() static G4Gamma*
+    }
+
+    G4ParticleTable o-- G4ParticleDefinition : manages
+    G4ParticleTable *-- G4IonTable : contains
+    G4ParticleDefinition *-- G4DecayTable : may have
+    G4DecayTable o-- G4VDecayChannel : contains
+    G4DynamicParticle --> G4ParticleDefinition : references
+    G4Electron --|> G4ParticleDefinition : inherits
+    G4Proton --|> G4ParticleDefinition : inherits
+    G4Gamma --|> G4ParticleDefinition : inherits
+
+    click G4ParticleDefinition "/geant4/modules/particles/api/g4particledefinition" "G4ParticleDefinition API"
+    click G4ParticleTable "/geant4/modules/particles/api/g4particletable" "G4ParticleTable API"
+    click G4DynamicParticle "/geant4/modules/particles/api/g4dynamicparticle" "G4DynamicParticle API"
+    click G4IonTable "/geant4/modules/particles/api/g4iontable" "G4IonTable API"
+    click G4DecayTable "/geant4/modules/particles/api/g4decaytable" "G4DecayTable API"
+    click G4VDecayChannel "/geant4/modules/particles/api/g4vdecaychannel" "G4VDecayChannel API"
+```
+
 ## Multi-Threading Architecture
 
 ```mermaid
@@ -446,6 +554,7 @@ flowchart LR
 - [Materials Module →](/modules/materials/) - Isotopes, elements, and material definitions
 - [Event Module →](/modules/event/) - Event generation and primary particle management
 - [Run Module →](/modules/run/) - Simulation control and event loop management
+- [Particles Module →](/modules/particles/) - Particle definitions and properties
 - [Architecture Overview →](/architecture) - High-level system architecture
 :::
 
@@ -458,7 +567,7 @@ flowchart LR
 | **run** | 15+ | global, event, tracking | ✅ 3/15 classes documented |
 | global | 60+ | - | ⏳ Pending |
 | geometry | 150+ | global, materials | ⏳ Pending |
-| particles | 200+ | global | ⏳ Pending |
+| **particles** | 252 | global | ✅ 13/252 classes documented |
 | processes | 250+ | particles, geometry | ⏳ Pending |
 | tracking | 40+ | event, geometry | ⏳ Pending |
 

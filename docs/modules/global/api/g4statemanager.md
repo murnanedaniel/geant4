@@ -1,40 +1,20 @@
-# G4StateManager API Documentation
+# G4StateManager
 
-## Overview
+## Class Overview
 
-`G4StateManager` is a singleton class responsible for managing the application state throughout the lifecycle of a Geant4 simulation. It tracks state transitions, enforces valid state changes, and notifies dependent objects when states change. The manager ensures that operations are only performed when the application is in an appropriate state.
+**Defined in**: `/source/global/management/include/G4StateManager.hh`
 
-::: tip Header File
-**Location:** `source/global/management/include/G4StateManager.hh`
-**Authors:** G.Cosmo, M.Asai - November 1996
-:::
+**Implemented in**: `/source/global/management/src/G4StateManager.cc`
 
-## Application State Lifecycle
+**Inline methods**: `/source/global/management/include/G4StateManager.icc`
 
-```mermaid
-stateDiagram-v2
-    [*] --> PreInit: Application Start
-    PreInit --> Init: G4Initializer::Initialize()
-    Init --> Idle: Initialization Complete
-    Idle --> GeomClosed: BeamOn() / CloseGeometry()
-    GeomClosed --> EventProc: Begin Event
-    EventProc --> GeomClosed: End Event
-    GeomClosed --> Idle: End Run / OpenGeometry()
-    Idle --> Quit: RunManager Destructor
+`G4StateManager` is the central singleton class responsible for managing the application state throughout the Geant4 lifecycle. It maintains the current and previous states, validates state transitions, and notifies registered observers when states change.
 
-    PreInit --> Abort: G4Exception
-    Init --> Abort: G4Exception
-    Idle --> Abort: G4Exception
-    GeomClosed --> Abort: G4Exception
-    EventProc --> Abort: G4Exception
+## Purpose
 
-    Abort --> Idle: Recovery
-    Quit --> [*]
-```
+The state manager serves as the authoritative source for application state information and coordinates state-dependent behavior across the Geant4 framework. It ensures that components operate only in appropriate states and provides hooks for custom behavior during state transitions.
 
 ## Class Declaration
-
-`source/global/management/include/G4StateManager.hh:52-120`
 
 ```cpp
 class G4StateManager
@@ -43,31 +23,26 @@ class G4StateManager
   static G4StateManager* GetStateManager();
   ~G4StateManager();
 
-  // Deleted copy/move operations
   G4StateManager(const G4StateManager&) = delete;
   G4StateManager& operator=(const G4StateManager&) = delete;
+  G4bool operator==(const G4StateManager&) const = delete;
+  G4bool operator!=(const G4StateManager&) const = delete;
 
-  // State queries
   const G4ApplicationState& GetCurrentState() const;
   const G4ApplicationState& GetPreviousState() const;
 
-  // State changes
   G4bool SetNewState(const G4ApplicationState& requestedState);
-  G4bool SetNewState(const G4ApplicationState& requestedState,
-                     const char* msg);
+  G4bool SetNewState(const G4ApplicationState& requestedState, const char* msg);
 
-  // State-dependent object registration
-  G4bool RegisterDependent(G4VStateDependent* aDependent,
-                          G4bool bottom = false);
+  G4bool RegisterDependent(G4VStateDependent* aDependent, G4bool bottom = false);
   G4bool DeregisterDependent(G4VStateDependent* aDependent);
   G4VStateDependent* RemoveDependent(const G4VStateDependent* aDependent);
 
-  // Utilities
   G4String GetStateString(const G4ApplicationState& aState) const;
+
   void NotifyDeletion(const G4Event*);
   void NotifyDeletion(const G4Run*);
 
-  // Exception handling control
   inline void SetSuppressAbortion(G4int i);
   inline G4int GetSuppressAbortion() const;
   inline const char* GetMessage() const;
@@ -77,701 +52,850 @@ class G4StateManager
 
  private:
   G4StateManager();
+
+  static G4ThreadLocal G4StateManager* theStateManager;
+  G4ApplicationState theCurrentState = G4State_PreInit;
+  G4ApplicationState thePreviousState = G4State_PreInit;
+  std::vector<G4VStateDependent*> theDependentsList;
+  G4VStateDependent* theBottomDependent = nullptr;
+  G4int suppressAbortion = 0;
+  const char* msgptr = nullptr;
+  G4VExceptionHandler* exceptionHandler = nullptr;
+  static G4int verboseLevel;
 };
 ```
 
-## Singleton Access
+## Public Methods
 
-### GetStateManager()
+### Singleton Access
 
-`source/global/management/include/G4StateManager.hh:55-58`
+#### GetStateManager()
 
 ```cpp
 static G4StateManager* GetStateManager();
 ```
 
-Returns pointer to the singleton instance of G4StateManager.
+**Description**: Returns the singleton instance of G4StateManager. Creates the instance on first call.
 
-**Returns:** Pointer to global state manager (never null)
+**Thread Safety**: Thread-local singleton - each thread gets its own instance
 
-**Thread Safety:** Thread-local in multi-threaded mode
+**Returns**: Pointer to the G4StateManager instance for the current thread
 
-**Example:**
+**Example**:
 ```cpp
 G4StateManager* stateManager = G4StateManager::GetStateManager();
-G4ApplicationState currentState = stateManager->GetCurrentState();
 ```
 
-## State Queries
+**Note**: Never delete the returned pointer - it's managed internally.
 
-### GetCurrentState()
+### State Query Methods
 
-`source/global/management/include/G4StateManager.hh:67-68`
+#### GetCurrentState()
 
 ```cpp
 const G4ApplicationState& GetCurrentState() const;
 ```
 
-Returns the current application state.
+**Description**: Returns the current application state
 
-**Returns:** Reference to current state
+**Returns**: Reference to current `G4ApplicationState`
 
-**Example:**
+**Thread Safety**: Thread-safe read operation
+
+**Performance**: Inline accessor - very fast
+
+**Example**:
 ```cpp
-G4StateManager* stateManager = G4StateManager::GetStateManager();
-G4ApplicationState state = stateManager->GetCurrentState();
+G4StateManager* sm = G4StateManager::GetStateManager();
+G4ApplicationState state = sm->GetCurrentState();
 
 if (state == G4State_Idle) {
-    G4cout << "Ready to start run" << G4endl;
+    // Safe to modify geometry
 }
 ```
 
-### GetPreviousState()
-
-`source/global/management/include/G4StateManager.hh:69-70`
+#### GetPreviousState()
 
 ```cpp
 const G4ApplicationState& GetPreviousState() const;
 ```
 
-Returns the previous application state.
+**Description**: Returns the application state before the most recent transition
 
-**Returns:** Reference to previous state
+**Returns**: Reference to previous `G4ApplicationState`
 
-**Usage:** Useful for state transition logging and recovery
+**Thread Safety**: Thread-safe read operation
 
-**Example:**
+**Use Cases**:
+- Determining state transition context
+- Implementing state-dependent history
+- Debugging state flow
+
+**Example**:
 ```cpp
-G4ApplicationState previous = stateManager->GetPreviousState();
-G4ApplicationState current = stateManager->GetCurrentState();
+G4ApplicationState current = sm->GetCurrentState();
+G4ApplicationState previous = sm->GetPreviousState();
 
-G4cout << "State transition: "
-       << stateManager->GetStateString(previous)
-       << " -> "
-       << stateManager->GetStateString(current)
-       << G4endl;
-```
-
-## State Changes
-
-### SetNewState() - Basic
-
-`source/global/management/include/G4StateManager.hh:71-74`
-
-```cpp
-G4bool SetNewState(const G4ApplicationState& requestedState);
-```
-
-Attempts to change the application state.
-
-**Parameters:**
-- `requestedState`: Desired new state
-
-**Returns:**
-- `true`: State change successful
-- `false`: State change rejected (illegal transition)
-
-**Behavior:**
-- Validates state transition is legal
-- Notifies all registered state-dependent objects
-- Updates current and previous states
-
-**Example:**
-```cpp
-G4bool success = stateManager->SetNewState(G4State_Idle);
-if (!success) {
-    G4cout << "Cannot transition to Idle from current state" << G4endl;
+if (current == G4State_Idle && previous == G4State_GeomClosed) {
+    G4cout << "Run has completed" << G4endl;
 }
 ```
 
-### SetNewState() - With Message
-
-`source/global/management/include/G4StateManager.hh:75-79`
-
-```cpp
-G4bool SetNewState(const G4ApplicationState& requestedState,
-                   const char* msg);
-```
-
-Changes state with an associated message.
-
-**Parameters:**
-- `requestedState`: Desired new state
-- `msg`: Message describing reason for state change
-
-**Returns:** Same as basic version
-
-**Example:**
-```cpp
-stateManager->SetNewState(G4State_GeomClosed,
-                         "Geometry closed for run");
-```
-
-::: warning State Validation
-Not all state transitions are valid. Attempting an illegal transition returns `false` and the state remains unchanged.
-:::
-
-## Valid State Transitions
-
-| From State | To State | Context |
-|------------|----------|---------|
-| G4State_PreInit | G4State_Init | Initialization begins |
-| G4State_Init | G4State_Idle | Initialization completes |
-| G4State_Idle | G4State_GeomClosed | Run begins (geometry closes) |
-| G4State_GeomClosed | G4State_EventProc | Event processing begins |
-| G4State_EventProc | G4State_GeomClosed | Event completes |
-| G4State_GeomClosed | G4State_Idle | Run ends (geometry opens) |
-| G4State_Idle | G4State_Quit | Application termination |
-| Any State | G4State_Abort | Exception occurs |
-| G4State_Abort | G4State_Idle | Recovery from error |
-
-## State-Dependent Object Registration
-
-State-dependent objects are notified when the application state changes. This allows different parts of Geant4 to respond appropriately to state transitions.
-
-### RegisterDependent()
-
-`source/global/management/include/G4StateManager.hh:80-84`
-
-```cpp
-G4bool RegisterDependent(G4VStateDependent* aDependent,
-                        G4bool bottom = false);
-```
-
-Registers an object to be notified of state changes.
-
-**Parameters:**
-- `aDependent`: Pointer to state-dependent object (must inherit from `G4VStateDependent`)
-- `bottom`: If `true`, adds to bottom of notification list; if `false`, adds to top (default)
-
-**Returns:**
-- `true`: Registration successful
-- `false`: Registration failed (already registered)
-
-**Notification Order:**
-- Objects registered with `bottom=false` are notified first (LIFO order)
-- Objects registered with `bottom=true` are notified last (FIFO order)
-
-**Example:**
-```cpp
-class MyStateDependent : public G4VStateDependent
-{
- public:
-  G4bool Notify(G4ApplicationState requestedState) override
-  {
-    G4cout << "State changing to: " << requestedState << G4endl;
-    return true;  // Allow state change
-  }
-};
-
-MyStateDependent* myObject = new MyStateDependent();
-stateManager->RegisterDependent(myObject);
-```
-
-### DeregisterDependent()
-
-`source/global/management/include/G4StateManager.hh:86-88`
-
-```cpp
-G4bool DeregisterDependent(G4VStateDependent* aDependent);
-```
-
-Removes an object from state change notifications.
-
-**Parameters:**
-- `aDependent`: Pointer to object to deregister
-
-**Returns:**
-- `true`: Deregistration successful
-- `false`: Object was not registered
-
-**Example:**
-```cpp
-stateManager->DeregisterDependent(myObject);
-```
-
-### RemoveDependent()
-
-`source/global/management/include/G4StateManager.hh:89-91`
-
-```cpp
-G4VStateDependent* RemoveDependent(const G4VStateDependent* aDependent);
-```
-
-Removes and returns a registered dependent object.
-
-**Parameters:**
-- `aDependent`: Pointer to object to remove
-
-**Returns:** Pointer to removed object, or `nullptr` if not found
-
-**Example:**
-```cpp
-G4VStateDependent* removed = stateManager->RemoveDependent(myObject);
-if (removed) {
-    delete removed;  // Caller responsible for deletion
-}
-```
-
-## Utility Methods
-
-### GetStateString()
-
-`source/global/management/include/G4StateManager.hh:92-93`
+#### GetStateString()
 
 ```cpp
 G4String GetStateString(const G4ApplicationState& aState) const;
 ```
 
-Converts a state enum to a human-readable string.
+**Description**: Converts state enumeration to human-readable string
 
-**Parameters:**
-- `aState`: State to convert
+**Parameters**:
+- `aState`: The application state to convert
 
-**Returns:** String representation of state
+**Returns**: String name of the state ("PreInit", "Init", "Idle", "GeomClosed", "EventProc", "Quit", "Abort", or "Unknown")
 
-**State Strings:**
-- `G4State_PreInit` → "PreInit"
-- `G4State_Init` → "Init"
-- `G4State_Idle` → "Idle"
-- `G4State_GeomClosed` → "GeomClosed"
-- `G4State_EventProc` → "EventProc"
-- `G4State_Quit` → "Quit"
-- `G4State_Abort` → "Abort"
-
-**Example:**
+**Example**:
 ```cpp
-G4ApplicationState state = stateManager->GetCurrentState();
-G4cout << "Current state: " << stateManager->GetStateString(state) << G4endl;
+G4ApplicationState state = sm->GetCurrentState();
+G4String stateName = sm->GetStateString(state);
+G4cout << "Current state: " << stateName << G4endl;
+// Output: "Current state: Idle"
 ```
 
-### NotifyDeletion() - Event
+**Implementation**:
+```cpp
+G4String G4StateManager::GetStateString(const G4ApplicationState& aState) const
+{
+  G4String stateName;
+  switch(aState)
+  {
+    case G4State_PreInit:    stateName = "PreInit"; break;
+    case G4State_Init:       stateName = "Init"; break;
+    case G4State_Idle:       stateName = "Idle"; break;
+    case G4State_GeomClosed: stateName = "GeomClosed"; break;
+    case G4State_EventProc:  stateName = "EventProc"; break;
+    case G4State_Quit:       stateName = "Quit"; break;
+    case G4State_Abort:      stateName = "Abort"; break;
+    default:                 stateName = "Unknown"; break;
+  }
+  return stateName;
+}
+```
 
-`source/global/management/include/G4StateManager.hh:95`
+### State Transition Methods
+
+#### SetNewState() - Basic
+
+```cpp
+G4bool SetNewState(const G4ApplicationState& requestedState);
+```
+
+**Description**: Request a state transition without an associated message
+
+**Parameters**:
+- `requestedState`: The desired new state
+
+**Returns**:
+- `true` if transition successful
+- `false` if transition rejected by any observer
+
+**Side Effects**:
+- Updates `theCurrentState` if successful
+- Updates `thePreviousState` with old current state
+- Notifies all registered state-dependent observers
+- Prints state change if verbose level > 0
+
+**Example**:
+```cpp
+G4bool success = sm->SetNewState(G4State_Idle);
+if (!success) {
+    G4cerr << "State transition rejected" << G4endl;
+}
+```
+
+#### SetNewState() - With Message
+
+```cpp
+G4bool SetNewState(const G4ApplicationState& requestedState, const char* msg);
+```
+
+**Description**: Request a state transition with an associated message
+
+**Parameters**:
+- `requestedState`: The desired new state
+- `msg`: Message describing the state change context (can be nullptr)
+
+**Returns**:
+- `true` if transition successful
+- `false` if transition rejected
+
+**Message Handling**: The message pointer is stored temporarily and can be retrieved by observers via `GetMessage()` during notification
+
+**Example**:
+```cpp
+const char* msg = "Starting run with 1000 events";
+G4bool success = sm->SetNewState(G4State_GeomClosed, msg);
+```
+
+**State Transition Algorithm**:
+
+```cpp
+G4bool G4StateManager::SetNewState(const G4ApplicationState& requestedState,
+                                   const char* msg)
+{
+  // Check abort suppression
+  if(requestedState == G4State_Abort && suppressAbortion > 0) {
+    if(suppressAbortion == 2) return false;
+    if(theCurrentState == G4State_EventProc) return false;
+  }
+
+  msgptr = msg;
+  G4ApplicationState savedState = thePreviousState;
+  thePreviousState = theCurrentState;
+
+  // Notify all regular dependents
+  G4bool ack = true;
+  for (auto* dependent : theDependentsList) {
+    ack = dependent->Notify(requestedState);
+    if (!ack) break;
+  }
+
+  // Notify bottom dependent (if exists)
+  if (theBottomDependent != nullptr) {
+    ack = theBottomDependent->Notify(requestedState);
+  }
+
+  // Finalize transition
+  if (!ack) {
+    thePreviousState = savedState;  // Restore previous state
+  } else {
+    theCurrentState = requestedState;
+    if (verboseLevel > 0) {
+      G4cout << "#### G4StateManager::SetNewState from "
+             << GetStateString(thePreviousState) << " to "
+             << GetStateString(requestedState) << G4endl;
+    }
+  }
+
+  msgptr = nullptr;
+  return ack;
+}
+```
+
+**Special Handling**:
+- **Abort Suppression**: If `suppressAbortion` is set, transitions to `G4State_Abort` may be blocked
+- **Event Processing**: Aborts during event processing can be specifically suppressed
+- **Rollback**: If any observer rejects, previous state is restored
+
+### Observer Management Methods
+
+#### RegisterDependent()
+
+```cpp
+G4bool RegisterDependent(G4VStateDependent* aDependent, G4bool bottom = false);
+```
+
+**Description**: Register an observer to be notified of state changes
+
+**Parameters**:
+- `aDependent`: Pointer to state-dependent object to register
+- `bottom`: If true, register as "bottom dependent" (notified last)
+
+**Returns**: `true` (always succeeds in current implementation)
+
+**Behavior**:
+- If `bottom == false`: Added to end of regular dependents list
+- If `bottom == true`: Replaces current bottom dependent (previous bottom dependent moved to regular list)
+
+**Notification Order**:
+1. Regular dependents (in registration order)
+2. Bottom dependent (if registered)
+
+**Example**:
+```cpp
+class MyObserver : public G4VStateDependent {
+    // ... implementation
+};
+
+MyObserver* observer = new MyObserver();
+// Automatic registration in constructor, or manual:
+sm->RegisterDependent(observer, false);  // Regular dependent
+```
+
+**Use Cases for Bottom Dependent**:
+- Final validation after all other components have accepted
+- Critical operations that must occur last
+- System-level state management
+
+#### DeregisterDependent()
+
+```cpp
+G4bool DeregisterDependent(G4VStateDependent* aDependent);
+```
+
+**Description**: Remove an observer from the notification list
+
+**Parameters**:
+- `aDependent`: Pointer to state-dependent object to deregister
+
+**Returns**:
+- `true` if object was found and removed
+- `false` if object was not registered
+
+**Note**: Automatically called by `G4VStateDependent` destructor
+
+**Example**:
+```cpp
+G4bool removed = sm->DeregisterDependent(observer);
+if (!removed) {
+    G4cerr << "Observer was not registered" << G4endl;
+}
+```
+
+#### RemoveDependent()
+
+```cpp
+G4VStateDependent* RemoveDependent(const G4VStateDependent* aDependent);
+```
+
+**Description**: Remove and return an observer from the notification list
+
+**Parameters**:
+- `aDependent`: Pointer to state-dependent object to remove
+
+**Returns**:
+- Pointer to removed object if found
+- `nullptr` if not found
+
+**Difference from DeregisterDependent()**: Returns the pointer instead of boolean
+
+**Example**:
+```cpp
+G4VStateDependent* removed = sm->RemoveDependent(observer);
+if (removed != nullptr) {
+    // Object was removed; caller now responsible for it
+    // Can use returned pointer or delete it
+}
+```
+
+### Object Deletion Notification
+
+#### NotifyDeletion(const G4Event*)
 
 ```cpp
 void NotifyDeletion(const G4Event*);
 ```
 
-Notifies state-dependent objects that an event is being deleted.
+**Description**: Notify all registered observers that an event is being deleted
 
-**Parameters:**
-- Pointer to event being deleted
+**Parameters**:
+- Pointer to G4Event being deleted
 
-**Usage:** Called internally when events are deleted
+**Purpose**: Allows observers to clear pointers and avoid dangling references
 
-### NotifyDeletion() - Run
+**Called By**: G4EventManager when destroying event objects
 
-`source/global/management/include/G4StateManager.hh:96`
+**Example Implementation in Observer**:
+```cpp
+void MyClass::NotifyDeletion(const G4Event* evt) {
+    if (currentEvent == evt) {
+        currentEvent = nullptr;  // Clear dangling pointer
+        SaveEventData();
+    }
+}
+```
+
+#### NotifyDeletion(const G4Run*)
 
 ```cpp
 void NotifyDeletion(const G4Run*);
 ```
 
-Notifies state-dependent objects that a run is being deleted.
+**Description**: Notify all registered observers that a run is being deleted
 
-**Parameters:**
-- Pointer to run being deleted
+**Parameters**:
+- Pointer to G4Run being deleted
 
-**Usage:** Called internally when runs are deleted
+**Purpose**: Allows observers to clear pointers and avoid dangling references
 
-## Exception Handling Control
+**Called By**: G4RunManager when destroying run objects
 
-### SetSuppressAbortion() / GetSuppressAbortion()
+**Example Implementation in Observer**:
+```cpp
+void MyClass::NotifyDeletion(const G4Run* run) {
+    if (currentRun == run) {
+        currentRun = nullptr;  // Clear dangling pointer
+        FinalizeRunData();
+    }
+}
+```
 
-`source/global/management/include/G4StateManager.hh:100-101`
+### Configuration Methods
+
+#### SetSuppressAbortion()
 
 ```cpp
 inline void SetSuppressAbortion(G4int i);
+```
+
+**Description**: Configure abortion suppression behavior
+
+**Parameters**:
+- `i`: Suppression level
+  - `0`: No suppression (default)
+  - `1`: Suppress abort during event processing
+  - `2`: Suppress all aborts
+
+**Use Cases**:
+- Testing and debugging
+- Controlled error recovery
+- Batch processing where errors should not halt execution
+
+**Warning**: Use with caution - may hide critical errors
+
+**Example**:
+```cpp
+// Suppress abort only during event processing
+sm->SetSuppressAbortion(1);
+
+// Process events...
+
+// Restore normal behavior
+sm->SetSuppressAbortion(0);
+```
+
+#### GetSuppressAbortion()
+
+```cpp
 inline G4int GetSuppressAbortion() const;
 ```
 
-Controls whether exceptions cause program abortion.
+**Description**: Query current abortion suppression level
 
-**Parameters:**
-- `i`: Suppression level
-  - `0`: Normal behavior (abort on fatal exceptions)
-  - `>0`: Suppress abortion, return to Idle state
+**Returns**: Current suppression level (0, 1, or 2)
 
-**Returns:** Current suppression level
-
-**Example:**
+**Example**:
 ```cpp
-// Temporarily suppress abortion for batch processing
-stateManager->SetSuppressAbortion(1);
-
-// ... run simulations ...
-
-stateManager->SetSuppressAbortion(0);  // Restore normal behavior
+G4int level = sm->GetSuppressAbortion();
+if (level > 0) {
+    G4cout << "Abort suppression is active (level " << level << ")" << G4endl;
+}
 ```
 
-::: warning Use with Caution
-Suppressing abortion can lead to inconsistent state if not handled properly. Use only when you have robust error recovery.
-:::
+#### SetExceptionHandler()
 
-### GetMessage()
+```cpp
+inline void SetExceptionHandler(G4VExceptionHandler* eh);
+```
 
-`source/global/management/include/G4StateManager.hh:102`
+**Description**: Set custom exception handler for state-related errors
+
+**Parameters**:
+- `eh`: Pointer to custom exception handler (can be nullptr)
+
+**Example**:
+```cpp
+class MyExceptionHandler : public G4VExceptionHandler {
+    virtual G4bool Notify(const char* origin,
+                         const char* code,
+                         G4ExceptionSeverity severity,
+                         const char* description) override {
+        // Custom handling
+        return true;
+    }
+};
+
+MyExceptionHandler* handler = new MyExceptionHandler();
+sm->SetExceptionHandler(handler);
+```
+
+#### GetExceptionHandler()
+
+```cpp
+inline G4VExceptionHandler* GetExceptionHandler() const;
+```
+
+**Description**: Get the current exception handler
+
+**Returns**: Pointer to exception handler, or nullptr if none set
+
+**Example**:
+```cpp
+G4VExceptionHandler* handler = sm->GetExceptionHandler();
+if (handler != nullptr) {
+    // Custom handler is installed
+}
+```
+
+#### GetMessage()
 
 ```cpp
 inline const char* GetMessage() const;
 ```
 
-Returns the message associated with the current state change.
+**Description**: Get the message associated with current state transition
 
-**Returns:** Pointer to message string
+**Returns**: Pointer to message string, or nullptr if no message
 
-**Example:**
+**Usage Context**: Called by observers during `Notify()` to get transition context
+
+**Example**:
 ```cpp
-const char* msg = stateManager->GetMessage();
-if (msg) {
-    G4cout << "State change reason: " << msg << G4endl;
-}
-```
-
-### SetExceptionHandler() / GetExceptionHandler()
-
-`source/global/management/include/G4StateManager.hh:103-104`
-
-```cpp
-inline void SetExceptionHandler(G4VExceptionHandler* eh);
-inline G4VExceptionHandler* GetExceptionHandler() const;
-```
-
-Sets or gets the custom exception handler.
-
-**Parameters:**
-- `eh`: Pointer to custom exception handler (or `nullptr` for default)
-
-**Returns:** Current exception handler
-
-**Example:**
-```cpp
-class MyExceptionHandler : public G4VExceptionHandler
-{
- public:
-  G4bool Notify(const char* originOfException,
-               const char* exceptionCode,
-               G4ExceptionSeverity severity,
-               const char* description) override
-  {
-    // Custom exception handling
-    return false;  // Continue with default handling
-  }
+class MyObserver : public G4VStateDependent {
+    G4bool Notify(G4ApplicationState requestedState) override {
+        G4StateManager* sm = G4StateManager::GetStateManager();
+        const char* msg = sm->GetMessage();
+        if (msg != nullptr) {
+            G4cout << "State change message: " << msg << G4endl;
+        }
+        return true;
+    }
 };
-
-MyExceptionHandler* handler = new MyExceptionHandler();
-stateManager->SetExceptionHandler(handler);
 ```
 
-### SetVerboseLevel()
+**Important**: Message pointer is only valid during notification callbacks
 
-`source/global/management/include/G4StateManager.hh:105`
+#### SetVerboseLevel()
 
 ```cpp
 static void SetVerboseLevel(G4int val);
 ```
 
-Sets verbosity level for state change messages.
+**Description**: Set verbosity level for state change logging
 
-**Parameters:**
-- `val`: Verbosity level
-  - `0`: Silent
-  - `1`: Errors only
-  - `2`: Warnings and errors
-  - `3`: All messages (default)
+**Parameters**:
+- `val`: Verbose level
+  - `0`: Silent (default)
+  - `>0`: Print state transitions
 
-**Example:**
-```cpp
-G4StateManager::SetVerboseLevel(1);  // Only show errors
+**Scope**: Global for all threads (static variable)
+
+**Output Format** (when verbose > 0):
+```
+#### G4StateManager::SetNewState from [previous] to [new]
 ```
 
-## Complete Usage Examples
-
-### Monitoring State Changes
-
+**Example**:
 ```cpp
-class StateMonitor : public G4VStateDependent
-{
- public:
-  G4bool Notify(G4ApplicationState requestedState) override
-  {
-    G4StateManager* stateManager = G4StateManager::GetStateManager();
-    G4ApplicationState currentState = stateManager->GetCurrentState();
+// Enable verbose output
+G4StateManager::SetVerboseLevel(1);
 
-    G4cout << "State transition: "
-           << stateManager->GetStateString(currentState)
-           << " -> "
-           << stateManager->GetStateString(requestedState)
-           << G4endl;
+// Now state changes print to console
+sm->SetNewState(G4State_Idle);
+// Output: #### G4StateManager::SetNewState from Init to Idle
 
-    // Log to file, update GUI, etc.
-
-    return true;  // Allow transition
-  }
-};
-
-// Register the monitor
-StateMonitor* monitor = new StateMonitor();
-G4StateManager::GetStateManager()->RegisterDependent(monitor);
+// Disable verbose output
+G4StateManager::SetVerboseLevel(0);
 ```
 
-### Validating Operations Based on State
+## Private Members
+
+### Static Members
 
 ```cpp
-void MyDetectorConstruction::UpdateGeometry()
+static G4ThreadLocal G4StateManager* theStateManager;
+```
+Thread-local singleton instance pointer
+
+```cpp
+static G4int verboseLevel;
+```
+Global verbose level for state transition logging
+
+### Instance Members
+
+```cpp
+G4ApplicationState theCurrentState = G4State_PreInit;
+```
+Current application state (initialized to PreInit)
+
+```cpp
+G4ApplicationState thePreviousState = G4State_PreInit;
+```
+Previous application state
+
+```cpp
+std::vector<G4VStateDependent*> theDependentsList;
+```
+List of registered state observers
+
+```cpp
+G4VStateDependent* theBottomDependent = nullptr;
+```
+Special observer notified last (if registered)
+
+```cpp
+G4int suppressAbortion = 0;
+```
+Abort suppression level
+
+```cpp
+const char* msgptr = nullptr;
+```
+Temporary pointer to transition message
+
+```cpp
+G4VExceptionHandler* exceptionHandler = nullptr;
+```
+Custom exception handler
+
+## Thread Safety
+
+### Thread-Local Storage
+
+The state manager uses thread-local storage for the singleton instance:
+
+```cpp
+G4ThreadLocal G4StateManager* theStateManager;
+```
+
+**Implications**:
+- Each thread has independent state manager
+- No synchronization needed within a thread
+- Master and worker threads have separate states
+- State transitions don't propagate between threads
+
+### Multi-threaded Initialization
+
+```cpp
+G4StateManager::G4StateManager()
 {
-    G4StateManager* stateManager = G4StateManager::GetStateManager();
-    G4ApplicationState state = stateManager->GetCurrentState();
-
-    if (state != G4State_PreInit && state != G4State_Idle) {
-        G4Exception("MyDetectorConstruction::UpdateGeometry()",
-                   "InvalidState", JustWarning,
-                   "Geometry can only be modified in PreInit or Idle state");
-        return;
-    }
-
-    // Safe to modify geometry
-    ModifyGeometry();
+#ifdef G4MULTITHREADED
+  G4iosInitialization();  // Thread-local I/O setup
+#endif
 }
 ```
 
-### Implementing State-Dependent Behavior
+Special initialization ensures proper I/O handling in multi-threaded mode.
+
+### Thread-Safe Operations
+
+**Safe Operations**:
+- `GetCurrentState()` - Read only, no contention
+- `GetPreviousState()` - Read only, no contention
+- `SetNewState()` - Modifies only thread-local state
+- `RegisterDependent()` - Modifies only thread-local list
+
+**No Cross-Thread Operations**: State managers in different threads never interact
+
+## Usage Patterns
+
+### Pattern 1: State-Conditional Logic
 
 ```cpp
-class RunTimeService : public G4VStateDependent
-{
- public:
-  G4bool Notify(G4ApplicationState requestedState) override
-  {
-    switch(requestedState) {
-      case G4State_Init:
-        InitializeService();
-        break;
+void MyClass::DoOperation() {
+    G4StateManager* sm = G4StateManager::GetStateManager();
+    G4ApplicationState state = sm->GetCurrentState();
 
-      case G4State_Idle:
-        if (isRunning) {
-          FinalizeRun();
-        }
-        break;
+    switch(state) {
+        case G4State_Idle:
+            // Can modify geometry
+            ModifyGeometry();
+            break;
 
-      case G4State_GeomClosed:
-        PrepareForRun();
-        break;
+        case G4State_GeomClosed:
+            // Can start events
+            BeginEvent();
+            break;
 
-      case G4State_EventProc:
-        // Event processing started
-        break;
+        case G4State_EventProc:
+            // Can track particles
+            TrackParticles();
+            break;
 
-      case G4State_Quit:
-        Cleanup();
-        break;
+        default:
+            G4Exception("MyClass::DoOperation()",
+                       "Invalid State",
+                       JustWarning,
+                       "Operation not available in current state");
+    }
+}
+```
 
-      case G4State_Abort:
-        HandleError();
-        break;
+### Pattern 2: State Transition Wrapper
 
-      default:
-        break;
+```cpp
+class StateTransitionGuard {
+public:
+    StateTransitionGuard(G4ApplicationState newState) {
+        sm = G4StateManager::GetStateManager();
+        previousState = sm->GetCurrentState();
+        success = sm->SetNewState(newState);
     }
 
-    return true;  // Allow state change
-  }
+    ~StateTransitionGuard() {
+        if (success) {
+            sm->SetNewState(previousState);  // Restore
+        }
+    }
 
- private:
-  G4bool isRunning = false;
+    bool IsValid() const { return success; }
 
-  void InitializeService() { /* ... */ }
-  void PrepareForRun() { isRunning = true; }
-  void FinalizeRun() { isRunning = false; }
-  void Cleanup() { /* ... */ }
-  void HandleError() { /* ... */ }
+private:
+    G4StateManager* sm;
+    G4ApplicationState previousState;
+    bool success;
+};
+
+// Usage
+void PerformOperation() {
+    StateTransitionGuard guard(G4State_Idle);
+    if (guard.IsValid()) {
+        // Operation with guaranteed state
+    }
+    // State automatically restored on scope exit
+}
+```
+
+### Pattern 3: State Change Monitoring
+
+```cpp
+class StateMonitor : public G4VStateDependent {
+public:
+    StateMonitor() : G4VStateDependent(false) {}
+
+    virtual G4bool Notify(G4ApplicationState requestedState) override {
+        G4StateManager* sm = G4StateManager::GetStateManager();
+        G4ApplicationState current = sm->GetCurrentState();
+        const char* msg = sm->GetMessage();
+
+        // Log all state transitions
+        G4cout << "State transition: "
+               << sm->GetStateString(current) << " -> "
+               << sm->GetStateString(requestedState);
+
+        if (msg != nullptr) {
+            G4cout << " (" << msg << ")";
+        }
+        G4cout << G4endl;
+
+        return true;  // Always allow
+    }
 };
 ```
 
-### Safe State Transitions
+## Common Pitfalls
 
+### 1. Not Checking State Before Operations
+
+**Wrong**:
 ```cpp
-G4bool SafeTransitionToIdle()
-{
-    G4StateManager* stateManager = G4StateManager::GetStateManager();
-    G4ApplicationState currentState = stateManager->GetCurrentState();
+void ModifyDetector() {
+    // Directly modify without checking state
+    detector->SetSize(newSize);  // May fail or cause errors
+}
+```
 
-    // Check if transition is possible
-    if (currentState == G4State_EventProc) {
-        G4cerr << "Cannot transition to Idle during event processing"
-               << G4endl;
-        return false;
+**Correct**:
+```cpp
+void ModifyDetector() {
+    G4StateManager* sm = G4StateManager::GetStateManager();
+    if (sm->GetCurrentState() != G4State_Idle) {
+        G4Exception("ModifyDetector()", "InvalidState",
+                   JustWarning, "Can only modify in Idle state");
+        return;
     }
+    detector->SetSize(newSize);
+}
+```
 
-    if (currentState == G4State_GeomClosed) {
-        // Need to open geometry first
-        if (!stateManager->SetNewState(G4State_Idle,
-                                      "End of run - opening geometry")) {
-            G4cerr << "Failed to open geometry" << G4endl;
-            return false;
-        }
+### 2. Vetoing State Changes Unnecessarily
+
+**Wrong**:
+```cpp
+G4bool Notify(G4ApplicationState requestedState) override {
+    if (requestedState == G4State_EventProc && !ready) {
+        return false;  // Blocks entire application!
     }
-
     return true;
 }
 ```
 
-### Exception Handling with State Recovery
-
+**Correct**:
 ```cpp
-void RunSimulationWithRecovery()
-{
-    G4StateManager* stateManager = G4StateManager::GetStateManager();
-
-    // Enable error recovery
-    G4int originalSuppression = stateManager->GetSuppressAbortion();
-    stateManager->SetSuppressAbortion(1);
-
-    try {
-        // Run simulation
-        runManager->BeamOn(1000);
-
-        // Check if we ended up in abort state
-        if (stateManager->GetCurrentState() == G4State_Abort) {
-            G4cerr << "Simulation aborted, attempting recovery..." << G4endl;
-
-            // Try to recover to Idle state
-            if (stateManager->SetNewState(G4State_Idle, "Recovery")) {
-                G4cout << "Successfully recovered to Idle state" << G4endl;
-            } else {
-                G4cerr << "Recovery failed" << G4endl;
-            }
-        }
+G4bool Notify(G4ApplicationState requestedState) override {
+    if (requestedState == G4State_EventProc && !ready) {
+        G4Exception("MyClass::Notify()", "NotReady",
+                   JustWarning, "Component not ready");
+        PrepareForEvent();  // Fix the issue
     }
-    catch (...) {
-        G4cerr << "Unexpected exception caught" << G4endl;
-    }
-
-    // Restore original behavior
-    stateManager->SetSuppressAbortion(originalSuppression);
+    return true;  // Allow state change
 }
 ```
 
-## Thread Safety
+### 3. Assuming Cross-Thread State Synchronization
 
-### Multi-Threading Behavior
-
-`source/global/management/include/G4StateManager.hh:111`
-
-- State manager is **thread-local** in multi-threaded mode
-- Each worker thread has its own state manager instance
-- Master thread has separate state manager
-- States are independent between threads
-
-**Thread States:**
-- **Master Thread**: Manages overall run state (PreInit → Init → Idle → Quit)
-- **Worker Threads**: Each goes through GeomClosed → EventProc cycles independently
-
-**Example:**
+**Wrong**:
 ```cpp
-// In worker thread
-G4StateManager* stateManager = G4StateManager::GetStateManager();
-// This is a thread-local instance, separate from master
+// In master thread
+sm->SetNewState(G4State_Idle);
+
+// Assume worker threads also in Idle - WRONG!
+// Each thread has independent state
 ```
 
-## Data Members
-
-`source/global/management/include/G4StateManager.hh:111-120`
-
+**Correct**:
 ```cpp
-private:
-  static G4ThreadLocal G4StateManager* theStateManager;
-  G4ApplicationState theCurrentState  = G4State_PreInit;
-  G4ApplicationState thePreviousState = G4State_PreInit;
-  std::vector<G4VStateDependent*> theDependentsList;
-  G4VStateDependent* theBottomDependent = nullptr;
-  G4int suppressAbortion                = 0;
-  const char* msgptr                    = nullptr;
-  G4VExceptionHandler* exceptionHandler = nullptr;
-  static G4int verboseLevel;
+// Each thread manages its own state
+// Use thread-safe communication mechanisms for coordination
+```
+
+### 4. Storing Message Pointer
+
+**Wrong**:
+```cpp
+class MyObserver : public G4VStateDependent {
+    const char* savedMessage;  // Dangling pointer risk!
+
+    G4bool Notify(G4ApplicationState requestedState) override {
+        G4StateManager* sm = G4StateManager::GetStateManager();
+        savedMessage = sm->GetMessage();  // Only valid during callback!
+        return true;
+    }
+};
+```
+
+**Correct**:
+```cpp
+class MyObserver : public G4VStateDependent {
+    G4String savedMessage;  // Store as string, not pointer
+
+    G4bool Notify(G4ApplicationState requestedState) override {
+        G4StateManager* sm = G4StateManager::GetStateManager();
+        const char* msg = sm->GetMessage();
+        if (msg != nullptr) {
+            savedMessage = msg;  // Copy to string
+        }
+        return true;
+    }
+};
 ```
 
 ## Performance Considerations
 
-1. **State Queries**: Getting current/previous state is very fast (simple member access)
+### Fast Operations
+- `GetCurrentState()` - Inline, single memory read
+- `GetPreviousState()` - Inline, single memory read
+- `GetSuppressAbortion()` - Inline, single memory read
 
-2. **State Changes**: Setting new state involves:
-   - Validation check (fast)
-   - Notification of all registered dependents (can be slow if many dependents)
-   - Consider minimizing dependents for performance-critical code
+### Moderate Operations
+- `SetNewState()` - Iterates through all observers
+- `RegisterDependent()` - Vector append
+- `DeregisterDependent()` - Vector search and erase
 
-3. **String Conversion**: `GetStateString()` involves string creation; cache results if called frequently
+### Slow Operations
+- `GetStateString()` - Switch statement with string construction
 
-4. **State Checks**: For performance-critical code, check state once and cache rather than repeatedly querying
-
-## Common Pitfalls
-
-### 1. Invalid State Transitions
-
-**Problem**: Attempting illegal state change
-```cpp
-// In EventProc state
-stateManager->SetNewState(G4State_PreInit);  // ILLEGAL!
-```
-
-**Solution**: Follow valid state transition diagram
-
-### 2. Not Checking Return Value
-
-**Problem**: Ignoring failed state change
-```cpp
-stateManager->SetNewState(G4State_Idle);  // Might fail
-DoSomethingRequiringIdleState();  // Unsafe
-```
-
-**Solution**: Always check return value
-```cpp
-if (stateManager->SetNewState(G4State_Idle)) {
-    DoSomethingRequiringIdleState();
-}
-```
-
-### 3. Blocking State Changes in Dependents
-
-**Problem**: Dependent returns false, preventing valid transition
-```cpp
-G4bool Notify(G4ApplicationState requestedState) override
-{
-    return false;  // Blocks ALL state changes
-}
-```
-
-**Solution**: Only return false for truly invalid transitions
-
-### 4. Memory Leaks with Dependents
-
-**Problem**: Not deregistering before deletion
-```cpp
-MyDependent* dep = new MyDependent();
-stateManager->RegisterDependent(dep);
-delete dep;  // Still registered!
-```
-
-**Solution**: Always deregister
-```cpp
-stateManager->DeregisterDependent(dep);
-delete dep;
-```
+**Optimization Tips**:
+1. Cache state strings if used frequently
+2. Keep observer `Notify()` methods fast
+3. Minimize number of registered observers
+4. Avoid repeated state string conversions in tight loops
 
 ## See Also
 
-- [G4ApplicationState](./g4applicationstate.md) - State enumeration
-- [G4VStateDependent](./g4vstatedependent.md) - Base class for state-dependent objects
-- [G4Exception](./g4exception.md) - Exception handling
-- [G4RunManager](../run/api/g4runmanager.md) - Run management
-- [Global Module Overview](../index.md) - Complete module documentation
-
----
-
-::: info Source Reference
-Complete implementation in:
-- Header: `source/global/management/include/G4StateManager.hh`
-- Source: `source/global/management/src/G4StateManager.cc`
-- Inline: `source/global/management/include/G4StateManager.icc`
-:::
+- [State Management Overview](state-management.md)
+- [G4VStateDependent](g4vstatedependent.md)
+- [G4ApplicationState](g4applicationstate.md)
+- [G4RunManager](g4runmanager.md)
+- [Multi-threading in Geant4](../multithreading.md)

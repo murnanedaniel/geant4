@@ -2,374 +2,417 @@
 
 ## Overview
 
-The Global module provides the foundational infrastructure and utilities used throughout Geant4. It defines fundamental types, units, constants, I/O facilities, random number generation, exception handling, and state management that all other modules depend on. This is the most widely used module in Geant4 - every simulation uses its components.
+The Global module is the foundational infrastructure of Geant4, providing essential utilities, types, mathematical functions, and framework components used throughout the entire toolkit. It contains the basic building blocks that all other modules depend on, including type definitions, physical constants, units, vectors, random number generation, numerical methods, threading support, and memory management.
 
 ::: tip Module Location
 **Source:** `source/global/`
-**Subdirectories:**
-- `management/` - Core utilities, units, I/O, state management
-- `HEPRandom/` - Random number generation
-- `HEPGeometry/` - Basic geometry types (vectors, transforms)
-- `HEPNumerics/` - Numerical methods and integration
+**Headers:** `source/global/{HEPGeometry,HEPNumerics,HEPRandom,management}/include/`
 :::
 
 ## Purpose and Scope
 
-The Global module serves as the foundation for all of Geant4:
+The Global module serves as the foundation for all Geant4 functionality:
 
-- **System of Units**: CLHEP-based unit system with automatic conversions
-- **Physical Constants**: Fundamental constants (c, h, electron mass, etc.)
-- **Random Number Generation**: High-quality random distributions
-- **I/O Utilities**: Thread-safe output streams (G4cout, G4cerr)
-- **Exception Handling**: Standardized error reporting and control
-- **State Management**: Application lifecycle and state transitions
-- **Memory Management**: Efficient allocators for high-performance objects
-- **String Utilities**: Enhanced string handling and manipulation
-- **Timers**: Performance measurement and profiling
-- **Type Definitions**: Platform-independent fundamental types
+- **Type System**: Fundamental type definitions (`G4int`, `G4double`, `G4bool`) and platform-specific configurations
+- **Units and Constants**: Complete system of physical units and fundamental constants
+- **Mathematical Utilities**: Vectors, matrices, transformations, and optimized math functions
+- **Random Number Generation**: High-quality random number generators and distributions
+- **Numerical Methods**: Integration, polynomial solving, interpolation, and statistical analysis
+- **Physics Data Structures**: Vectors and tables for storing cross-sections and energy loss data
+- **Threading Support**: Multi-threading infrastructure, task management, and thread-local storage
+- **Memory Management**: Efficient object allocation, smart pointers, and memory pools
+- **I/O System**: Output formatting, logging, and destination management
+- **Exception Handling**: Robust error reporting and exception management
+- **Performance Tools**: Timing, profiling, and optimization utilities
 
-## Core Concepts
+## Module Organization
 
-### Application States
+The Global module is organized into four main subdirectories:
 
-Geant4 progresses through well-defined states during execution:
+### 1. HEPGeometry (8 classes)
+Geometric primitives and transformations, wrapping CLHEP geometry classes:
+- 3D points, vectors, and normals
+- 3D transformations (rotation + translation)
+- 4D Lorentz vectors and rotations
+- Geometric definitions and enumerations
 
-```mermaid
-stateDiagram-v2
-    [*] --> PreInit: Application Start
+### 2. HEPNumerics (18 classes)
+Numerical analysis and computational methods:
+- Numerical integration (Simpson, Gaussian quadrature methods)
+- Polynomial equation solving
+- Data interpolation and approximation
+- Statistical analysis and convergence testing
+- Function optimization
 
-    PreInit --> Init: Initialize()
-    Init --> Idle: Initialization Complete
+### 3. HEPRandom (6 classes)
+Random number generation utilities:
+- High-quality random number generators
+- Random distributions (Poisson, Gaussian, exponential)
+- Random direction generation
+- Thread-safe random number pools
 
-    Idle --> GeomClosed: BeamOn()
-    Idle --> Quit: Application Exit
-
-    GeomClosed --> EventProc: Start Event
-    EventProc --> GeomClosed: End Event
-
-    GeomClosed --> Idle: Run Complete
-
-    PreInit --> Abort: Exception
-    Init --> Abort: Exception
-    Idle --> Abort: Exception
-    GeomClosed --> Abort: Exception
-    EventProc --> Abort: Exception
-
-    Abort --> [*]
-    Quit --> [*]
-```
-
-States:
-- **PreInit**: Before initialization
-- **Init**: During initialization
-- **Idle**: Ready to run, geometry open
-- **GeomClosed**: Geometry closed, ready for events
-- **EventProc**: Processing an event
-- **Quit**: Clean shutdown
-- **Abort**: Error condition
-
-### Units System
-
-```mermaid
-graph TB
-    subgraph "CLHEP Units"
-        CLHEP[CLHEP::Units]
-        SysUnits[G4SystemOfUnits.hh]
-        CLHEP --> SysUnits
-    end
-
-    subgraph "User Code"
-        UserValue["double energy = 1.5*MeV"]
-        UserCalc["double range = CalculateRange(energy)"]
-        UserOutput["G4cout << G4BestUnit(range, 'Length')"]
-    end
-
-    subgraph "Internal Storage"
-        Internal["All values in CLHEP base units<br/>(MeV, mm, ns)"]
-    end
-
-    subgraph "Output Conversion"
-        BestUnit[G4BestUnit<br/>Auto-selects appropriate unit]
-        Output["10.3 cm (not 103 mm)"]
-    end
-
-    SysUnits --> UserValue
-    UserValue --> Internal
-    Internal --> UserCalc
-    UserCalc --> UserOutput
-    UserOutput --> BestUnit
-    BestUnit --> Output
-
-    style Internal fill:#e1f5e1
-    style BestUnit fill:#ffe1e1
-```
-
-### Exception Severity Levels
-
-```cpp
-enum G4ExceptionSeverity {
-    FatalException,          // Abort with core dump
-    FatalErrorInArgument,    // Fatal misuse of API
-    RunMustBeAborted,        // Abort current run
-    EventMustBeAborted,      // Abort current event
-    JustWarning,            // Warning message only
-    IgnoreTheIssue          // Silent (no message)
-};
-```
+### 4. Management (77 classes)
+Core framework utilities and infrastructure:
+- **Types and Constants**: Fundamental types, units, physical constants
+- **Vectors and Matrices**: `G4ThreeVector`, `G4TwoVector`, `G4RotationMatrix`
+- **Physics Data**: `G4PhysicsVector`, `G4PhysicsTable` families
+- **Threading**: Thread pools, tasks, synchronization
+- **Memory**: Allocators, smart pointers, caching
+- **I/O**: Output destinations, formatters, logging
+- **Exception Handling**: Error reporting and custom handlers
+- **State Management**: Application state tracking
+- **Mathematical Functions**: Optimized power, log, exponential functions
+- **Utilities**: Tokenization, expression evaluation, file I/O
 
 ## Architecture
 
-### Module Organization
+### Type System and Constants
 
 ```mermaid
 graph TB
-    subgraph "Global Module"
-        subgraph "Management"
-            Units[Units & Constants]
-            IO[I/O Streams]
-            State[State Manager]
-            Exception[Exception Handling]
-            Memory[Memory Allocators]
-            String[String Utilities]
-            Timer[Timers]
-        end
-
-        subgraph "HEPRandom"
-            RandEngine[Random Engines]
-            RandDist[Distributions]
-            RandTools[Random Tools]
-        end
-
-        subgraph "HEPGeometry"
-            Vectors[3D Vectors]
-            Transform[Transformations]
-            Rotation[Rotations]
-        end
-
-        subgraph "HEPNumerics"
-            Integration[Integration]
-            Polynomial[Polynomial Solvers]
-            Statistics[Statistical Analysis]
-        end
+    subgraph "Fundamental Types"
+        Types[G4Types.hh]
+        Platform[Platform Detection]
+        TLS[Thread Local Storage]
     end
 
-    subgraph "All Other Modules"
-        Track[Track Module]
-        Event[Event Module]
-        Geometry[Geometry Module]
-        Physics[Physics Processes]
-        Materials[Materials Module]
+    subgraph "Physical System"
+        Units[G4SystemOfUnits]
+        Constants[G4PhysicalConstants]
+        UnitsTable[G4UnitsTable]
     end
 
-    Units --> Track
-    Units --> Event
-    Units --> Geometry
-    Units --> Physics
-    Units --> Materials
+    subgraph "Global Configuration"
+        Globals[globals.hh]
+        Version[G4Version]
+        AppState[G4ApplicationState]
+    end
 
-    IO --> Track
-    IO --> Event
-    IO --> Physics
+    Types --> Globals
+    Platform --> Types
+    TLS --> Types
+    Units --> Constants
+    Units --> UnitsTable
+    Globals --> Units
+    Globals --> Constants
 
-    Exception --> Track
-    Exception --> Event
-    Exception --> Geometry
-    Exception --> Physics
-
-    RandDist --> Physics
-    RandDist --> Event
-
-    style Units fill:#e1f5e1
-    style IO fill:#ffe1e1
-    style Exception fill:#fff4e1
+    style Types fill:#e1f5e1
+    style Units fill:#ffe1e1
+    style Globals fill:#e1e5ff
 ```
 
-### I/O Streaming Architecture
+### Mathematical Infrastructure
 
 ```mermaid
-sequenceDiagram
-    participant User as User Code
-    participant G4cout
-    participant Dest as G4coutDestination
-    participant MT as Multi-Threading Handler
-    participant Output as stdout/file
-
-    User->>G4cout: G4cout << "Message" << G4endl
-
-    alt Multi-Threaded Mode
-        G4cout->>MT: Get thread-local stream
-        MT->>Dest: Route to destination
-        Dest->>Output: Thread-safe output
-    else Sequential Mode
-        G4cout->>Dest: Direct to destination
-        Dest->>Output: Standard output
+graph TB
+    subgraph "Geometry"
+        Point3D[G4Point3D]
+        Vector3D[G4Vector3D]
+        Normal3D[G4Normal3D]
+        Transform3D[G4Transform3D]
+        ThreeVector[G4ThreeVector]
+        RotationMatrix[G4RotationMatrix]
+        LorentzVector[G4LorentzVector]
     end
 
-    Note over Dest: Can redirect to:<br/>- Console<br/>- File<br/>- Buffer<br/>- Custom handler
+    subgraph "Numerics"
+        Integrator[G4Integrator]
+        GaussQuad[Gaussian Quadrature]
+        PolySolver[Polynomial Solvers]
+        DataInterp[Data Interpolation]
+        Statistics[G4StatDouble]
+    end
+
+    subgraph "Random"
+        Randomize[Randomize.hh]
+        RandomDir[G4RandomDirection]
+        Poisson[G4Poisson]
+        RandPool[G4UniformRandPool]
+    end
+
+    Transform3D --> Point3D
+    Transform3D --> Vector3D
+    RotationMatrix --> ThreeVector
+    LorentzVector --> ThreeVector
+
+    Integrator --> GaussQuad
+    Integrator --> PolySolver
+    DataInterp --> Statistics
+
+    Randomize --> RandomDir
+    Randomize --> Poisson
+    RandPool --> Randomize
+
+    style ThreeVector fill:#e1f5e1
+    style Integrator fill:#ffe1e1
+    style Randomize fill:#e1e5ff
+```
+
+### Physics Data Storage
+
+```mermaid
+graph TB
+    subgraph "Physics Vectors"
+        PhysicsVector[G4PhysicsVector]
+        LinearVector[G4PhysicsLinearVector]
+        LogVector[G4PhysicsLogVector]
+        FreeVector[G4PhysicsFreeVector]
+        OrderedVector[G4PhysicsOrderedFreeVector]
+        Vector2D[G4Physics2DVector]
+    end
+
+    subgraph "Collections"
+        PhysicsTable[G4PhysicsTable]
+        OrderedTable[G4OrderedTable]
+        DataVector[G4DataVector]
+    end
+
+    subgraph "Usage"
+        CrossSection[Cross Sections]
+        EnergyLoss[Energy Loss]
+        RangeTables[Range Tables]
+    end
+
+    PhysicsVector --> LinearVector
+    PhysicsVector --> LogVector
+    PhysicsVector --> FreeVector
+    PhysicsVector --> OrderedVector
+    PhysicsVector --> Vector2D
+
+    PhysicsTable --> PhysicsVector
+    OrderedTable --> PhysicsVector
+    DataVector --> PhysicsTable
+
+    CrossSection --> PhysicsTable
+    EnergyLoss --> PhysicsTable
+    RangeTables --> PhysicsTable
+
+    style PhysicsVector fill:#e1f5e1
+    style PhysicsTable fill:#ffe1e1
+```
+
+### Threading and Concurrency
+
+```mermaid
+graph TB
+    subgraph "Thread Management"
+        Threading[G4Threading]
+        ThreadPool[G4ThreadPool]
+        ThreadData[G4ThreadData]
+        TLSingleton[G4ThreadLocalSingleton]
+    end
+
+    subgraph "Task System"
+        Task[G4Task]
+        TaskManager[G4TaskManager]
+        TaskGroup[G4TaskGroup]
+        TaskQueue[G4UserTaskQueue]
+    end
+
+    subgraph "Synchronization"
+        AutoLock[G4AutoLock]
+        MTBarrier[G4MTBarrier]
+        Cache[G4Cache]
+        Workspace[G4TWorkspacePool]
+    end
+
+    subgraph "Thread-Safe I/O"
+        MTcout[G4MTcoutDestination]
+        MasterForward[G4MasterForwardcoutDestination]
+        Lockcout[G4LockcoutDestination]
+    end
+
+    Threading --> ThreadPool
+    ThreadPool --> ThreadData
+    ThreadData --> TLSingleton
+
+    TaskManager --> Task
+    TaskManager --> TaskGroup
+    TaskGroup --> TaskQueue
+
+    AutoLock --> MTBarrier
+    Cache --> Workspace
+
+    MTcout --> MasterForward
+    MasterForward --> Lockcout
+
+    style Threading fill:#e1f5e1
+    style TaskManager fill:#ffe1e1
+    style AutoLock fill:#e1e5ff
+    style MTcout fill:#fff5e1
+```
+
+### Memory Management
+
+```mermaid
+graph TB
+    subgraph "Allocators"
+        Allocator[G4Allocator]
+        AllocatorPool[G4AllocatorPool]
+        AllocatorList[G4AllocatorList]
+    end
+
+    subgraph "Smart Pointers"
+        RefCountHandle[G4ReferenceCountedHandle]
+        AutoDelete[G4AutoDelete]
+    end
+
+    subgraph "Caching"
+        Cache[G4Cache]
+        CacheDetails[G4CacheDetails]
+    end
+
+    Allocator --> AllocatorPool
+    AllocatorPool --> AllocatorList
+
+    RefCountHandle --> AutoDelete
+
+    Cache --> CacheDetails
+
+    style Allocator fill:#e1f5e1
+    style RefCountHandle fill:#ffe1e1
+    style Cache fill:#e1e5ff
 ```
 
 ## Key Classes by Category
 
-### System of Units
+### Fundamental Types and Constants
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4Types](/modules/global/api/g4types) | Fundamental type definitions | `management/include/G4Types.hh:1` |
+| [G4SystemOfUnits](/modules/global/api/g4systemofunits) | Physical unit definitions | `management/include/G4SystemOfUnits.hh:1` |
+| [G4PhysicalConstants](/modules/global/api/g4physicalconstants) | Physical constants | `management/include/G4PhysicalConstants.hh:1` |
+| [globals.hh](/modules/global/api/globals) | Global definitions and includes | `management/include/globals.hh:1` |
 
-| Class/Header | Purpose | Usage |
-|--------------|---------|-------|
-| **G4SystemOfUnits.hh** | All CLHEP units (MeV, mm, ns, etc.) | `#include "G4SystemOfUnits.hh"` |
-| **G4UnitsTable** | Unit definitions and categories | Unit registry and lookup |
-| **G4UnitDefinition** | Individual unit definition | Define custom units |
-| **G4BestUnit** | Automatic unit selection for output | `G4cout << G4BestUnit(value, "Energy")` |
+### Vectors and Transformations
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4ThreeVector](/modules/global/api/g4threevector) | 3D vector (position, momentum) | `management/include/G4ThreeVector.hh:1` |
+| [G4TwoVector](/modules/global/api/g4twovector) | 2D vector | `management/include/G4TwoVector.hh:1` |
+| [G4RotationMatrix](/modules/global/api/g4rotationmatrix) | 3x3 rotation matrix | `management/include/G4RotationMatrix.hh:1` |
+| [G4Transform3D](/modules/global/api/g4transform3d) | 3D transformation | `HEPGeometry/include/G4Transform3D.hh:1` |
+| [G4LorentzVector](/modules/global/api/g4lorentzvector) | 4D energy-momentum vector | `HEPGeometry/include/G4LorentzVector.hh:1` |
 
-### Physical Constants
-
-| Constant | Description | Header |
-|----------|-------------|--------|
-| **c_light** | Speed of light | `G4PhysicalConstants.hh` |
-| **h_Planck** | Planck's constant | `G4PhysicalConstants.hh` |
-| **electron_mass_c2** | Electron mass energy | `G4PhysicalConstants.hh` |
-| **proton_mass_c2** | Proton mass energy | `G4PhysicalConstants.hh` |
-| **Avogadro** | Avogadro's number | `G4PhysicalConstants.hh` |
-| **k_Boltzmann** | Boltzmann constant | `G4PhysicalConstants.hh` |
+### Physics Data Storage
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4PhysicsVector](/modules/global/api/g4physicsvector) | Base class for physics data vectors | `management/include/G4PhysicsVector.hh:1` |
+| [G4PhysicsTable](/modules/global/api/g4physicstable) | Collection of physics vectors | `management/include/G4PhysicsTable.hh:1` |
+| [G4PhysicsLinearVector](/modules/global/api/g4physicslinearvector) | Linear binning physics vector | `management/include/G4PhysicsLinearVector.hh:1` |
+| [G4PhysicsLogVector](/modules/global/api/g4physicslogvector) | Logarithmic binning physics vector | `management/include/G4PhysicsLogVector.hh:1` |
+| [G4PhysicsFreeVector](/modules/global/api/g4physicsfreevector) | Arbitrary binning physics vector | `management/include/G4PhysicsFreeVector.hh:1` |
 
 ### Random Number Generation
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [Randomize](/modules/global/api/randomize) | Main random number header | `HEPRandom/include/Randomize.hh:1` |
+| [G4RandomDirection](/modules/global/api/g4randomdirection) | Random 3D direction generation | `HEPRandom/include/G4RandomDirection.hh:1` |
+| [G4Poisson](/modules/global/api/g4poisson) | Poisson distribution sampling | `HEPRandom/include/G4Poisson.hh:1` |
+| [G4UniformRandPool](/modules/global/api/g4uniformrandpool) | Thread-safe random pool | `HEPRandom/include/G4UniformRandPool.hh:1` |
 
-| Class | Purpose | Header |
-|-------|---------|--------|
-| **G4UniformRand()** | Uniform random [0,1) | `Randomize.hh` |
-| **G4RandGauss** | Gaussian distribution | `Randomize.hh` |
-| **G4RandFlat** | Flat/uniform distribution | `Randomize.hh` |
-| **G4RandExponential** | Exponential distribution | `Randomize.hh` |
-| **G4RandPoisson** | Poisson distribution | `Randomize.hh` |
-| **G4RandomDirection** | Isotropic direction generation | `G4RandomDirection.hh` |
-| **G4Poisson** | Fast Poisson sampling | `G4Poisson.hh` |
+### Numerical Methods
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4Integrator](/modules/global/api/g4integrator) | Numerical integration | `HEPNumerics/include/G4Integrator.hh:1` |
+| [G4StatDouble](/modules/global/api/g4statdouble) | Statistical analysis | `HEPNumerics/include/G4StatDouble.hh:1` |
+| [G4DataInterpolation](/modules/global/api/g4datainterpolation) | Cubic spline interpolation | `HEPNumerics/include/G4DataInterpolation.hh:1` |
+| [G4PolynomialSolver](/modules/global/api/g4polynomialsolver) | Polynomial root finding | `HEPNumerics/include/G4PolynomialSolver.hh:1` |
 
-### I/O Utilities
-
-| Object/Function | Purpose | Header |
-|-----------------|---------|--------|
-| **G4cout** | Thread-safe standard output | `G4ios.hh` or `globals.hh` |
-| **G4cerr** | Thread-safe error output | `G4ios.hh` or `globals.hh` |
-| **G4endl** | End line (flush) | `G4ios.hh` or `globals.hh` |
-| **G4coutDestination** | Custom output destination base | `G4coutDestination.hh` |
-
-### State Management
-
-| Class | Purpose | Header |
-|-------|---------|--------|
-| **G4StateManager** | Application state controller (singleton) | `G4StateManager.hh` |
-| **G4ApplicationState** | State enumeration | `G4ApplicationState.hh` |
-| **G4VStateDependent** | State change notification interface | `G4VStateDependent.hh` |
-
-### Exception Handling
-
-| Function/Type | Purpose | Header |
-|---------------|---------|--------|
-| **G4Exception()** | Throw exception with severity | `G4Exception.hh` or `globals.hh` |
-| **G4ExceptionSeverity** | Exception severity levels | `G4ExceptionSeverity.hh` |
-| **G4ExceptionDescription** | Stream for exception messages | `G4Exception.hh` |
-| **G4VExceptionHandler** | Custom exception handler interface | `G4VExceptionHandler.hh` |
+### Threading and Tasks
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4Threading](/modules/global/api/g4threading) | Threading utilities | `management/include/G4Threading.hh:1` |
+| [G4ThreadPool](/modules/global/api/g4threadpool) | Thread pool management | `management/include/G4ThreadPool.hh:1` |
+| [G4Task](/modules/global/api/g4task) | Task-based parallelism | `management/include/G4Task.hh:1` |
+| [G4TaskManager](/modules/global/api/g4taskmanager) | Task execution management | `management/include/G4TaskManager.hh:1` |
+| [G4AutoLock](/modules/global/api/g4autolock) | RAII mutex lock | `management/include/G4AutoLock.hh:1` |
 
 ### Memory Management
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4Allocator](/modules/global/api/g4allocator) | Fast object pool allocator | `management/include/G4Allocator.hh:1` |
+| [G4ReferenceCountedHandle](/modules/global/api/g4referencecountedhandle) | Smart pointer | `management/include/G4ReferenceCountedHandle.hh:1` |
+| [G4Cache](/modules/global/api/g4cache) | Thread-safe caching | `management/include/G4Cache.hh:1` |
 
-| Class | Purpose | Header |
-|-------|---------|--------|
-| **G4Allocator\<T\>** | Fast memory pool allocator | `G4Allocator.hh` |
-| **G4AllocatorPool** | Memory pool implementation | `G4AllocatorPool.hh` |
-| **G4AllocatorList** | Global allocator registry | `G4AllocatorList.hh` |
-| **G4Cache\<T\>** | Thread-local caching | `G4Cache.hh` |
-| **G4AutoDelete** | Automatic cleanup utility | `G4AutoDelete.hh` |
+### I/O and Exception Handling
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4Exception](/modules/global/api/g4exception) | Exception/error handling | `management/include/G4Exception.hh:1` |
+| [G4coutDestination](/modules/global/api/g4coutdestination) | Output destination base class | `management/include/G4coutDestination.hh:1` |
+| [G4MTcoutDestination](/modules/global/api/g4mtcoutdestination) | Multi-threaded output | `management/include/G4MTcoutDestination.hh:1` |
 
-### String Utilities
-
-| Class/Type | Purpose | Header |
-|------------|---------|--------|
-| **G4String** | Enhanced std::string | `G4String.hh` or `globals.hh` |
-| **G4Tokenizer** | String tokenization | `G4Tokenizer.hh` |
-
-### Timers and Performance
-
-| Class | Purpose | Header |
-|-------|---------|--------|
-| **G4Timer** | Elapsed time measurement | `G4Timer.hh` |
-| **G4SliceTimer** | High-resolution timing | `G4SliceTimer.hh` |
-
-### Geometry Types (HEPGeometry)
-
-| Class | Purpose | Header |
-|-------|---------|--------|
-| **G4ThreeVector** | 3D vector (CLHEP) | `G4ThreeVector.hh` |
-| **G4TwoVector** | 2D vector (CLHEP) | `G4TwoVector.hh` |
-| **G4RotationMatrix** | 3D rotation matrix (CLHEP) | `G4RotationMatrix.hh` |
-| **G4Transform3D** | 3D affine transformation | `G4Transform3D.hh` |
-| **G4Point3D** | 3D point | `G4Point3D.hh` |
-| **G4Vector3D** | 3D vector | `G4Vector3D.hh` |
-| **G4Normal3D** | 3D normal vector | `G4Normal3D.hh` |
-
-### Numerical Methods (HEPNumerics)
-
-| Class | Purpose | Header |
-|-------|---------|--------|
-| **G4Integrator** | Numerical integration | `G4Integrator.hh` |
-| **G4PolynomialSolver** | Polynomial root finding | `G4PolynomialSolver.hh` |
-| **G4StatAnalysis** | Statistical analysis | `G4StatAnalysis.hh` |
-| **G4SimplexDownhill** | Minimization algorithm | `G4SimplexDownhill.hh` |
+### Utilities
+| Class | Purpose | Source File |
+|-------|---------|-------------|
+| [G4Timer](/modules/global/api/g4timer) | CPU and wall clock timing | `management/include/G4Timer.hh:1` |
+| [G4Pow](/modules/global/api/g4pow) | Optimized power functions | `management/include/G4Pow.hh:1` |
+| [G4UnitsTable](/modules/global/api/g4unitstable) | Unit conversion utilities | `management/include/G4UnitsTable.hh:1` |
+| [G4StateManager](/modules/global/api/g4statemanager) | Application state management | `management/include/G4StateManager.hh:1` |
 
 ## Usage Patterns
 
-### Working with Units
+### Using Units and Constants
 
 ```cpp
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
 
-void DefineParticleEnergy()
-{
-    // Define values with units (automatic conversion to internal units)
-    G4double energy = 10.5 * MeV;        // Energy in MeV
-    G4double distance = 5.0 * cm;        // Distance in cm
-    G4double time = 100 * ns;             // Time in nanoseconds
+// Define dimensions with units
+G4double energy = 10.0 * MeV;
+G4double length = 5.0 * cm;
+G4double time = 1.0 * ns;
+G4double angle = 30.0 * deg;
 
-    // All arithmetic automatically in internal units
-    G4double velocity = distance / time;
-
-    // Output with automatic unit selection
-    G4cout << "Energy: " << G4BestUnit(energy, "Energy") << G4endl;
-    G4cout << "Distance: " << G4BestUnit(distance, "Length") << G4endl;
-    G4cout << "Time: " << G4BestUnit(time, "Time") << G4endl;
-
-    // Using physical constants
-    G4double beta = velocity / c_light;
-    G4double mass = electron_mass_c2;
-    G4double momentum = sqrt(energy*energy - mass*mass);
-}
+// Use physical constants
+G4double speedOfLight = c_light;        // ~2.998e8 m/s
+G4double electronMass = electron_mass_c2; // ~0.511 MeV
+G4double fineStructure = fine_structure_const; // ~1/137
 ```
 
-### Using Physical Constants
+### Working with Vectors
 
 ```cpp
-#include "G4PhysicalConstants.hh"
-#include "G4SystemOfUnits.hh"
+#include "G4ThreeVector.hh"
+#include "G4RotationMatrix.hh"
 
-void CalculatePhysics()
-{
-    // Fundamental constants
-    G4double speedOfLight = c_light;           // ~3e8 m/s
-    G4double planck = h_Planck;               // Planck's constant
-    G4double hbar = hbar_Planck;              // ℏ = h/2π
+// Create and manipulate 3D vectors
+G4ThreeVector position(1.0*cm, 2.0*cm, 3.0*cm);
+G4ThreeVector momentum(100*MeV, 50*MeV, 0);
 
-    // Particle masses
-    G4double me = electron_mass_c2;           // ~0.511 MeV
-    G4double mp = proton_mass_c2;             // ~938.3 MeV
-    G4double mn = neutron_mass_c2;            // ~939.6 MeV
+// Vector operations
+G4double magnitude = momentum.mag();
+G4ThreeVector direction = momentum.unit();
+G4double dotProduct = position.dot(momentum);
+G4ThreeVector crossProduct = position.cross(momentum);
 
-    // Other constants
-    G4double alpha = fine_structure_const;    // ~1/137
-    G4double Na = Avogadro;                   // 6.022e23 /mol
-    G4double kB = k_Boltzmann;                // Boltzmann constant
+// Apply rotations
+G4RotationMatrix rotation;
+rotation.rotateZ(45*deg);
+G4ThreeVector rotated = rotation * position;
+```
 
-    // Derived calculations
-    G4double compton_wavelength = hbarc / me;  // Compton wavelength
-    G4double bohr_radius = Bohr_radius;        // ~0.529 Angstrom
+### Physics Vector Usage
+
+```cpp
+#include "G4PhysicsLogVector.hh"
+#include "G4PhysicsTable.hh"
+
+// Create physics vector for cross-section data
+G4PhysicsLogVector* crossSection = new G4PhysicsLogVector(
+    1.0*keV,    // minimum energy
+    10.0*GeV,   // maximum energy
+    100         // number of bins
+);
+
+// Fill with data
+for (size_t i = 0; i < crossSection->GetVectorLength(); ++i) {
+    G4double energy = crossSection->Energy(i);
+    G4double xs = CalculateCrossSection(energy);
+    crossSection->PutValue(i, xs);
 }
+
+// Retrieve interpolated values
+G4double value = crossSection->Value(5.0*MeV);
 ```
 
 ### Random Number Generation
@@ -378,34 +421,66 @@ void CalculatePhysics()
 #include "Randomize.hh"
 #include "G4RandomDirection.hh"
 
-void GenerateRandomNumbers()
-{
-    // Uniform random [0, 1)
-    G4double r = G4UniformRand();
+// Generate random numbers
+G4double uniform = G4UniformRand();  // [0, 1)
+G4double gaussian = G4RandGauss::shoot(mean, sigma);
+G4double exponential = G4RandExponential::shoot(tau);
+G4int poisson = G4Poisson(3.5);
 
-    // Gaussian (mean=0, sigma=1)
-    G4double gauss = G4RandGauss::shoot(0.0, 1.0);
+// Random directions
+G4ThreeVector randomDir = G4RandomDirection();
+```
 
-    // Gaussian with different parameters
-    G4double energy_spread = G4RandGauss::shoot(100*MeV, 5*MeV);
+### Threading Support
 
-    // Exponential decay
-    G4double decay_time = G4RandExponential::shoot(10*ns);
+```cpp
+#include "G4Threading.hh"
+#include "G4AutoLock.hh"
+#include "G4Cache.hh"
 
-    // Flat distribution in range
-    G4double angle = G4RandFlat::shoot(0, 2*pi);
+namespace {
+    G4Mutex myMutex = G4MUTEX_INITIALIZER;
+    G4Cache<MyData> threadLocalData;
+}
 
-    // Poisson distribution
-    G4int n_particles = G4RandPoisson::shoot(5.3);
+void ThreadSafeFunction() {
+    // RAII lock
+    G4AutoLock lock(&myMutex);
 
-    // Random 3D direction (isotropic)
-    G4ThreeVector direction = G4RandomDirection();
+    // Critical section
+    SharedResourceAccess();
 
-    // Random direction in cone
-    G4double cosTheta = 1.0 - G4UniformRand() * (1.0 - cos(30*deg));
-    G4double phi = 2 * pi * G4UniformRand();
-    G4double sinTheta = sqrt(1.0 - cosTheta*cosTheta);
-    G4ThreeVector coneDir(sinTheta*cos(phi), sinTheta*sin(phi), cosTheta);
+    // lock released automatically
+}
+
+void UseThreadLocalData() {
+    MyData& data = threadLocalData.Get();
+    data.Process();
+}
+```
+
+### Memory Allocation
+
+```cpp
+#include "G4Allocator.hh"
+
+class MyClass {
+public:
+    void* operator new(size_t);
+    void operator delete(void*);
+
+private:
+    static G4Allocator<MyClass> allocator;
+};
+
+G4Allocator<MyClass> MyClass::allocator;
+
+void* MyClass::operator new(size_t) {
+    return allocator.MallocSingle();
+}
+
+void MyClass::operator delete(void* obj) {
+    allocator.FreeSingle((MyClass*)obj);
 }
 ```
 
@@ -414,607 +489,138 @@ void GenerateRandomNumbers()
 ```cpp
 #include "G4Exception.hh"
 
-void ValidateInput(G4double energy)
-{
-    // Fatal error - abort with core dump
-    if (energy < 0) {
-        G4Exception("ValidateInput()", "FATAL001",
-                   FatalException,
-                   "Energy cannot be negative!");
+void MyFunction() {
+    if (errorCondition) {
+        G4Exception("MyFunction", "CODE001",
+                    FatalException,
+                    "Description of the error");
     }
 
-    // Warning - continue execution
-    if (energy < 1*keV) {
-        G4ExceptionDescription msg;
-        msg << "Energy " << energy/keV << " keV is very low.\n"
-            << "Results may not be accurate.";
-        G4Exception("ValidateInput()", "WARN001",
-                   JustWarning, msg);
-    }
-
-    // Event must be aborted
-    if (energy > 1*TeV) {
-        G4Exception("ValidateInput()", "EVENT001",
-                   EventMustBeAborted,
-                   "Energy exceeds simulation limits!");
-    }
-}
-
-void CheckGeometry(G4VPhysicalVolume* volume)
-{
-    if (!volume) {
-        G4ExceptionDescription msg;
-        msg << "Physical volume is null!\n"
-            << "Check geometry construction.";
-        G4Exception("CheckGeometry()", "GEOM001",
-                   FatalErrorInArgument, msg);
+    if (warningCondition) {
+        G4Exception("MyFunction", "CODE002",
+                    JustWarning,
+                    "This is just a warning");
     }
 }
 ```
 
-### State Management
-
-```cpp
-#include "G4StateManager.hh"
-
-void CheckApplicationState()
-{
-    // Get state manager (singleton)
-    G4StateManager* stateManager = G4StateManager::GetStateManager();
-
-    // Query current state
-    G4ApplicationState currentState = stateManager->GetCurrentState();
-
-    // Check state before operations
-    if (currentState == G4State_PreInit) {
-        G4cout << "Still in pre-initialization" << G4endl;
-    }
-    else if (currentState == G4State_Idle) {
-        G4cout << "Ready to start run" << G4endl;
-    }
-    else if (currentState == G4State_EventProc) {
-        G4cout << "Processing event" << G4endl;
-    }
-
-    // Get state name as string
-    G4String stateName = stateManager->GetStateString(currentState);
-    G4cout << "Current state: " << stateName << G4endl;
-}
-
-// State-dependent class
-class MyStateDependent : public G4VStateDependent
-{
-public:
-    MyStateDependent() : G4VStateDependent(true) {
-        // Register with state manager
-        G4StateManager::GetStateManager()->RegisterDependent(this);
-    }
-
-    virtual G4bool Notify(G4ApplicationState requestedState) override
-    {
-        if (requestedState == G4State_Idle) {
-            G4cout << "Transitioning to Idle state" << G4endl;
-            // Perform state-dependent initialization
-        }
-        return true;  // Allow state change
-    }
-};
-```
-
-### I/O Streaming
-
-```cpp
-#include "globals.hh"  // Includes G4cout, G4cerr, G4endl
-
-void PrintInformation()
-{
-    // Standard output
-    G4cout << "Starting simulation..." << G4endl;
-
-    // Formatted output
-    G4cout << "Energy = " << 10.5 << " MeV" << G4endl;
-
-    // With G4BestUnit
-    G4double distance = 5.0 * cm;
-    G4cout << "Distance: " << G4BestUnit(distance, "Length") << G4endl;
-
-    // Error output
-    G4cerr << "WARNING: Low statistics!" << G4endl;
-
-    // Multi-threaded output (automatic thread ID)
-    #ifdef G4MULTITHREADED
-    G4cout << "Thread-safe output in MT mode" << G4endl;
-    #endif
-}
-
-// Custom output destination
-class MyOutputDestination : public G4coutDestination
-{
-public:
-    virtual G4int ReceiveG4cout(const G4String& msg) override {
-        // Custom handling of G4cout messages
-        myLogFile << "[INFO] " << msg;
-        return 0;
-    }
-
-    virtual G4int ReceiveG4cerr(const G4String& msg) override {
-        // Custom handling of G4cerr messages
-        myLogFile << "[ERROR] " << msg;
-        return 0;
-    }
-
-private:
-    std::ofstream myLogFile;
-};
-```
-
-### Memory Management with Allocators
-
-```cpp
-#include "G4Allocator.hh"
-
-class MyTrackData
-{
-public:
-    MyTrackData() = default;
-    ~MyTrackData() = default;
-
-    // Custom memory management
-    inline void* operator new(size_t);
-    inline void operator delete(void* obj);
-
-private:
-    static G4Allocator<MyTrackData>* allocator;
-
-    G4double energy;
-    G4ThreeVector position;
-    G4int trackID;
-};
-
-// Define allocator
-G4Allocator<MyTrackData>* MyTrackData::allocator = nullptr;
-
-// Efficient allocation from pool
-inline void* MyTrackData::operator new(size_t)
-{
-    if (!allocator) {
-        allocator = new G4Allocator<MyTrackData>;
-    }
-    return allocator->MallocSingle();
-}
-
-// Return to pool (not actually freed)
-inline void MyTrackData::operator delete(void* obj)
-{
-    allocator->FreeSingle((MyTrackData*)obj);
-}
-
-void UseAllocator()
-{
-    // Fast allocation from pool
-    MyTrackData* data = new MyTrackData();
-
-    // Use the object
-    // ...
-
-    // Return to pool (very fast)
-    delete data;
-}
-```
-
-### Performance Timing
-
-```cpp
-#include "G4Timer.hh"
-
-void MeasurePerformance()
-{
-    G4Timer timer;
-
-    // Start timing
-    timer.Start();
-
-    // Perform operations
-    for (int i = 0; i < 1000000; ++i) {
-        G4double x = G4UniformRand();
-        G4double y = sin(x);
-    }
-
-    // Stop timing
-    timer.Stop();
-
-    // Get elapsed times
-    G4double realTime = timer.GetRealElapsed();
-    G4double sysTime = timer.GetSystemElapsed();
-    G4double userTime = timer.GetUserElapsed();
-
-    G4cout << "Real time: " << realTime << " s" << G4endl;
-    G4cout << "System time: " << sysTime << " s" << G4endl;
-    G4cout << "User time: " << userTime << " s" << G4endl;
-
-    // Convenient output
-    G4cout << timer << G4endl;
-}
-```
-
-### Custom Unit Definitions
-
-```cpp
-#include "G4UnitsTable.hh"
-#include "G4SystemOfUnits.hh"
-
-void DefineCustomUnits()
-{
-    // Define new unit in existing category
-    new G4UnitDefinition("millielectronvolt", "meV", "Energy", 1.e-3*eV);
-
-    // Define unit with custom symbol
-    new G4UnitDefinition("atmosphere", "atm", "Pressure", atmosphere);
-
-    // Define derived unit
-    new G4UnitDefinition("barn", "b", "Surface", barn);
-    new G4UnitDefinition("millibarn", "mb", "Surface", millibarn);
-
-    // Use custom unit
-    G4double crossSection = 50 * millibarn;
-    G4cout << G4BestUnit(crossSection, "Surface") << G4endl;
-
-    // Check if unit is defined
-    if (G4UnitDefinition::IsUnitDefined("meV")) {
-        G4double value = G4UnitDefinition::GetValueOf("meV");
-        G4cout << "1 meV = " << value << " (internal units)" << G4endl;
-    }
-}
-```
-
-## Advanced Features
-
-### Thread-Local Storage
-
-```cpp
-#include "G4Cache.hh"
-
-// Thread-local cached data
-class MyPhysicsData
-{
-public:
-    void Initialize() {
-        // Expensive initialization
-        computedTable = ComputePhysicsTable();
-    }
-
-    G4PhysicsVector* GetTable() {
-        return computedTable;
-    }
-
-private:
-    G4PhysicsVector* computedTable;
-};
-
-// Use G4Cache for thread-local instances
-G4Cache<MyPhysicsData*> threadLocalData;
-
-void UseThreadLocalData()
-{
-    // Get thread-local instance
-    MyPhysicsData* data = threadLocalData.Get();
-
-    // Initialize if needed
-    if (!data) {
-        data = new MyPhysicsData();
-        data->Initialize();
-        threadLocalData.Put(data);
-    }
-
-    // Use thread-local data
-    G4PhysicsVector* table = data->GetTable();
-}
-```
-
-### Backtrace and Debugging
-
-```cpp
-#include "G4Backtrace.hh"
-
-void DebugFunction()
-{
-    // Get backtrace for debugging
-    #ifdef G4BACKTRACE
-    G4Backtrace bt;
-    bt.Dump();
-    #endif
-}
-```
-
-## Integration with All Modules
-
-The Global module is the foundation for every other module in Geant4:
-
-```mermaid
-graph TD
-    Global[Global Module<br/>Foundation]
-
-    Global --> Track[Track Module]
-    Global --> Event[Event Module]
-    Global --> Run[Run Module]
-    Global --> Geometry[Geometry Module]
-    Global --> Materials[Materials Module]
-    Global --> Particles[Particles Module]
-    Global --> Processes[Processes Module]
-    Global --> Tracking[Tracking Module]
-    Global --> Digits[Digits+Hits Module]
-    Global --> Analysis[Analysis Module]
-
-    style Global fill:#e1f5e1
-    style Track fill:#ffe1e1
-    style Event fill:#e1e5ff
-    style Geometry fill:#fff4e1
-```
-
-### Universal Dependencies
-
-Every module depends on Global for:
-- **Units**: All physical quantities use the unit system
-- **Constants**: Physics calculations use fundamental constants
-- **I/O**: All modules use G4cout/G4cerr for output
-- **Exceptions**: All modules use G4Exception for error handling
-- **Random**: Physics processes use random number generation
-- **Types**: G4double, G4int, G4bool, G4String are ubiquitous
-- **Vectors**: G4ThreeVector used throughout for positions/directions
-
-## Thread Safety
-
-### Multi-Threading Considerations
-
-The Global module provides comprehensive thread safety:
-
-| Component | Thread Safety | Notes |
-|-----------|---------------|-------|
-| **Units/Constants** | Thread-safe | Const values, no synchronization needed |
-| **G4cout/G4cerr** | Thread-safe | Automatic thread identification in MT mode |
-| **Random** | Thread-local | Separate engine per thread |
-| **G4StateManager** | Thread-local | Per-thread state tracking |
-| **G4Allocator** | Thread-safe | Lock-free pool allocation |
-| **G4Cache** | Thread-local | Explicit thread-local storage |
-| **G4Timer** | Thread-safe | Independent per thread |
-
-### Multi-Threading Example
-
-```cpp
-#ifdef G4MULTITHREADED
-#include "G4Threading.hh"
-
-void ThreadSafeOperation()
-{
-    // Get thread ID
-    G4int threadID = G4Threading::G4GetThreadId();
-
-    // Thread-safe output (automatic thread ID prefix)
-    G4cout << "Running on thread " << threadID << G4endl;
-
-    // Thread-local random number generator
-    G4double rand = G4UniformRand();  // Independent per thread
-
-    // Thread-local state
-    G4StateManager* stateManager = G4StateManager::GetStateManager();
-    G4ApplicationState state = stateManager->GetCurrentState();
-}
-#endif
-```
+## Thread Safety Considerations
+
+The Global module provides extensive support for multi-threading:
+
+### Thread-Safe Components
+- **G4Cache**: Thread-local caching mechanism
+- **G4ThreadLocalSingleton**: Thread-local singleton pattern
+- **G4AutoLock**: RAII mutex locking
+- **G4MTBarrier**: Thread synchronization barriers
+- **G4UniformRandPool**: Thread-safe random number generation
+- **G4MTcoutDestination**: Thread-safe output
+
+### Thread-Unsafe Components (Require Protection)
+- **G4PhysicsTable**: Shared physics data (read-only after initialization)
+- **G4UnitsTable**: Unit definitions (initialized at startup)
+- **Static allocators**: Use thread-local instances when possible
+
+### Best Practices
+1. Use `G4Cache` for thread-local data
+2. Protect shared resources with `G4AutoLock`
+3. Initialize physics tables before multi-threaded execution
+4. Use `G4UniformRandPool` for thread-safe random generation
+5. Use `G4MTcoutDestination` for thread-safe logging
 
 ## Performance Considerations
 
-### Best Practices
+### Optimized Mathematical Functions
+- **G4Pow**: Pre-computed power tables for common exponents
+- **G4Log**: Fast logarithm calculations
+- **G4Exp**: Fast exponential calculations
+- **G4IEEE754**: Low-level floating-point optimizations
 
-1. **Memory Allocators**
-   - Use `G4Allocator` for frequently allocated/deallocated objects
-   - Reduces memory fragmentation and allocation overhead
-   - Particularly important for G4Track, G4Step, geometry objects
+### Memory Efficiency
+- **G4Allocator**: Object pooling reduces allocation overhead
+- **G4PhysicsVector**: Compact storage with interpolation
+- **G4Cache**: Reduces synchronization overhead
 
-2. **Random Number Generation**
-   - `G4UniformRand()` is highly optimized
-   - Avoid creating temporary distribution objects in tight loops
-   - Reuse distribution objects when possible
+### Timing and Profiling
+- **G4Timer**: Measure CPU and wall-clock time
+- **G4SliceTimer**: High-resolution performance measurement
 
-3. **String Operations**
-   - Minimize string creation in performance-critical code
-   - Use const references for string parameters
-   - G4String is std::string with some extensions
+## Integration with Other Modules
 
-4. **I/O Operations**
-   - G4cout involves threading overhead in MT mode
-   - Reduce output in tight loops
-   - Consider buffering for batch output
+The Global module is used by virtually every other module:
 
-5. **Unit Conversions**
-   - Unit multiplication is compile-time in many cases
-   - No runtime overhead for simple conversions
-   - G4BestUnit involves lookup, use sparingly in loops
+- **Materials**: Uses `G4PhysicsVector` for material properties
+- **Geometry**: Uses vectors, transformations, and geometry definitions
+- **Particles**: Uses units, constants, and physics tables
+- **Processes**: Uses physics vectors/tables for cross-sections and energy loss
+- **Tracking**: Uses vectors, random numbers, and state management
+- **Run**: Uses threading, state management, and exception handling
+- **Event**: Uses allocators, vectors, and random generation
 
-### Performance Example
+## Common Pitfalls
 
+### Unit Mismatches
 ```cpp
-// GOOD: Efficient random number usage
-void EfficientRandom()
-{
-    // Reuse for multiple samples
-    CLHEP::RandGaussQ gaussGen(engine, 0.0, 1.0);
+// WRONG: Mixing unit systems
+G4double energy = 10.0;  // What unit? Undefined!
 
-    for (int i = 0; i < 1000000; ++i) {
-        G4double value = gaussGen.fire();  // Fast
-    }
-}
-
-// POOR: Creates temporary objects
-void InefficientRandom()
-{
-    for (int i = 0; i < 1000000; ++i) {
-        G4double value = G4RandGauss::shoot(0.0, 1.0);  // Slower
-    }
-}
+// CORRECT: Always specify units
+G4double energy = 10.0 * MeV;
 ```
 
-## Common Patterns
-
-### Initialization Pattern
-
+### Thread Safety
 ```cpp
-#include "globals.hh"
-#include "G4SystemOfUnits.hh"
-#include "Randomize.hh"
+// WRONG: Unprotected shared access
+static G4int counter = 0;
+counter++;  // Race condition!
 
-class MyDetectorConstruction
-{
-public:
-    MyDetectorConstruction()
-    {
-        // Use units in initialization
-        detectorThickness = 10*cm;
-        detectorRadius = 5*cm;
-        absorberMaterial = nullptr;
-    }
-
-    G4VPhysicalVolume* Construct()
-    {
-        // State checking
-        G4StateManager* stateManager = G4StateManager::GetStateManager();
-        if (stateManager->GetCurrentState() != G4State_PreInit &&
-            stateManager->GetCurrentState() != G4State_Idle) {
-            G4Exception("Construct()", "DET001", FatalException,
-                       "Geometry can only be built in PreInit or Idle state!");
-        }
-
-        // Construction with units
-        G4Box* solidBox = new G4Box("Detector",
-                                    detectorRadius,
-                                    detectorRadius,
-                                    detectorThickness/2);
-
-        // Output for verification
-        G4cout << "Detector thickness: "
-               << G4BestUnit(detectorThickness, "Length") << G4endl;
-
-        // ... geometry construction
-    }
-
-private:
-    G4double detectorThickness;
-    G4double detectorRadius;
-    G4Material* absorberMaterial;
-};
+// CORRECT: Use atomic or mutex
+G4AutoLock lock(&mutex);
+counter++;
 ```
 
-### Error Handling Pattern
-
+### Physics Vector Binning
 ```cpp
-#include "G4Exception.hh"
+// WRONG: Linear binning for exponential data
+G4PhysicsLinearVector* vec = new G4PhysicsLinearVector(1*eV, 1*TeV, 100);
+// Poor resolution at low energies!
 
-class MyPhysicsProcess
-{
-public:
-    G4double ComputeCrossSection(G4double energy, const G4Material* material)
-    {
-        // Validate inputs
-        if (energy <= 0) {
-            G4ExceptionDescription msg;
-            msg << "Invalid energy: " << energy/MeV << " MeV\n"
-                << "Energy must be positive.";
-            G4Exception("ComputeCrossSection()", "PHYS001",
-                       FatalErrorInArgument, msg);
-        }
-
-        if (!material) {
-            G4Exception("ComputeCrossSection()", "PHYS002",
-                       FatalErrorInArgument,
-                       "Material pointer is null!");
-        }
-
-        // Warn about potential issues
-        if (energy > 100*TeV) {
-            G4ExceptionDescription msg;
-            msg << "Very high energy: " << energy/TeV << " TeV\n"
-                << "Cross section may be unreliable.";
-            G4Exception("ComputeCrossSection()", "PHYS003",
-                       JustWarning, msg);
-        }
-
-        // Compute and return
-        return CalculateXS(energy, material);
-    }
-};
+// CORRECT: Logarithmic binning for wide range
+G4PhysicsLogVector* vec = new G4PhysicsLogVector(1*eV, 1*TeV, 100);
 ```
 
-## Source Files
+## Related Modules
 
-Key source files in `source/global/`:
+- [**Materials**](/modules/materials/) - Uses physics vectors for material properties
+- [**Geometry**](/modules/geometry/) - Uses geometric primitives and transformations
+- [**Particles**](/modules/particles/) - Uses units and constants for particle definitions
+- [**Processes**](/modules/processes/) - Uses physics tables for cross-sections
 
-```
-source/global/
-├── management/
-│   ├── include/
-│   │   ├── G4SystemOfUnits.hh            # CLHEP units
-│   │   ├── G4PhysicalConstants.hh        # Physical constants
-│   │   ├── G4UnitsTable.hh               # Unit definitions
-│   │   ├── G4Exception.hh                # Exception handling
-│   │   ├── G4ExceptionSeverity.hh        # Exception levels
-│   │   ├── G4StateManager.hh             # State management
-│   │   ├── G4ApplicationState.hh         # State enumeration
-│   │   ├── G4ios.hh                      # I/O streams
-│   │   ├── globals.hh                    # Common includes
-│   │   ├── G4Allocator.hh                # Memory allocator
-│   │   ├── G4String.hh                   # String utilities
-│   │   ├── G4Timer.hh                    # Performance timing
-│   │   ├── G4Types.hh                    # Type definitions
-│   │   ├── G4Threading.hh                # Threading utilities
-│   │   └── G4Cache.hh                    # Thread-local cache
-│   └── src/
-│       ├── G4UnitsTable.cc
-│       ├── G4Exception.cc
-│       ├── G4StateManager.cc
-│       └── G4Timer.cc
-│
-├── HEPRandom/
-│   ├── include/
-│   │   ├── Randomize.hh                  # Main random header
-│   │   ├── G4RandomDirection.hh          # Random directions
-│   │   ├── G4Poisson.hh                  # Poisson sampling
-│   │   └── G4UniformRandPool.hh          # Random pool
-│   └── src/
-│
-├── HEPGeometry/
-│   ├── include/
-│   │   ├── G4ThreeVector.hh              # 3D vectors
-│   │   ├── G4TwoVector.hh                # 2D vectors
-│   │   ├── G4RotationMatrix.hh           # Rotations
-│   │   ├── G4Transform3D.hh              # 3D transforms
-│   │   └── geomdefs.hh                   # Geometry definitions
-│   └── src/
-│
-└── HEPNumerics/
-    ├── include/
-    │   ├── G4Integrator.hh               # Numerical integration
-    │   ├── G4PolynomialSolver.hh         # Polynomial solver
-    │   ├── G4StatAnalysis.hh             # Statistical analysis
-    │   └── G4SimplexDownhill.hh          # Minimization
-    └── src/
-```
+## Documentation Status
 
-::: tip Related Documentation
-- [Track Module](../track/index.md) - Uses Global for units, I/O, types
-- [Event Module](../event/index.md) - Uses Global for random numbers
-- [Materials Module](../materials/index.md) - Uses Global for units and constants
-- [Documentation Progress](../../documentation-progress.md) - Track documentation status
+::: info Documentation Progress
+See the [Documentation Progress](/documentation-progress#global-module) page for detailed class-level documentation status.
 :::
 
-## See Also
+## References
 
-- **Geant4 User's Guide**: System of Units, Random Number Generation
-- **CLHEP Documentation**: Underlying units and random number implementation
-- **Multi-Threading Guide**: Thread safety and parallelization
-- **Exception Handling**: Best practices for error reporting
+### CLHEP Dependencies
+The Global module wraps several CLHEP (Class Library for High Energy Physics) components:
+- **HepGeom**: Geometric primitives (Point3D, Vector3D, Transform3D)
+- **HepRandom**: Random number generation
+- **HepVector**: Vector and matrix classes
+
+### External Documentation
+- [Geant4 User's Guide - Toolkit Fundamentals](https://geant4-userdoc.web.cern.ch/)
+- [CLHEP Documentation](https://proj-clhep.web.cern.ch/)
+- [System of Units in Geant4](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/unitsAndDimensions.html)
 
 ---
 
-::: info Foundation Module
-The Global module is the foundation of Geant4. Understanding its components is essential for effective use of all other modules. Every Geant4 application depends on these utilities.
+::: tip Next Steps
+Explore individual class documentation in the API reference sections:
+- [HEPGeometry Classes](/modules/global/api/hepgeometry)
+- [HEPNumerics Classes](/modules/global/api/hepnumerics)
+- [HEPRandom Classes](/modules/global/api/heprandom)
+- [Management Classes](/modules/global/api/management)
 :::
