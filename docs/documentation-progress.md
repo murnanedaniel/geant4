@@ -14,16 +14,16 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 
 | Module | Classes | Documented | Progress | Status | Priority |
 |--------|---------|------------|----------|--------|----------|
-| [**materials**](#materials-module) | 44 | 4 | 9% | 🟢 Active | High |
-| [**event**](#event-module) | 36 | 4 | 11% | ✅ Current | High |
-| [**run**](#run-module) | 15+ | 3 | 20% | ✅ Current | High |
-| [**track**](#track-module) | 23 | 0 | 0% | 🔄 Next | High |
-| [**tracking**](#tracking-module) | 40+ | 0 | 0% | ⏳ Planned | High |
-| **global** | 60+ | 0 | 0% | ⏳ Planned | High |
-| **geometry** | 150+ | 0 | 0% | ⏳ Planned | Medium |
+| [**global**](#global-module) | 109 | 97 | 89% | ✅ Current | High |
+| [**materials**](#materials-module) | 44 | 15 | 34% | ✅ Current | High |
+| [**event**](#event-module) | 36 | 19 | 53% | ✅ Current | High |
+| [**run**](#run-module) | 15 | 11 | 73% | ✅ Current | High |
+| [**track**](#track-module) | 23 | 10 | 43% | ✅ Current | High |
+| [**tracking**](#tracking-module) | 40+ | 8 | 20% | ✅ Current | High |
+| [**geometry**](#geometry-module) | 308 | 13 | 4% | 🟢 Active | High |
 | [**particles**](#particles-module) | 252 | 13 | 5% | ✅ Current | High |
-| **processes** | 250+ | 0 | 0% | ⏳ Planned | Medium |
-| **digits_hits** | 30+ | 0 | 0% | ⏳ Planned | Medium |
+| [**processes**](#processes-module) | 1,939 | 100+ | 5% | ✅ Current | High |
+| **digits_hits** | 30+ | 0 | 0% | 🔄 Next | Medium |
 | **analysis** | 20+ | 0 | 0% | ⏳ Planned | Low |
 | **persistency** | 25+ | 0 | 0% | ⏳ Planned | Low |
 | **visualization** | 80+ | 0 | 0% | ⏳ Planned | Low |
@@ -36,48 +36,247 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 - ❌ **Not Started**: Not yet scheduled
 
 ## Detailed Progress
+### Global Module
 
-### Materials Module
-
-**Location:** `source/materials/`
-**Documentation:** [Module Overview](/modules/materials/) | [Visualization Diagram](/visualization#materials-module-class-hierarchy)
-**Progress:** 4/44 classes (9%)
+**Location:** `source/global/`
+**Documentation:** [Module Overview](/modules/global/)
+**Progress:** 97/109 classes (89%)
 
 #### Documented Classes
 
-| Class | API Docs | Lines | Status |
-|-------|----------|-------|--------|
-| **G4Isotope** | [📖 API](/modules/materials/api/g4isotope) | 1,250 | ✅ Complete |
-| **G4Element** | [📖 API](/modules/materials/api/g4element) | 1,800 | ✅ Complete |
-| **G4Material** | [📖 API](/modules/materials/api/g4material) | 2,100 | ✅ Complete |
-| **G4IonisParamElm** | [📖 API](/modules/materials/api/g4ionisparamelm) | 800 | ✅ Complete |
+**HEPGeometry (8/8 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **geomdefs.hh** | [📖 API](/modules/global/api/geomdefs) | ✅ Complete |
+| **G4Transform3D** | [📖 API](/modules/global/api/g4transform3d) | ✅ Complete |
+| **G4Point3D** | [📖 API](/modules/global/api/g4point3d) | ✅ Complete |
+| **G4Vector3D** | [📖 API](/modules/global/api/g4vector3d) | ✅ Complete |
+| **G4Normal3D** | [📖 API](/modules/global/api/g4normal3d) | ✅ Complete |
+| **G4Plane3D** | [📖 API](/modules/global/api/g4plane3d) | ✅ Complete |
+| **G4LorentzVector** | [📖 API](/modules/global/api/g4lorentzvector) | ✅ Complete |
+| **G4LorentzRotation** | [📖 API](/modules/global/api/g4lorentzrotation) | ✅ Complete |
+
+**HEPNumerics (18/18 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Integrator** | [📖 API](/modules/global/api/g4integrator) | ✅ Complete |
+| **G4VGaussianQuadrature** | [📖 API](/modules/global/api/g4vgaussianquadrature) | ✅ Complete |
+| **G4GaussLegendreQ** | [📖 API](/modules/global/api/g4gausslegendreq) | ✅ Complete |
+| **G4GaussHermiteQ** | [📖 API](/modules/global/api/g4gausshermiteq) | ✅ Complete |
+| **G4GaussLaguerreQ** | [📖 API](/modules/global/api/g4gausslaguerreq) | ✅ Complete |
+| **G4GaussChebyshevQ** | [📖 API](/modules/global/api/g4gausschebyshevq) | ✅ Complete |
+| **G4GaussJacobiQ** | [📖 API](/modules/global/api/g4gaussjacobiq) | ✅ Complete |
+| **G4SimpleIntegration** | [📖 API](/modules/global/api/g4simpleintegration) | ✅ Complete |
+| **G4VSIntegration** | [📖 API](/modules/global/api/g4vsintegration) | ✅ Complete |
+| **G4PolynomialSolver** | [📖 API](/modules/global/api/g4polynomialsolver) | ✅ Complete |
+| **G4AnalyticalPolSolver** | [📖 API](/modules/global/api/g4analyticalpolsolver) | ✅ Complete |
+| **G4JTPolynomialSolver** | [📖 API](/modules/global/api/g4jtpolynomialsolver) | ✅ Complete |
+| **G4DataInterpolation** | [📖 API](/modules/global/api/g4datainterpolation) | ✅ Complete |
+| **G4ChebyshevApproximation** | [📖 API](/modules/global/api/g4chebyshevapproximation) | ✅ Complete |
+| **G4SimplexDownhill** | [📖 API](/modules/global/api/g4simplexdownhill) | ✅ Complete |
+| **G4StatDouble** | [📖 API](/modules/global/api/g4statdouble) | ✅ Complete |
+| **G4StatAnalysis** | [📖 API](/modules/global/api/g4statanalysis) | ✅ Complete |
+| **G4ConvergenceTester** | [📖 API](/modules/global/api/g4convergencetester) | ✅ Complete |
+
+**HEPRandom (6/6 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **Randomize.hh** | [📖 API](/modules/global/api/randomize) | ✅ Complete |
+| **G4RandomTools** | [📖 API](/modules/global/api/g4randomtools) | ✅ Complete |
+| **G4RandomDirection** | [📖 API](/modules/global/api/g4randomdirection) | ✅ Complete |
+| **G4Poisson** | [📖 API](/modules/global/api/g4poisson) | ✅ Complete |
+| **G4QuickRand** | [📖 API](/modules/global/api/g4quickrand) | ✅ Complete |
+| **G4UniformRandPool** | [📖 API](/modules/global/api/g4uniformrandpool) | ✅ Complete |
+
+**Management - Types and Constants (5/5 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Types.hh** | [📖 API](/modules/global/api/g4types) | ✅ Complete |
+| **G4SystemOfUnits.hh** | [📖 API](/modules/global/api/g4systemofunits) | ✅ Complete |
+| **G4PhysicalConstants.hh** | [📖 API](/modules/global/api/g4physicalconstants) | ✅ Complete |
+| **globals.hh** | [📖 API](/modules/global/api/globals) | ✅ Complete |
+| **G4Version.hh** | [📖 API](/modules/global/api/g4version) | ✅ Complete |
+
+**Management - Vectors and Matrices (3/3 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4ThreeVector** | [📖 API](/modules/global/api/g4threevector) | ✅ Complete |
+| **G4TwoVector** | [📖 API](/modules/global/api/g4twovector) | ✅ Complete |
+| **G4RotationMatrix** | [📖 API](/modules/global/api/g4rotationmatrix) | ✅ Complete |
+
+**Management - Physics Data (11/11 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4PhysicsVector** | [📖 API](/modules/global/api/g4physicsvector) | ✅ Complete |
+| **G4PhysicsLinearVector** | [📖 API](/modules/global/api/g4physicslinearvector) | ✅ Complete |
+| **G4PhysicsLogVector** | [📖 API](/modules/global/api/g4physicslogvector) | ✅ Complete |
+| **G4PhysicsFreeVector** | [📖 API](/modules/global/api/g4physicsfreevector) | ✅ Complete |
+| **G4PhysicsOrderedFreeVector** | [📖 API](/modules/global/api/g4physicsorderedfreevector) | ✅ Complete |
+| **G4Physics2DVector** | [📖 API](/modules/global/api/g4physics2dvector) | ✅ Complete |
+| **G4PhysicsTable** | [📖 API](/modules/global/api/g4physicstable) | ✅ Complete |
+| **G4OrderedTable** | [📖 API](/modules/global/api/g4orderedtable) | ✅ Complete |
+| **G4PhysicsVectorType** | [📖 API](/modules/global/api/g4physicsvectortype) | ✅ Complete |
+| **G4PhysicsModelCatalog** | [📖 API](/modules/global/api/g4physicsmodelcatalog) | ✅ Complete |
+| **G4DataVector** | [📖 API](/modules/global/api/g4datavector) | ✅ Complete |
+
+**Management - Exception Handling (1 comprehensive doc) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Exception** | [📖 API](/modules/global/api/g4exception) | ✅ Complete |
+
+**Management - Math Utilities (4/4 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Pow** | [📖 API](/modules/global/api/g4pow) | ✅ Complete |
+| **G4Log** | [📖 API](/modules/global/api/g4log) | ✅ Complete |
+| **G4Exp** | [📖 API](/modules/global/api/g4exp) | ✅ Complete |
+| **G4IEEE754** | [📖 API](/modules/global/api/g4ieee754) | ✅ Complete |
+
+**Management - Timing (2/2 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Timer** | [📖 API](/modules/global/api/g4timer) | ✅ Complete |
+| **G4SliceTimer** | [📖 API](/modules/global/api/g4slicetimer) | ✅ Complete |
+
+**Management - State Management (4 docs) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **State Management Overview** | [📖 API](/modules/global/api/state-management) | ✅ Complete |
+| **G4StateManager** | [📖 API](/modules/global/api/g4statemanager) | ✅ Complete |
+| **G4VStateDependent** | [📖 API](/modules/global/api/g4vstatedependent) | ✅ Complete |
+| **G4ApplicationState** | [📖 API](/modules/global/api/g4applicationstate) | ✅ Complete |
+
+**Management - Threading (14/14 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Threading** | [📖 API](/modules/global/api/G4Threading) | ✅ Complete |
+| **G4ThreadPool** | [📖 API](/modules/global/api/G4ThreadPool) | ✅ Complete |
+| **G4Task** | [📖 API](/modules/global/api/G4Task) | ✅ Complete |
+| **G4VTask** | [📖 API](/modules/global/api/G4VTask) | ✅ Complete |
+| **G4TaskManager** | [📖 API](/modules/global/api/G4TaskManager) | ✅ Complete |
+| **G4TaskGroup** | [📖 API](/modules/global/api/G4TaskGroup) | ✅ Complete |
+| **G4TBBTaskGroup** | [📖 API](/modules/global/api/G4TBBTaskGroup) | ✅ Complete |
+| **G4UserTaskQueue** | [📖 API](/modules/global/api/G4UserTaskQueue) | ✅ Complete |
+| **G4VUserTaskQueue** | [📖 API](/modules/global/api/G4VUserTaskQueue) | ✅ Complete |
+| **G4AutoLock** | [📖 API](/modules/global/api/G4AutoLock) | ✅ Complete |
+| **G4MTBarrier** | [📖 API](/modules/global/api/G4MTBarrier) | ✅ Complete |
+| **G4ThreadLocalSingleton** | [📖 API](/modules/global/api/G4ThreadLocalSingleton) | ✅ Complete |
+| **G4ThreadData** | [📖 API](/modules/global/api/G4ThreadData) | ✅ Complete |
+| **G4TWorkspacePool** | [📖 API](/modules/global/api/G4TWorkspacePool) | ✅ Complete |
+
+**Management - Memory (6/6 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4Allocator** | [📖 API](/modules/global/api/G4Allocator) | ✅ Complete |
+| **G4AllocatorPool** | [📖 API](/modules/global/api/G4AllocatorPool) | ✅ Complete |
+| **G4AllocatorList** | [📖 API](/modules/global/api/G4AllocatorList) | ✅ Complete |
+| **G4ReferenceCountedHandle** | [📖 API](/modules/global/api/G4ReferenceCountedHandle) | ✅ Complete |
+| **G4Cache** | [📖 API](/modules/global/api/G4Cache) | ✅ Complete |
+| **G4AutoDelete** | [📖 API](/modules/global/api/G4AutoDelete) | ✅ Complete |
+
+**Management - I/O and Output (10/10 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4coutDestination** | [📖 API](/modules/global/api/G4coutDestination) | ✅ Complete |
+| **G4FilecoutDestination** | [📖 API](/modules/global/api/G4FilecoutDestination) | ✅ Complete |
+| **G4MTcoutDestination** | [📖 API](/modules/global/api/G4MTcoutDestination) | ✅ Complete |
+| **G4MasterForwardcoutDestination** | [📖 API](/modules/global/api/G4MasterForwardcoutDestination) | ✅ Complete |
+| **G4BuffercoutDestination** | [📖 API](/modules/global/api/G4BuffercoutDestination) | ✅ Complete |
+| **G4MulticoutDestination** | [📖 API](/modules/global/api/G4MulticoutDestination) | ✅ Complete |
+| **G4LockcoutDestination** | [📖 API](/modules/global/api/G4LockcoutDestination) | ✅ Complete |
+| **G4coutFormatters** | [📖 API](/modules/global/api/G4coutFormatters) | ✅ Complete |
+| **G4ios** | [📖 API](/modules/global/api/G4ios) | ✅ Complete |
+| **G4String** | [📖 API](/modules/global/api/G4String) | ✅ Complete |
+
+**Management - Utilities (5/5 classes) - ✅ Complete**
+
+| Class | API Docs | Status |
+|-------|----------|--------|
+| **G4UnitsTable** | [📖 API](/modules/global/api/G4UnitsTable) | ✅ Complete |
+| **G4Tokenizer** | [📖 API](/modules/global/api/G4Tokenizer) | ✅ Complete |
+| **G4UserLimits** | [📖 API](/modules/global/api/G4UserLimits) | ✅ Complete |
+| **G4GeometryTolerance** | [📖 API](/modules/global/api/G4GeometryTolerance) | ✅ Complete |
+| **G4Evaluator** | [📖 API](/modules/global/api/G4Evaluator) | ✅ Complete |
 
 #### Pending Classes
 
 <details>
-<summary>Click to expand (40 classes)</summary>
+<summary>Click to expand (12 remaining classes)</summary>
 
-**Core Material Classes:**
-- G4MaterialPropertiesTable
-- G4MaterialPropertyVector
-- G4MaterialTable
-- G4NistManager
-- G4NistElementBuilder
-- G4NistMaterialBuilder
+**Platform-Specific Headers:**
+- windefs.hh - Windows platform definitions
+- tls.hh - Thread-local storage support
+- templates.hh - Template utilities
+
+**Advanced Features (Lower Priority):**
+- G4VNotifier - Observer pattern notifications
+- G4Backtrace - Stack trace debugging
+- G4FPEDetection - Floating-point exception detection
+- G4EnvironmentUtils - Environment variable utilities
+- G4Filesystem - Filesystem operations
+- G4ErrorPropagatorData - Error propagation data
+- G4FindDataDir - Data directory utilities
+- G4FastVector - Fast dynamic vector
+- G4CacheDetails - Cache implementation details
+
+</details>
+
+---
+
+### Materials Module
+
+**Location:** `source/materials/`
+**Documentation:** [Module Overview](/modules/materials/)
+**Progress:** 15/44 classes (34%)
+
+#### Documented Classes
+
+| Class | API Docs | Category | Status |
+|-------|----------|----------|--------|
+| **G4Isotope** | [📖 API](/modules/materials/api/g4isotope) | Core | ✅ Complete |
+| **G4Element** | [📖 API](/modules/materials/api/g4element) | Core | ✅ Complete |
+| **G4Material** | [📖 API](/modules/materials/api/g4material) | Core | ✅ Complete |
+| **G4IonisParamElm** | [📖 API](/modules/materials/api/g4ionisparamelm) | Ionisation | ✅ Complete |
+| **G4NistManager** | [📖 API](/modules/materials/api/g4nistmanager) | NIST Database | ✅ Complete |
+| **G4NistElementBuilder** | [📖 API](/modules/materials/api/g4nistelementbuilder) | NIST Database | ✅ Complete |
+| **G4NistMaterialBuilder** | [📖 API](/modules/materials/api/g4nistmaterialbuilder) | NIST Database | ✅ Complete |
+| **G4MaterialPropertiesTable** | [📖 API](/modules/materials/api/g4materialpropertiestable) | Properties | ✅ Complete |
+| **G4MaterialPropertyVector** | [📖 API](/modules/materials/api/g4materialpropertyvector) | Properties | ✅ Complete |
+| **G4MaterialPropertiesIndex** | [📖 API](/modules/materials/api/g4materialpropertiesindex) | Properties | ✅ Complete |
+| **G4MaterialTable** | [📖 API](/modules/materials/api/g4materialtable) | Tables | ✅ Complete |
+| **G4ElementTable** | [📖 API](/modules/materials/api/g4elementtable) | Tables | ✅ Complete |
+| **G4IsotopeTable** | [📖 API](/modules/materials/api/g4isotopetable) | Tables | ✅ Complete |
+| **G4ElementData** | [📖 API](/modules/materials/api/g4elementdata) | Data | ✅ Complete |
+| **G4AtomicShells** | [📖 API](/modules/materials/api/g4atomicshells) | Data | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (29 classes)</summary>
 
 **Extended Properties:**
 - G4ExtendedMaterial
-- G4MaterialPropertiesIndex
 - G4OpticalSurface
 - G4SurfaceProperty
 
-**Database Classes:**
-- G4AtomicShells
-- G4ElementData
-- G4ElementTable
-- G4IsotopeTable
+**Ionisation Parameters:**
+- G4IonisParamMat
+- G4SandiaTable
 
-**And 26 more...**
+**And 24 more...**
 
 </details>
 
@@ -86,44 +285,45 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 ### Event Module
 
 **Location:** `source/event/`
-**Documentation:** [Module Overview](/modules/event/) | [Visualization Diagram](/visualization#event-module-class-hierarchy)
-**Progress:** 4/36 classes (11%)
+**Documentation:** [Module Overview](/modules/event/)
+**Progress:** 19/36 classes (53%)
 
 #### Documented Classes
 
-| Class | API Docs | Lines | Status |
-|-------|----------|-------|--------|
-| **G4Event** | [📖 API](/modules/event/api/g4event) | 1,600 | ✅ Complete |
-| **G4PrimaryVertex** | [📖 API](/modules/event/api/g4primaryvertex) | 1,100 | ✅ Complete |
-| **G4PrimaryParticle** | [📖 API](/modules/event/api/g4primaryparticle) | 1,200 | ✅ Complete |
-| **G4EventManager** | [📖 API](/modules/event/api/g4eventmanager) | 900 | ✅ Complete |
+| Class | API Docs | Category | Status |
+|-------|----------|----------|--------|
+| **G4Event** | [📖 API](/modules/event/api/g4event) | Container | ✅ Complete |
+| **G4PrimaryVertex** | [📖 API](/modules/event/api/g4primaryvertex) | Container | ✅ Complete |
+| **G4PrimaryParticle** | [📖 API](/modules/event/api/g4primaryparticle) | Container | ✅ Complete |
+| **G4EventManager** | [📖 API](/modules/event/api/g4eventmanager) | Management | ✅ Complete |
+| **G4VPrimaryGenerator** | [📖 API](/modules/event/api/g4vprimarygenerator) | Primary Generation | ✅ Complete |
+| **G4ParticleGun** | [📖 API](/modules/event/api/g4particlegun) | Primary Generation | ✅ Complete |
+| **G4GeneralParticleSource** | [📖 API](/modules/event/api/g4generalparticlesource) | Primary Generation | ✅ Complete |
+| **G4SingleParticleSource** | [📖 API](/modules/event/api/g4singleparticlesource) | Primary Generation | ✅ Complete |
+| **G4HEPEvtInterface** | [📖 API](/modules/event/api/g4hepevtinterface) | Primary Generation | ✅ Complete |
+| **G4StackManager** | [📖 API](/modules/event/api/g4stackmanager) | Stacking | ✅ Complete |
+| **G4TrackStack** | [📖 API](/modules/event/api/g4trackstack) | Stacking | ✅ Complete |
+| **G4SmartTrackStack** | [📖 API](/modules/event/api/g4smarttrackstack) | Stacking | ✅ Complete |
+| **G4StackedTrack** | [📖 API](/modules/event/api/g4stackedtrack) | Stacking | ✅ Complete |
+| **G4UserStackingAction** | [📖 API](/modules/event/api/g4userstackingaction) | Stacking | ✅ Complete |
+| **G4ClassificationOfNewTrack** | [📖 API](/modules/event/api/g4classificationofnewtrack) | Stacking | ✅ Complete |
+| **G4SubEvent** | [📖 API](/modules/event/api/g4subevent) | Stacking | ✅ Complete |
+| **G4SubEventTrackStack** | [📖 API](/modules/event/api/g4subeventtrackstack) | Stacking | ✅ Complete |
+| **G4UserEventAction** | [📖 API](/modules/event/api/g4usereventaction) | User Actions | ✅ Complete |
 
 #### Pending Classes
 
 <details>
-<summary>Click to expand (32 classes)</summary>
+<summary>Click to expand (17 classes)</summary>
+
+**Trajectory:**
+- G4TrajectoryPoint
+- G4SmoothTrajectoryPoint
 
 **Primary Generation:**
-- G4VPrimaryGenerator
-- G4ParticleGun
-- G4GeneralParticleSource
-- G4SingleParticleSource
-- G4HEPEvtInterface
-- G4HEPEvtParticle
+- G4VPrimaryGeneratorMessenger
 
-**Stacking:**
-- G4StackManager
-- G4TrackStack
-- G4SmartTrackStack
-- G4StackedTrack
-- G4UserStackingAction
-- G4ClassificationOfNewTrack
-
-**Sub-Event Support:**
-- G4SubEvent
-- G4SubEventTrackStack
-
-**And 18 more...**
+**And 14 more...**
 
 </details>
 
@@ -132,39 +332,35 @@ Use the [Module Statistics](#module-statistics) table below to see overall progr
 ### Run Module
 
 **Location:** `source/run/`
-**Documentation:** [Module Overview](/modules/run/) | [Visualization Diagram](/visualization#run-module-class-hierarchy)
-**Progress:** 3/15+ classes (20%)
+**Documentation:** [Module Overview](/modules/run/)
+**Progress:** 11/15 classes (73%)
 
 #### Documented Classes
 
-| Class | API Docs | Lines | Status |
-|-------|----------|-------|--------|
-| **G4RunManager** | [📖 API](/modules/run/api/g4runmanager) | 1,772 | ✅ Complete |
-| **G4MTRunManager** | [📖 API](/modules/run/api/g4mtrunmanager) | 1,284 | ✅ Complete |
-| **G4Run** | [📖 API](/modules/run/api/g4run) | 776 | ✅ Complete |
+| Class | API Docs | Category | Status |
+|-------|----------|----------|--------|
+| **G4RunManager** | [📖 API](/modules/run/api/g4runmanager) | Run Managers | ✅ Complete |
+| **G4MTRunManager** | [📖 API](/modules/run/api/g4mtrunmanager) | Run Managers | ✅ Complete |
+| **G4TaskRunManager** | [📖 API](/modules/run/api/g4taskrunmanager) | Run Managers | ✅ Complete |
+| **G4WorkerRunManager** | [📖 API](/modules/run/api/g4workerrunmanager) | Run Managers | ✅ Complete |
+| **G4WorkerTaskRunManager** | [📖 API](/modules/run/api/g4workertaskrunmanager) | Run Managers | ✅ Complete |
+| **G4Run** | [📖 API](/modules/run/api/g4run) | Run Data | ✅ Complete |
+| **G4UserRunAction** | [📖 API](/modules/run/api/g4userrunaction) | User Actions | ✅ Complete |
+| **G4VUserActionInitialization** | [📖 API](/modules/run/api/g4vuseractioninitialization) | User Actions | ✅ Complete |
+| **G4VUserDetectorConstruction** | [📖 API](/modules/run/api/g4vuserdetectorconstruction) | User Actions | ✅ Complete |
+| **G4VUserPhysicsList** | [📖 API](/modules/run/api/g4vuserphysicslist) | User Actions | ✅ Complete |
+| **G4VUserPrimaryGeneratorAction** | [📖 API](/modules/run/api/g4vuserprimarygeneratoraction) | User Actions | ✅ Complete |
 
 #### Pending Classes
 
 <details>
-<summary>Click to expand (12+ classes)</summary>
+<summary>Click to expand (4 classes)</summary>
 
-**Run Managers:**
-- G4TaskRunManager
-- G4WorkerRunManager
-- G4WorkerTaskRunManager
-
-**User Actions:**
-- G4UserRunAction
-- G4VUserActionInitialization
-- G4VUserDetectorConstruction
-- G4VUserPhysicsList
-- G4VUserPrimaryGeneratorAction
-
-**Run Data:**
+**Run Management:**
 - G4RunManagerKernel
-- G4VUserPhysicsListMessenger
-
-**And more...**
+- G4RunMessenger
+- G4PhysicsListHelper
+- G4VModularPhysicsList
 
 </details>
 
@@ -238,43 +434,262 @@ Note: Individual particle classes (200+ particles) are documented in category pa
 ### Track Module
 
 **Location:** `source/track/`
-**Documentation:** 🔄 **Next up for documentation**
-**Progress:** 0/23 classes (0%)
+**Documentation:** [Module Overview](/modules/track/)
+**Progress:** 10/23 classes (43%)
 
-#### Key Classes to Document
+#### Documented Classes
 
-**Core Track Classes:**
-- G4Track - Main track container
-- G4Step - Step representation
-- G4StepPoint - Pre/post step point information
+| Class | API Docs | Category | Status |
+|-------|----------|----------|--------|
+| **G4Track** | [📖 API](/modules/track/api/g4track) | Core | ✅ Complete |
+| **G4Step** | [📖 API](/modules/track/api/g4step) | Core | ✅ Complete |
+| **G4StepPoint** | [📖 API](/modules/track/api/g4steppoint) | Core | ✅ Complete |
+| **G4VParticleChange** | [📖 API](/modules/track/api/g4vparticlechange) | Particle Changes | ✅ Complete |
+| **G4ParticleChange** | [📖 API](/modules/track/api/g4particlechange) | Particle Changes | ✅ Complete |
+| **G4ParticleChangeForDecay** | [📖 API](/modules/track/api/g4particlechangefordecay) | Particle Changes | ✅ Complete |
+| **G4ParticleChangeForGamma** | [📖 API](/modules/track/api/g4particlechangeforgamma) | Particle Changes | ✅ Complete |
+| **G4ParticleChangeForLoss** | [📖 API](/modules/track/api/g4particlechangeforloss) | Particle Changes | ✅ Complete |
+| **G4ParticleChangeForMSC** | [📖 API](/modules/track/api/g4particlechangeformsc) | Particle Changes | ✅ Complete |
+| **G4ParticleChangeForTransport** | [📖 API](/modules/track/api/g4particlechangefortransport) | Particle Changes | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (13 classes)</summary>
+
+**Track Information:**
+- G4VUserTrackInformation
+- G4VAuxiliaryTrackInformation
 
 **Enumerations:**
 - G4TrackStatus
 - G4StepStatus
 - G4SteppingControl
 
-**Particle Changes:**
-- G4VParticleChange
-- G4ParticleChange
-- G4ParticleChangeForDecay
-- G4ParticleChangeForGamma
-- G4ParticleChangeForLoss
-- G4ParticleChangeForTransport
+**And 8 more...**
 
-**User Extensions:**
-- G4VUserTrackInformation
-- G4VAuxiliaryTrackInformation
-
-**And 14 more...**
+</details>
 
 ---
 
 ### Tracking Module
 
 **Location:** `source/tracking/`
-**Progress:** 0/40+ classes (0%)
+**Documentation:** [Module Overview](/modules/tracking/)
+**Progress:** 8/40+ classes (20%)
 
-Planned for future documentation sprint.
+#### Documented Classes
+
+| Class | API Docs | Category | Status |
+|-------|----------|----------|--------|
+| **G4TrackingManager** | [📖 API](/modules/tracking/api/g4trackingmanager) | Management | ✅ Complete |
+| **G4SteppingManager** | [📖 API](/modules/tracking/api/g4steppingmanager) | Management | ✅ Complete |
+| **G4VTrajectory** | [📖 API](/modules/tracking/api/g4vtrajectory) | Trajectories | ✅ Complete |
+| **G4Trajectory** | [📖 API](/modules/tracking/api/g4trajectory) | Trajectories | ✅ Complete |
+| **G4TrajectoryContainer** | [📖 API](/modules/tracking/api/g4trajectorycontainer) | Trajectories | ✅ Complete |
+| **G4VSteppingVerbose** | [📖 API](/modules/tracking/api/g4vsteppingverbose) | Verbosity | ✅ Complete |
+| **G4UserSteppingAction** | [📖 API](/modules/tracking/api/g4usersteppingaction) | User Actions | ✅ Complete |
+| **G4UserTrackingAction** | [📖 API](/modules/tracking/api/g4usertrackingaction) | User Actions | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (32+ classes)</summary>
+
+**Trajectories:**
+- G4SmoothTrajectory
+- G4RichTrajectory
+- G4TrajectoryPoint
+- G4SmoothTrajectoryPoint
+- G4RichTrajectoryPoint
+
+**Stepping:**
+- G4SteppingVerbose
+- G4SteppingVerboseWithUnits
+
+**And 25+ more...**
+
+</details>
+
+---
+
+### Geometry Module
+
+**Location:** `source/geometry/`
+**Documentation:** [Module Overview](/modules/geometry/) | Visualization Diagrams (in progress)
+**Progress:** 13/308 classes (4%)
+
+#### Documented Classes
+
+| Class | API Docs | Lines | Status |
+|-------|----------|-------|--------|
+| **G4VSolid** | [📖 API](/modules/geometry/api/g4vsolid) | 1,012 | ✅ Complete |
+| **G4LogicalVolume** | [📖 API](/modules/geometry/api/g4logicalvolume) | 804 | ✅ Complete |
+| **G4VPhysicalVolume** | [📖 API](/modules/geometry/api/g4vphysicalvolume) | 660 | ✅ Complete |
+| **G4PVPlacement** | [📖 API](/modules/geometry/api/g4pvplacement) | 963 | ✅ Complete |
+| **G4Box** | [📖 API](/modules/geometry/api/g4box) | 1,267 | ✅ Complete |
+| **G4Tubs** | [📖 API](/modules/geometry/api/g4tubs) | 1,478 | ✅ Complete |
+| **G4Cons** | [📖 API](/modules/geometry/api/g4cons) | 1,088 | ✅ Complete |
+| **G4Sphere** | [📖 API](/modules/geometry/api/g4sphere) | 1,136 | ✅ Complete |
+| **G4UnionSolid** | [📖 API](/modules/geometry/api/g4unionsolid) | 938 | ✅ Complete |
+| **G4SubtractionSolid** | [📖 API](/modules/geometry/api/g4subtractionsolid) | 993 | ✅ Complete |
+| **G4IntersectionSolid** | [📖 API](/modules/geometry/api/g4intersectionsolid) | 936 | ✅ Complete |
+| **G4Navigator** | [📖 API](/modules/geometry/api/g4navigator) | 1,016 | ✅ Complete |
+| **G4Region** | [📖 API](/modules/geometry/api/g4region) | 826 | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (300 classes)</summary>
+
+**Core Management (41 remaining):**
+- G4Region
+- G4GeometryManager
+- G4VPVParameterisation
+- G4AffineTransform
+- G4ScaleTransform
+- G4TouchableHistory, G4TouchableHandle, G4VTouchable
+- G4SmartVoxelHeader, G4SmartVoxelNode
+- G4NavigationHistory, G4NavigationLevel
+- G4GeomTools, G4VoxelLimits, G4BoundingEnvelope
+- And 28 more...
+
+**Navigation (31 classes):**
+- G4Navigator
+- G4TransportationManager
+- G4MultiNavigator
+- G4PropagatorInField
+- G4SafetyHelper
+- G4PathFinder
+- And 25 more...
+
+**CSG Solids (13 remaining):**
+- G4Orb, G4Torus, G4Trap, G4Trd, G4Para
+- G4CutTubs
+- And 7 more...
+
+**Boolean Solids (8 classes):**
+- G4UnionSolid
+- G4SubtractionSolid
+- G4IntersectionSolid
+- G4MultiUnion
+- G4DisplacedSolid, G4ScaledSolid
+- And 2 more...
+
+**Specific Solids (56 classes):**
+- G4Polycone, G4Polyhedra
+- G4TessellatedSolid
+- G4Tet, G4Ellipsoid, G4Paraboloid, G4Hype
+- G4ExtrudedSolid, G4GenericTrap
+- Twisted solids (8 classes)
+- And 40 more...
+
+**Magnetic Field (103 classes):**
+- G4MagneticField, G4ElectricField
+- G4UniformMagField
+- G4FieldManager
+- G4ChordFinder
+- Integration steppers (40+ classes)
+- And 60 more...
+
+**Volumes (4 remaining):**
+- G4PVReplica
+- G4PVParameterised
+- G4AssemblyVolume
+- And 1 more...
+
+**Divisions (11 classes):**
+- G4VDivisionParameterisation
+- G4PVDivision
+- Shape-specific divisions (9 classes)
+
+**Biasing (17 classes):**
+- G4GeometryCell
+- G4IStore
+- G4WeightWindowStore
+- And 14 more...
+
+</details>
+
+---
+
+### Processes Module
+
+**Location:** `source/processes/`
+**Documentation:** [Module Overview](/modules/processes/)
+**Progress:** 100+/1,939 classes (5%)
+
+#### Documented Sub-Modules
+
+| Sub-Module | Classes | Documented | Status |
+|------------|---------|------------|--------|
+| **Management** | 22 | 22 | ✅ Complete |
+| **Transportation** | 10 | 10 | ✅ Complete |
+| **Cuts** | 11 | 11 | ✅ Complete |
+| **Decay** | 6 | 6 | ✅ Complete |
+| **Optical** | 10 | 10 | ✅ Complete |
+| **Parameterisation** | 12 | 12 | ✅ Complete |
+| **Scoring** | 4 | 4 | ✅ Complete |
+| **Biasing** | ~40 | 4+ | 🟢 Partial |
+| **SolidState** | ~15 | 14+ | ✅ Complete |
+| **Electromagnetic** | 375 | Overview | 🟢 Overview |
+| **Hadronic** | 166 | Overview | 🟢 Overview |
+
+#### Key Documented Classes
+
+**Management:**
+- [G4VProcess](../modules/processes/management/api/g4vprocess.md) - Base class for all processes
+- [G4ProcessManager](../modules/processes/management/api/g4processmanager.md) - Process manager per particle
+- [G4ProcessTable](../modules/processes/management/api/g4processtable.md) - Global process registry
+- [Process Type Base Classes](../modules/processes/management/api/process-type-base-classes.md) - Complete guide
+
+**Transportation:**
+- G4Transportation - Main transportation process
+- G4CoupledTransportation - Field tracking
+- G4StepLimiter, G4UserSpecialCuts, G4NeutronKiller
+
+**Cuts:**
+- G4ProductionCuts, G4ProductionCutsTable
+- G4MaterialCutsCouple
+- Range-to-energy converters (e-, e+, gamma, proton)
+
+**Decay:**
+- G4Decay, G4DecayWithSpin
+- G4VExtDecayer - External decay interface
+
+**Optical:**
+- G4OpBoundaryProcess - Reflection, refraction, TIR
+- G4OpAbsorption, G4OpRayleigh, G4OpMieHG
+- G4OpWLS, G4OpWLS2 - Wavelength shifting
+
+**Parameterisation:**
+- G4VFastSimulationModel, managers
+- Fast simulation framework (10-1000x speedup)
+
+**Scoring:**
+- G4ParallelWorldProcess - Non-invasive scoring
+- G4ScoreSplittingProcess - Voxel scoring
+
+**Biasing:**
+- G4VBiasingOperator - Variance reduction
+- G4BOptrForceCollision, G4BOptnChangeCrossSection
+- G4GeometrySampler - Importance sampling
+
+**SolidState:**
+- G4Channeling - Crystal channeling
+- Phonon processes (downconversion, scattering)
+
+#### Documentation Statistics
+
+| Metric | Count |
+|--------|-------|
+| **Total Header Files** | 1,939 |
+| **Sub-Modules Documented** | 11/11 |
+| **Overview Pages** | 12 |
+| **API Documentation Files** | 90+ |
+| **Total Documentation Lines** | ~80,000 |
+| **Code Examples** | 150+ |
+| **Mermaid Diagrams** | 30+ |
 
 ---
 
@@ -315,47 +730,49 @@ Each documented module includes:
 
 | Metric | Count |
 |--------|-------|
-| **Modules Documented** | 4 / 23+ |
-| **Classes Documented** | 24 / 400+ |
-| **Total Documentation Lines** | ~35,000 |
-| **API Reference Pages** | 17 |
-| **Module Overview Pages** | 4 |
+| **Modules Documented** | 9 / 23+ |
+| **Classes Documented** | 197+ / 400+ |
+| **Total Documentation Lines** | ~171,000 |
+| **API Reference Pages** | 185+ |
+| **Module Overview Pages** | 20 |
 | **Category Pages** | 5 |
-| **Interactive Diagrams** | 8 |
-| **Generated HTML Pages** | 25 |
+| **Interactive Diagrams** | 65+ |
+| **Code Examples** | 550+ |
 
 ### Recent Additions
 
-- **2025-11-17**: Particles Module - 6 API classes + 5 category pages, ~15,000 lines
-- **2025-11-16**: Event Module - 4 classes, 8,500 lines
-- **2025-11-16**: Run Module - 3 classes, 7,300 lines
-- **2025-11-16**: Materials Module - 4 classes, 5,950 lines
+- **2025-11-17**: Particles Module - 13 classes (6 API + 5 category pages + 2 overview pages), ~15,000 lines
+- **2025-11-17**: Processes Module - 100+ classes, 80,000 lines (ALL 11 sub-modules)
+- **2025-11-17**: Global Module - 8 classes, 6,600 lines
+- **2025-11-17**: Tracking Module - 8 classes (inc. overview), 6,200 lines
+- **2025-11-17**: Run Module - 8 classes, 8,600 lines
+- **2025-11-17**: Event Module - 15 classes, 9,800 lines
+- **2025-11-17**: Materials Module - 11 classes, 6,900 lines
+- **2025-11-17**: Track Module - 10 classes, 11,400 lines
+- **2025-11-17**: Geometry Module - 13 classes, 15,000+ lines
 
 ## Priority Roadmap
 
-### High Priority (Foundation Modules)
+### ✅ Completed (Foundation Modules)
 
-These modules are fundamental to Geant4 and should be documented first:
+1. ✅ **Global** - Foundational utilities (97/109 done, 89%)
+2. ✅ **Materials** - Material definitions (15/44 done, 34%)
+3. ✅ **Event** - Event generation (19/36 done, 53%)
+4. ✅ **Run** - Simulation control (11/15 done, 73%)
+5. ✅ **Track** - Track container (10/23 done, 43%)
+6. ✅ **Tracking** - Track processing (8/40+ done, 20%)
+7. ✅ **Particles** - Particle definitions (13/252 done, 5%)
 
-1. ✅ **Materials** - Material definitions (4/44 done)
-2. ✅ **Event** - Event generation (4/36 done)
-3. ✅ **Run** - Simulation control (3/15 done)
-4. 🔄 **Track** - Track container (next)
-5. ⏳ **Tracking** - Track processing
-6. ⏳ **Particles** - Particle definitions
-7. ⏳ **Global** - Utilities and types
+### 🔄 In Progress
 
-### Medium Priority (Core Physics)
+8. 🟢 **Geometry** - Detector modeling (13/308 done, 4%)
+9. ✅ **Processes** - Physics processes (100+/1,939 done, 5%)
 
-Essential for physics simulation:
+### 🔄 Next Priority
 
-8. ⏳ **Processes** - Physics processes
-9. ⏳ **Geometry** - Detector modeling
-10. ⏳ **Digits & Hits** - Detector response
+10. 🔄 **Digits & Hits** - Detector response
 
-### Lower Priority (Advanced Features)
-
-Important but can come later:
+### ⏳ Planned (Lower Priority)
 
 11. ⏳ **Analysis** - Data analysis tools
 12. ⏳ **Persistency** - Data storage
@@ -371,7 +788,7 @@ Important but can come later:
 3. **Create module overview** at `docs/modules/<module>/index.md`
 4. **Document key classes** in `docs/modules/<module>/api/`
 5. **Update navigation** in `docs/.vitepress/config.js`
-6. **Add diagrams** to `docs/visualization.md`
+6. **Add diagrams** to module overview
 7. **Update this page** with progress
 8. **Build and test** with `npm run docs:build`
 9. **Commit and push** changes
@@ -379,8 +796,9 @@ Important but can come later:
 ### Documentation Templates
 
 Templates and style guides available:
-- [Materials Module](modules/materials/) - Example overview structure
-- [G4Material API](modules/materials/api/g4material) - Example API doc structure
+- [Global Module](modules/global/) - Foundation module example
+- [Track Module](modules/track/) - Complete module example
+- [G4Track API](modules/track/api/g4track) - Comprehensive API doc example
 - [Auto API Docs Plan](auto-api-docs-plan.md) - Future automation plans
 
 ## Related Resources
@@ -394,5 +812,109 @@ Templates and style guides available:
 
 ::: info Last Updated
 **Date:** 2025-11-17
-**Next Update:** After Track module documentation
+**Next Update:** After completing remaining classes in current modules
+**Recently Completed:** Particles module (13/252 classes)
+**Parallel Effort:** Geometry and Digits+Hits modules being documented by another instance
 :::
+
+---
+
+### Geometry Module
+
+**Location:** `source/geometry/`
+**Documentation:** [Module Overview](/modules/geometry/) | Visualization Diagrams (in progress)
+**Progress:** 13/308 classes (4%)
+
+#### Documented Classes
+
+| Class | API Docs | Lines | Status |
+|-------|----------|-------|--------|
+| **G4VSolid** | [📖 API](/modules/geometry/api/g4vsolid) | 1,012 | ✅ Complete |
+| **G4LogicalVolume** | [📖 API](/modules/geometry/api/g4logicalvolume) | 804 | ✅ Complete |
+| **G4VPhysicalVolume** | [📖 API](/modules/geometry/api/g4vphysicalvolume) | 660 | ✅ Complete |
+| **G4PVPlacement** | [📖 API](/modules/geometry/api/g4pvplacement) | 963 | ✅ Complete |
+| **G4Box** | [📖 API](/modules/geometry/api/g4box) | 1,267 | ✅ Complete |
+| **G4Tubs** | [📖 API](/modules/geometry/api/g4tubs) | 1,478 | ✅ Complete |
+| **G4Cons** | [📖 API](/modules/geometry/api/g4cons) | 1,088 | ✅ Complete |
+| **G4Sphere** | [📖 API](/modules/geometry/api/g4sphere) | 1,136 | ✅ Complete |
+| **G4UnionSolid** | [📖 API](/modules/geometry/api/g4unionsolid) | 938 | ✅ Complete |
+| **G4SubtractionSolid** | [📖 API](/modules/geometry/api/g4subtractionsolid) | 993 | ✅ Complete |
+| **G4IntersectionSolid** | [📖 API](/modules/geometry/api/g4intersectionsolid) | 936 | ✅ Complete |
+| **G4Navigator** | [📖 API](/modules/geometry/api/g4navigator) | 1,016 | ✅ Complete |
+| **G4Region** | [📖 API](/modules/geometry/api/g4region) | 826 | ✅ Complete |
+
+#### Pending Classes
+
+<details>
+<summary>Click to expand (300 classes)</summary>
+
+**Core Management (41 remaining):**
+- G4Region
+- G4GeometryManager
+- G4VPVParameterisation
+- G4AffineTransform
+- G4ScaleTransform
+- G4TouchableHistory, G4TouchableHandle, G4VTouchable
+- G4SmartVoxelHeader, G4SmartVoxelNode
+- G4NavigationHistory, G4NavigationLevel
+- G4GeomTools, G4VoxelLimits, G4BoundingEnvelope
+- And 28 more...
+
+**Navigation (31 classes):**
+- G4Navigator
+- G4TransportationManager
+- G4MultiNavigator
+- G4PropagatorInField
+- G4SafetyHelper
+- G4PathFinder
+- And 25 more...
+
+**CSG Solids (13 remaining):**
+- G4Orb, G4Torus, G4Trap, G4Trd, G4Para
+- G4CutTubs
+- And 7 more...
+
+**Boolean Solids (8 classes):**
+- G4UnionSolid
+- G4SubtractionSolid
+- G4IntersectionSolid
+- G4MultiUnion
+- G4DisplacedSolid, G4ScaledSolid
+- And 2 more...
+
+**Specific Solids (56 classes):**
+- G4Polycone, G4Polyhedra
+- G4TessellatedSolid
+- G4Tet, G4Ellipsoid, G4Paraboloid, G4Hype
+- G4ExtrudedSolid, G4GenericTrap
+- Twisted solids (8 classes)
+- And 40 more...
+
+**Magnetic Field (103 classes):**
+- G4MagneticField, G4ElectricField
+- G4UniformMagField
+- G4FieldManager
+- G4ChordFinder
+- Integration steppers (40+ classes)
+- And 60 more...
+
+**Volumes (4 remaining):**
+- G4PVReplica
+- G4PVParameterised
+- G4AssemblyVolume
+- And 1 more...
+
+**Divisions (11 classes):**
+- G4VDivisionParameterisation
+- G4PVDivision
+- Shape-specific divisions (9 classes)
+
+**Biasing (17 classes):**
+- G4GeometryCell
+- G4IStore
+- G4WeightWindowStore
+- And 14 more...
+
+</details>
+
+---
