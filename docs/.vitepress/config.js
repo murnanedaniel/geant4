@@ -114,6 +114,86 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Global Module',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/modules/global/' },
+          {
+            text: 'Types & Constants',
+            collapsed: true,
+            items: [
+              { text: 'G4Types', link: '/modules/global/api/g4types' },
+              { text: 'G4SystemOfUnits', link: '/modules/global/api/g4systemofunits' },
+              { text: 'G4PhysicalConstants', link: '/modules/global/api/g4physicalconstants' },
+              { text: 'globals.hh', link: '/modules/global/api/globals' },
+              { text: 'G4Version', link: '/modules/global/api/g4version' }
+            ]
+          },
+          {
+            text: 'Vectors & Geometry',
+            collapsed: true,
+            items: [
+              { text: 'G4ThreeVector', link: '/modules/global/api/g4threevector' },
+              { text: 'G4TwoVector', link: '/modules/global/api/g4twovector' },
+              { text: 'G4RotationMatrix', link: '/modules/global/api/g4rotationmatrix' },
+              { text: 'G4Transform3D', link: '/modules/global/api/g4transform3d' },
+              { text: 'G4LorentzVector', link: '/modules/global/api/g4lorentzvector' },
+              { text: 'Geometry Defs', link: '/modules/global/api/geomdefs' }
+            ]
+          },
+          {
+            text: 'Physics Data',
+            collapsed: true,
+            items: [
+              { text: 'G4PhysicsVector', link: '/modules/global/api/g4physicsvector' },
+              { text: 'G4PhysicsTable', link: '/modules/global/api/g4physicstable' },
+              { text: 'G4PhysicsLogVector', link: '/modules/global/api/g4physicslogvector' },
+              { text: 'G4PhysicsFreeVector', link: '/modules/global/api/g4physicsfreevector' }
+            ]
+          },
+          {
+            text: 'Random Numbers',
+            collapsed: true,
+            items: [
+              { text: 'Randomize', link: '/modules/global/api/randomize' },
+              { text: 'G4RandomDirection', link: '/modules/global/api/g4randomdirection' },
+              { text: 'G4Poisson', link: '/modules/global/api/g4poisson' },
+              { text: 'G4UniformRandPool', link: '/modules/global/api/g4uniformrandpool' }
+            ]
+          },
+          {
+            text: 'Threading',
+            collapsed: true,
+            items: [
+              { text: 'G4Threading', link: '/modules/global/api/G4Threading' },
+              { text: 'G4AutoLock', link: '/modules/global/api/G4AutoLock' },
+              { text: 'G4ThreadPool', link: '/modules/global/api/G4ThreadPool' },
+              { text: 'G4Task', link: '/modules/global/api/G4Task' }
+            ]
+          },
+          {
+            text: 'Memory Management',
+            collapsed: true,
+            items: [
+              { text: 'G4Allocator', link: '/modules/global/api/G4Allocator' },
+              { text: 'G4Cache', link: '/modules/global/api/G4Cache' },
+              { text: 'G4ReferenceCountedHandle', link: '/modules/global/api/G4ReferenceCountedHandle' }
+            ]
+          },
+          {
+            text: 'Utilities',
+            collapsed: true,
+            items: [
+              { text: 'G4Exception', link: '/modules/global/api/g4exception' },
+              { text: 'G4Timer', link: '/modules/global/api/g4timer' },
+              { text: 'G4UnitsTable', link: '/modules/global/api/G4UnitsTable' },
+              { text: 'G4Pow', link: '/modules/global/api/g4pow' },
+              { text: 'G4StateManager', link: '/modules/global/api/g4statemanager' }
+            ]
+          }
+        ]
+      },
+      {
         text: 'Materials Module',
         collapsed: true,
         items: [
