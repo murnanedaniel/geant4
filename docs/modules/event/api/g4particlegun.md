@@ -700,7 +700,7 @@ Each thread's particle gun is completely independent, ensuring thread safety wit
 
 - [G4VPrimaryGenerator](g4vprimarygenerator.md) - Base class interface
 - [G4GeneralParticleSource](g4generalparticlesource.md) - Advanced particle source with distributions
-- [G4VUserPrimaryGeneratorAction](../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
+- [G4VUserPrimaryGeneratorAction](../../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
 - [G4Event](g4event.md) - Event container
 - [G4PrimaryVertex](g4primaryvertex.md) - Primary vertex class
 - [G4PrimaryParticle](g4primaryparticle.md) - Primary particle class

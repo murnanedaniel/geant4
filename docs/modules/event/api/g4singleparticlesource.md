@@ -687,7 +687,7 @@ Controls energy/momentum distribution:
 - [G4GeneralParticleSource](g4generalparticlesource.md) - GPS manager (uses this class)
 - [G4ParticleGun](g4particlegun.md) - Simple alternative
 - [G4VPrimaryGenerator](g4vprimarygenerator.md) - Base class
-- [G4VUserPrimaryGeneratorAction](../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
+- [G4VUserPrimaryGeneratorAction](../../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
 - [Event Module Overview](../index.md) - Complete module documentation
 
 ---

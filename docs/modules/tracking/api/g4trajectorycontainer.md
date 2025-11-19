@@ -792,9 +792,9 @@ if (container) {
 - G4TrajectoryPoint - Position storage
 
 ### Event
-- [G4Event](../event/api/g4event.md) - Owns trajectory container
-- [G4EventManager](../event/api/g4eventmanager.md) - Event processing
-- [G4UserEventAction](../event/api/g4usereventaction.md) - Access in user code
+- [G4Event](../../event/api/g4event.md) - Owns trajectory container
+- [G4EventManager](../../event/api/g4eventmanager.md) - Event processing
+- [G4UserEventAction](../../event/api/g4usereventaction.md) - Access in user code
 
 ### Tracking
 - [G4TrackingManager](g4trackingmanager.md) - Creates trajectories
@@ -803,7 +803,7 @@ if (container) {
 ## See Also
 
 - [Tracking Module Overview](../overview.md)
-- [Event Module](../../event/overview.md)
+- [Event Module](../../../event/overview.md)
 - [Visualization](../../visualization/overview.md)
 
 ---

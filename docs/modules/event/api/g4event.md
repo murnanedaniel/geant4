@@ -742,7 +742,7 @@ Sub-event methods are mutex-protected:
 - [G4PrimaryParticle](g4primaryparticle.md) - Primary particle class
 - [G4EventManager](g4eventmanager.md) - Event processing manager
 - [Event Module Overview](../index.md) - Complete module documentation
-- [Run Module](../../run/index.md) - Event management in runs
+- [Run Module](../../../run/index.md) - Event management in runs
 
 ---
 

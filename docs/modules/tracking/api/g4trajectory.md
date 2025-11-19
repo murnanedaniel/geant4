@@ -893,17 +893,17 @@ void EndOfEventAction(const G4Event* event) {
 ### Tracking
 - [G4TrackingManager](g4trackingmanager.md) - Creates/manages trajectories
 - [G4UserTrackingAction](g4usertrackingaction.md) - Access in user code
-- [G4Track](../track/api/g4track.md) - Source of trajectory data
+- [G4Track](../../../track/api/g4track.md) - Source of trajectory data
 
 ### Event
-- [G4Event](../event/api/g4event.md) - Stores trajectory container
-- [G4EventManager](../event/api/g4eventmanager.md) - Event processing
+- [G4Event](../../event/api/g4event.md) - Stores trajectory container
+- [G4EventManager](../../event/api/g4eventmanager.md) - Event processing
 
 ## See Also
 
 - [Tracking Module Overview](../overview.md)
 - [Visualization](../../visualization/overview.md)
-- [User Actions](../../run/overview.md#user-actions)
+- [User Actions](../../../run/overview.md#user-actions)
 
 ---
 

@@ -1102,7 +1102,6 @@ for (G4int i = 0; i < nBands; i++) {
 ## See Also
 
 - [G4VSolid](g4vsolid.md) - Base class for all solids
-- [G4CSGSolid](g4cssolid.md) - Base class for CSG primitives
 - [G4Box](g4box.md) - Rectangular box (simplest solid)
 - [G4Tubs](g4tubs.md) - Cylindrical solid
 - [G4Cons](g4cons.md) - Conical section

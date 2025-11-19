@@ -1446,11 +1446,9 @@ G4LogicalVolume* tubeLV = new G4LogicalVolume(fullTube, material, "Detector");
 ## See Also
 
 - [G4VSolid](g4vsolid.md) - Base class for all solids
-- [G4CSGSolid](g4cssolid.md) - Base class for CSG primitives
 - [G4Box](g4box.md) - Rectangular box (simpler, faster)
 - [G4Cons](g4cons.md) - Conical section (tapered tube)
 - [G4Sphere](g4sphere.md) - Spherical shell
-- [G4Polycone](g4polycone.md) - Complex shape with varying radius vs Z
 - [Geometry Module Overview](../index.md) - Complete module documentation
 
 ## References

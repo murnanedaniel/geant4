@@ -880,9 +880,9 @@ void MySteppingVerbose::AlongStepDoItAllDone()
 - G4SteppingVerbose - Default implementation
 
 ### Track and Step
-- [G4Track](../track/api/g4track.md) - Track information
-- [G4Step](../track/api/g4step.md) - Step information
-- [G4StepPoint](../track/api/g4steppoint.md) - Step points
+- [G4Track](../../track/api/g4track.md) - Track information
+- [G4Step](../../track/api/g4step.md) - Step information
+- [G4StepPoint](../../track/api/g4steppoint.md) - Step points
 
 ### User Actions
 - [G4UserSteppingAction](g4usersteppingaction.md) - Alternative step hooks

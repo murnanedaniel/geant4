@@ -717,12 +717,12 @@ void MySteppingAction::UserSteppingAction(const G4Step* step)
 
 ## See Also
 
-- [G4Step](../track/api/g4step.md) - Step data container
-- [G4Track](../track/api/g4track.md) - Track information
-- [G4StepPoint](../track/api/g4steppoint.md) - Step point data
+- [G4Step](../../track/api/g4step.md) - Step data container
+- [G4Track](../../track/api/g4track.md) - Track information
+- [G4StepPoint](../../track/api/g4steppoint.md) - Step point data
 - [G4UserTrackingAction](g4usertrackingaction.md) - Track-level actions
-- [G4UserEventAction](../event/api/g4usereventaction.md) - Event-level actions
-- [G4VUserActionInitialization](../run/api/g4vuseractioninitialization.md) - Action registration
+- [G4UserEventAction](../../event/api/g4usereventaction.md) - Event-level actions
+- [G4VUserActionInitialization](../../run/api/g4vuseractioninitialization.md) - Action registration
 
 ---
 

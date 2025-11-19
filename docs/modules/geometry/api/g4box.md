@@ -1237,7 +1237,6 @@ G4double distToSurface = std::max({
 ## See Also
 
 - [G4VSolid](g4vsolid.md) - Base class for all solids
-- [G4CSGSolid](g4csgsol id.md) - Base class for CSG primitives
 - [G4LogicalVolume](g4logicalvolume.md) - Associates solid with material
 - [G4PVPlacement](g4pvplacement.md) - Places solid in geometry
 - [G4Tubs](g4tubs.md) - Cylindrical solid

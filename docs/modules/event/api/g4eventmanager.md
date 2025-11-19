@@ -733,7 +733,7 @@ Sub-event methods (`PopSubEvent`, `TerminateSubEvent`) include additional mutex 
 - [G4PrimaryVertex](g4primaryvertex.md) - Primary vertex class
 - [G4PrimaryParticle](g4primaryparticle.md) - Primary particle class
 - [Event Module Overview](../index.md) - Complete module documentation
-- [Run Module](../../run/index.md) - Run management
+- [Run Module](../../../run/index.md) - Run management
 
 ---
 

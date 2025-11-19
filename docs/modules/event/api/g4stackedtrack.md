@@ -443,7 +443,7 @@ delete stacked1.GetTrack();  // Now stacked2 has dangling pointer!
 ## See Also
 
 - [G4Track](../../track/api/g4track.md) - Track class wrapped by G4StackedTrack
-- [G4VTrajectory](../../tracking/api/g4vtrajectory.md) - Trajectory base class
+- [G4VTrajectory](../../../tracking/api/g4vtrajectory.md) - Trajectory base class
 - [G4TrackStack](g4trackstack.md) - LIFO stack storing G4StackedTrack
 - [G4StackManager](g4stackmanager.md) - Manager class using G4StackedTrack
 - [Event Module Overview](../index.md) - Complete module documentation

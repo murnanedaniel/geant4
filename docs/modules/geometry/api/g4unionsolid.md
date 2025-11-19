@@ -913,7 +913,6 @@ for (auto& solid : solids) {
 
 ## See Also
 
-- [G4BooleanSolid](g4booleansolid.md) - Base class for Boolean operations
 - [G4SubtractionSolid](g4subtractionsolid.md) - Subtraction (A - B)
 - [G4IntersectionSolid](g4intersectionsolid.md) - Intersection (A ∩ B)
 - [G4VSolid](g4vsolid.md) - Base class for all solids
