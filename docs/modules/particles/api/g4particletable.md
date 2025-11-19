@@ -83,7 +83,7 @@ G4ParticleDefinition* FindParticle(G4int aPDGEncoding);
 ```
 
 **Parameters:**
-- `aPDGEncoding`: PDG particle code (e.g., 11 for electron, 2212 for proton)
+- `aPDGEncoding`: PDG particle code (e.g., 11 for electron, 2212 for proton) [📖](https://pdg.lbl.gov/2019/reviews/rpp2019-rev-monte-carlo-numbering.pdf)
 
 **Returns:**
 - Pointer to particle definition if found
@@ -1418,7 +1418,8 @@ void MyPhysicsList::ConstructParticle()  // Master thread
 ### User Guides
 
 - [Geant4 User Guide - Particle Definition](https://geant4.web.cern.ch/docs/) - Official documentation
-- [Particle Data Group (PDG)](https://pdg.lbl.gov/) - PDG particle codes and properties
+- [Particle Data Group (PDG)](https://pdg.lbl.gov/) [📄](https://pdg.lbl.gov/2019/reviews/rpp2019-rev-monte-carlo-numbering.pdf) - PDG particle codes and Monte Carlo numbering scheme
+- [PDG Monte Carlo Particle Numbering Scheme](https://pdg.lbl.gov/2019/reviews/rpp2019-rev-monte-carlo-numbering.pdf) - Official reference for particle encoding
 
 ---
 

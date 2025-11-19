@@ -30,7 +30,7 @@ enum G4State {
 
 Defines the physical state of the material.
 
-**Location**: G4Material.hh:106-112
+**Location**: G4Material.hh:106-112 [💻](https://github.com/Geant4/geant4/blob/master/source/materials/include/G4Material.hh#L106-L112)
 
 **Note**: The vacuum state was removed in version 28-05-98; vacuum is now treated as a gas with very low density.
 
@@ -44,9 +44,9 @@ static const G4double NTP_Temperature = 293.15 * CLHEP::kelvin;
 
 Normal Temperature and Pressure (NTP) temperature constant.
 
-**Value**: 293.15 K (20°C)
+**Value**: 293.15 K (20°C) [📖](https://www.engineeringtoolbox.com/stp-standard-ntp-normal-air-d_772.html)
 
-**Location**: G4Material.hh:114
+**Location**: G4Material.hh:114 [💻](https://github.com/Geant4/geant4/blob/master/source/materials/include/G4Material.hh#L114)
 
 ## Type Definitions
 

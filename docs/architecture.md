@@ -103,9 +103,9 @@ Geant4 is used in:
 
 For detailed information on Geant4's architecture and physics models, see:
 
-1. Nuclear Instruments and Methods in Physics Research A 835 (2016) 186-225
-2. IEEE Transactions on Nuclear Science 53 No. 1 (2006) 270-278
-3. Nuclear Instruments and Methods in Physics Research A 506 (2003) 250-303
+1. J. Allison et al., "Recent developments in Geant4", Nuclear Instruments and Methods in Physics Research A 835 (2016) 186-225 [📄](https://doi.org/10.1016/j.nima.2016.06.125) [PDF](https://cds.cern.ch/record/2261116/files/10.1016_j.nima.2016.06.125.pdf)
+2. J. Allison et al., "Geant4 developments and applications", IEEE Transactions on Nuclear Science 53 No. 1 (2006) 270-278 [📄](https://doi.org/10.1109/TNS.2006.869826)
+3. S. Agostinelli et al., "Geant4 - a simulation toolkit", Nuclear Instruments and Methods in Physics Research A 506 (2003) 250-303 [📄](https://doi.org/10.1016/S0168-9002(03)01368-8)
 
 ## Further Reading
 
