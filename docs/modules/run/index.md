@@ -340,7 +340,7 @@ The run module is a core component and is always built. Threading support depend
 
 ## External References
 
-- [Geant4 User Guide: Getting Started](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/index.html)
-- [Geant4 Multi-threading Guide](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/multithreading.html)
-- [PTL (Parallel Tasking Library)](https://github.com/jrmadsen/PTL)
-- [Intel TBB Documentation](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onetbb.html)
+- [Geant4 User Guide: Getting Started](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/index.html) [📖](https://geant4.web.cern.ch/docs/) - Official getting started guide
+- [Geant4 Multi-threading Guide](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/multithreading.html) [📖](https://geant4.web.cern.ch/docs/) - Official multi-threading documentation
+- [PTL (Parallel Tasking Library)](https://github.com/jrmadsen/PTL) [🔗](https://github.com/jrmadsen/PTL) - Task-based parallelism library used by G4TaskRunManager
+- [Intel TBB Documentation](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onetbb.html) [🔗](https://spec.oneapi.io/versions/latest/elements/oneTBB/source/nested-index.html) - Threading Building Blocks for advanced parallelism

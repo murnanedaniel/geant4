@@ -399,13 +399,13 @@ The materials system has evolved significantly:
 ## References
 
 ### Official Documentation
-- [Geant4 User's Guide for Application Developers: Materials](http://cern.ch/geant4-userdoc)
-- [Geant4 Physics Reference Manual: Materials and Processes](http://cern.ch/geant4/support/user_documentation)
+- [Geant4 User's Guide for Application Developers: Materials](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/) [📖](https://geant4.web.cern.ch/docs/)
+- [Geant4 Physics Reference Manual](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsReferenceManual/html/) [📖](https://geant4.web.cern.ch/docs/)
 
 ### External Databases
-- [NIST Atomic Weights and Isotopic Compositions](https://physics.nist.gov/PhysRefData/Compositions/)
-- [ICRU Report 37](https://icru.org/) - Stopping Powers for Electrons and Positrons
-- [ICRU Report 90](https://icru.org/) - Key Data for Ionizing-Radiation Dosimetry
+- [NIST Atomic Weights and Isotopic Compositions](https://www.nist.gov/pml/atomic-weights-and-isotopic-compositions-relative-atomic-masses) [🔗](https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl) - Official NIST database for atomic weights and isotope abundances
+- [ICRU Report 37](https://www.icru.org/report/stopping-powers-for-electrons-and-positrons-report-37/) - Stopping Powers for Electrons and Positrons
+- [ICRU Report 90](https://www.icru.org/report/key-data-for-ionizing-radiation-dosimetry-measurement-standards-and-applications-report-90/) - Key Data for Ionizing-Radiation Dosimetry
 
 ### Scientific Background
 - Bethe-Bloch Formula for ionization energy loss

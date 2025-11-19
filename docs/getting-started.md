@@ -6,8 +6,8 @@ Geant4 is a C++ toolkit for simulating the passage of particles through matter. 
 
 ## System Requirements
 
-- **CMake**: Version 3.16 or higher (up to 3.27)
-- **C++ Compiler**: Supporting C++17 or later
+- **CMake**: Version 3.16 or higher (up to 3.27) [📖](https://geant4.web.cern.ch/documentation/dev/ig_html/InstallationGuide/gettingstarted.html)
+- **C++ Compiler**: Supporting C++17 or later [📖](https://geant4.web.cern.ch/documentation/dev/ig_html/InstallationGuide/gettingstarted.html)
 - **Operating Systems**: Linux, macOS, Windows
 
 ## Installation
@@ -62,12 +62,13 @@ Version is defined in CMakeLists.txt:32-35:
 
 - Review the [Architecture](./architecture) to understand Geant4's design
 - Explore the [Source Modules](./reference/source-modules) for detailed component information
-- Check the [official installation guide](http://cern.ch/geant4-userdoc/UsersGuides/InstallationGuide/html) for advanced configuration options
+- Check the [official installation guide](https://geant4.web.cern.ch/documentation/dev/ig_html/InstallationGuide/) [📖](https://geant4.web.cern.ch/documentation/dev/ig_pdf/Geant4InstallationGuide.pdf) for advanced configuration options
 
 ## Additional Resources
 
-- **User Documentation**: [http://cern.ch/geant4/support/user_documentation](http://cern.ch/geant4/support/user_documentation)
-- **User Forum**: [http://cern.ch/geant4-forum](http://cern.ch/geant4-forum)
+- **User Documentation**: [https://geant4.web.cern.ch/docs/](https://geant4.web.cern.ch/docs/) - Official Geant4 Documentation Portal
+- **User Guides**: [https://geant4-userdoc.web.cern.ch/](https://geant4-userdoc.web.cern.ch/) - Detailed User Guides (Installation, Application Development, Physics)
+- **User Forum**: [https://geant4-forum.web.cern.ch/](https://geant4-forum.web.cern.ch/) - Official Geant4 User Forum
 - **Examples**: Check the `examples/` directory in the source tree
 
 ## Getting Help
