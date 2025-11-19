@@ -426,7 +426,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: 'Documentation © Daniel Murnane - Free to use | Geant4 software © Copyright Holders of the Geant4 Collaboration, 1994-2006',
+      message: 'Documentation © Daniel Murnane - Free to use | Geant4 software © Geant4 Collaboration',
       copyright: 'Released under the Geant4 Software License'
     }
   }
