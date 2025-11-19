@@ -1056,11 +1056,9 @@ new G4PVPlacement(rot, G4ThreeVector(0, 0, 50*cm), coneLV,
 ## See Also
 
 - [G4VSolid](g4vsolid.md) - Base class for all solids
-- [G4CSGSolid](g4cssolid.md) - Base class for CSG primitives
 - [G4Box](g4box.md) - Rectangular box (simplest solid)
 - [G4Tubs](g4tubs.md) - Cylindrical solid (use when no taper)
 - [G4Sphere](g4sphere.md) - Spherical shell
-- [G4Polycone](g4polycone.md) - Complex shape with piecewise-linear radius vs Z
 - [Geometry Module Overview](../index.md) - Complete module documentation
 
 ## References

@@ -550,7 +550,7 @@ For more advanced event file formats, consider:
 - [G4VPrimaryGenerator](g4vprimarygenerator.md) - Base class
 - [G4ParticleGun](g4particlegun.md) - Simple particle gun
 - [G4GeneralParticleSource](g4generalparticlesource.md) - GPS alternative
-- [G4VUserPrimaryGeneratorAction](../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
+- [G4VUserPrimaryGeneratorAction](../../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
 - [G4PrimaryParticle](g4primaryparticle.md) - Particle class
 - [G4PrimaryVertex](g4primaryvertex.md) - Vertex class
 - [Event Module Overview](../index.md) - Complete module documentation

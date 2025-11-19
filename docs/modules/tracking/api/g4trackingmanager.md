@@ -890,8 +890,8 @@ void MyTrackingAction::PostUserTrackingAction(const G4Track* track) {
 - [G4SteppingManager](g4steppingmanager.md) - Handles individual steps
 - [G4UserTrackingAction](g4usertrackingaction.md) - User tracking hooks
 - [G4UserSteppingAction](g4usersteppingaction.md) - User stepping hooks
-- [G4Track](../track/api/g4track.md) - Track data container
-- [G4Step](../track/api/g4step.md) - Step information
+- [G4Track](../../track/api/g4track.md) - Track data container
+- [G4Step](../../track/api/g4step.md) - Step information
 
 ### Trajectory
 - [G4VTrajectory](g4vtrajectory.md) - Trajectory base class
@@ -899,15 +899,15 @@ void MyTrackingAction::PostUserTrackingAction(const G4Track* track) {
 - [G4TrajectoryContainer](g4trajectorycontainer.md) - Trajectory storage
 
 ### Event Management
-- [G4EventManager](../event/api/g4eventmanager.md) - Event processing
-- [G4Event](../event/api/g4event.md) - Event data
-- [G4StackManager](../event/api/g4stackmanager.md) - Track stack
+- [G4EventManager](../../event/api/g4eventmanager.md) - Event processing
+- [G4Event](../../event/api/g4event.md) - Event data
+- [G4StackManager](../../event/api/g4stackmanager.md) - Track stack
 
 ## See Also
 
 - [Tracking Module Overview](../overview.md) - Module documentation
-- [Track Module](../../track/overview.md) - Track classes
-- [Event Module](../../event/overview.md) - Event processing
+- [Track Module](../../../track/overview.md) - Track classes
+- [Event Module](../../../event/overview.md) - Event processing
 
 ---
 

@@ -867,7 +867,7 @@ void ActionInitialization::Build() const
 - [G4SingleParticleSource](g4singleparticlesource.md) - Individual source component
 - [G4ParticleGun](g4particlegun.md) - Simple particle gun
 - [G4VPrimaryGenerator](g4vprimarygenerator.md) - Base class
-- [G4VUserPrimaryGeneratorAction](../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
+- [G4VUserPrimaryGeneratorAction](../../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
 - [Event Module Overview](../index.md) - Complete module documentation
 
 ---

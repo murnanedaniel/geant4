@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Processes module is the largest and most complex component of Geant4, providing the complete infrastructure for defining and managing all physics interactions in particle simulations. This module implements the physical processes that govern how particles interact with matter, from electromagnetic interactions to nuclear reactions, optical photon transport, and specialized phenomena.
+The Processes module is the largest and most complex component of Geant4, encompassing over 1,900 classes across 11 major sub-modules. It provides the complete infrastructure for defining and managing all physics interactions in particle simulations. This module implements the physical processes that govern how particles interact with matter, from electromagnetic interactions to nuclear reactions, optical photon transport, and specialized phenomena.
 
 ::: tip Module Location
 **Source:** `source/processes/`

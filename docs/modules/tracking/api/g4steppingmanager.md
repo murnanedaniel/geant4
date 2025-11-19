@@ -897,9 +897,9 @@ void MySteppingAction::UserSteppingAction(const G4Step* step) {
 - [G4VSteppingVerbose](g4vsteppingverbose.md) - Verbose output base
 
 ### Track and Step
-- [G4Track](../track/api/g4track.md) - Track information
-- [G4Step](../track/api/g4step.md) - Step information
-- [G4StepPoint](../track/api/g4steppoint.md) - Pre/post step state
+- [G4Track](../../track/api/g4track.md) - Track information
+- [G4Step](../../track/api/g4step.md) - Step information
+- [G4StepPoint](../../track/api/g4steppoint.md) - Pre/post step state
 
 ### Processes
 - G4VProcess - Process base class

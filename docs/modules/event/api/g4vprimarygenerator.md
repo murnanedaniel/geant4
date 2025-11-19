@@ -353,7 +353,7 @@ Geant4 provides several concrete implementations of `G4VPrimaryGenerator`:
 
 - [G4ParticleGun](g4particlegun.md) - Simple particle gun implementation
 - [G4GeneralParticleSource](g4generalparticlesource.md) - Advanced particle source
-- [G4VUserPrimaryGeneratorAction](../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
+- [G4VUserPrimaryGeneratorAction](../../../run/api/g4vuserprimarygeneratoraction.md) - User action interface
 - [G4Event](g4event.md) - Event container class
 - [G4PrimaryVertex](g4primaryvertex.md) - Primary vertex class
 - [G4PrimaryParticle](g4primaryparticle.md) - Primary particle class

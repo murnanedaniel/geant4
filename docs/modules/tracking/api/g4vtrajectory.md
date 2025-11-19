@@ -801,17 +801,17 @@ void AppendStep(const G4Step* aStep) {
 ### Tracking
 - [G4TrackingManager](g4trackingmanager.md) - Manages trajectory creation
 - [G4UserTrackingAction](g4usertrackingaction.md) - Access trajectories in user code
-- [G4Track](../track/api/g4track.md) - Track information
+- [G4Track](../../track/api/g4track.md) - Track information
 
 ### Event
-- [G4Event](../event/api/g4event.md) - Event containing trajectories
-- [G4EventManager](../event/api/g4eventmanager.md) - Event processing
+- [G4Event](../../event/api/g4event.md) - Event containing trajectories
+- [G4EventManager](../../event/api/g4eventmanager.md) - Event processing
 
 ## See Also
 
 - [Tracking Module Overview](../overview.md)
 - [Visualization Guide](../../visualization/overview.md)
-- [User Actions](../../run/overview.md#user-actions)
+- [User Actions](../../../run/overview.md#user-actions)
 
 ---
 

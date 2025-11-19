@@ -841,11 +841,11 @@ void MyTrackingAction::PreUserTrackingAction(const G4Track* track) {
 
 ## See Also
 
-- [G4Track](../track/api/g4track.md) - Track data container
+- [G4Track](../../track/api/g4track.md) - Track data container
 - [G4UserSteppingAction](g4usersteppingaction.md) - Step-level actions
-- [G4UserEventAction](../event/api/g4usereventaction.md) - Event-level actions
-- [G4UserRunAction](../run/api/g4userrunaction.md) - Run-level actions
-- [G4VUserActionInitialization](../run/api/g4vuseractioninitialization.md) - Action registration
+- [G4UserEventAction](../../event/api/g4usereventaction.md) - Event-level actions
+- [G4UserRunAction](../../run/api/g4userrunaction.md) - Run-level actions
+- [G4VUserActionInitialization](../../run/api/g4vuseractioninitialization.md) - Action registration
 
 ---
 

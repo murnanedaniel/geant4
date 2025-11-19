@@ -910,7 +910,6 @@ G4double volume = intersect->GetCubicVolume();
 
 ## See Also
 
-- [G4BooleanSolid](g4booleansolid.md) - Base class for Boolean operations
 - [G4UnionSolid](g4unionsolid.md) - Union (A ∪ B)
 - [G4SubtractionSolid](g4subtractionsolid.md) - Subtraction (A - B)
 - [G4VSolid](g4vsolid.md) - Base class for all solids

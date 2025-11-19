@@ -4,14 +4,14 @@
 
 ## Overview
 
-The geometry module is the largest and most complex component of Geant4, providing a comprehensive infrastructure for defining detector geometries, solid shapes, volume hierarchies, particle navigation, and magnetic field integration. This module handles all aspects of spatial representation and particle tracking through complex detector structures.
+The geometry module is a foundational component of Geant4, providing a comprehensive infrastructure for defining detector geometries, solid shapes, volume hierarchies, particle navigation, and magnetic field integration. This module handles all aspects of spatial representation and particle tracking through complex detector structures, forming the essential spatial framework upon which all simulations are built.
 
 ## Module Statistics
 
 - **Subdirectories**: 10 (management, volumes, navigation, magneticfield, solids/CSG, solids/Boolean, solids/specific, divisions, biasing)
 - **Total Classes**: ~308
 - **Core Classes**: 15+ fundamental base classes
-- **Lines of Code**: ~150,000+ lines
+- **Lines of Code**: ~161,000 lines
 - **Primary Purpose**: Detector geometry modeling and particle navigation
 
 ## Architecture

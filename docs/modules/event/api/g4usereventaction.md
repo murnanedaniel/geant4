@@ -717,10 +717,10 @@ void MyEventAction::EndOfEventAction(const G4Event* event) {
 
 - [G4Event](g4event.md) - Event data container
 - [G4EventManager](g4eventmanager.md) - Event processing manager
-- [G4UserRunAction](../run/api/g4userrunaction.md) - Run-level actions
-- [G4UserTrackingAction](../tracking/api/g4usertrackingaction.md) - Track-level actions
-- [G4UserSteppingAction](../tracking/api/g4usersteppingaction.md) - Step-level actions
-- [G4VUserActionInitialization](../run/api/g4vuseractioninitialization.md) - Action registration
+- [G4UserRunAction](../../run/api/g4userrunaction.md) - Run-level actions
+- [G4UserTrackingAction](../../tracking/api/g4usertrackingaction.md) - Track-level actions
+- [G4UserSteppingAction](../../tracking/api/g4usersteppingaction.md) - Step-level actions
+- [G4VUserActionInitialization](../../run/api/g4vuseractioninitialization.md) - Action registration
 - [Event Module Overview](../index.md) - Complete module documentation
 
 ---
