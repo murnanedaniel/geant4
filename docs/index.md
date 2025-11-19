@@ -12,20 +12,6 @@ hero:
     - theme: alt
       text: GitHub Repository
       link: https://github.com/Geant4/geant4
-
-features:
-  - title: High Energy Physics
-    details: Comprehensive simulation capabilities for high energy, nuclear and accelerator physics experiments
-  - title: Medical Applications
-    details: Advanced tools for medical physics simulations including radiotherapy and medical imaging
-  - title: Space Science
-    details: Simulation support for space radiation effects and particle interactions in space environments
-  - title: Accurate Physics
-    details: Extensive physics models covering electromagnetic, hadronic, and optical processes
-  - title: Flexible Architecture
-    details: Modular design allowing customization and extension for specific use cases
-  - title: Geometry & Visualization
-    details: Powerful geometry modeling and multiple visualization options for detector design
 ---
 
 ## About Geant4
@@ -33,14 +19,6 @@ features:
 Geant4 is a toolkit for the simulation of the passage of particles through matter. Its areas of application include high energy, nuclear and accelerator physics, as well as studies in medical and space science.
 
 The toolkit is written in C++ and uses object-oriented technology to provide a flexible and powerful framework for particle physics simulations.
-
-## Key Features
-
-- **Comprehensive Physics Models**: Electromagnetic, hadronic, and optical processes
-- **Flexible Geometry**: Support for complex detector geometries
-- **Extensible Framework**: Easy to customize and extend
-- **Cross-Platform**: Runs on Linux, macOS, and Windows
-- **Active Community**: Large user base and continuous development
 
 ## Quick Links
 
