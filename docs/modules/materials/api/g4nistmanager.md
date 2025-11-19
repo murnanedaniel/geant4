@@ -32,7 +32,9 @@ G4NistManager* nist = G4NistManager::Instance();
 ## NIST Database Reference
 
 Element data is sourced from the NIST database on Atomic Weights and Isotope Compositions:
-http://physics.nist.gov/PhysRefData/Compositions/index.html
+[NIST Atomic Weights and Isotopic Compositions](https://www.nist.gov/pml/atomic-weights-and-isotopic-compositions-relative-atomic-masses) [🔗](https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl)
+
+**Official Source**: J.S. Coursey, D.J. Schwab, J.J. Tsai, and R.A. Dragoset (2015), Atomic Weights and Isotopic Compositions (version 4.1), National Institute of Standards and Technology
 
 ## Class Relationships
 
